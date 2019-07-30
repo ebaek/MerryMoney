@@ -1,0 +1,10 @@
+
+.login-form-box{
+    display: -webkit-box;  /* WebKit */
+    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.login-form-img{
+    width: 50px;
+    height: 100%;
+}

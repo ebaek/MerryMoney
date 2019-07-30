@@ -31,6 +31,27 @@ class SessionForm extends React.Component {
     }
 
     render() {
+       const name = this.props.formType === 'Sign Up' ? (
+           <>
+            <label>First Name:
+                    <input type="text"
+                    value={this.state.first_name}
+                    onChange={this.update('first_name')}
+                    className="login-input"
+                />
+            </label>
+            <br/>
+            <label>Last Name:
+                    <input type="text"
+                    value={this.state.last_name}
+                    onChange={this.update('last_name')}
+                    className="login-input"
+                />
+            </label>
+            <br/>
+            </>
+        ) : null
+
         return (
             <div className="login-form-container">
                 <div className="login-form-img">
@@ -41,24 +62,10 @@ class SessionForm extends React.Component {
                 <br/>
                     {this.renderErrors()}
                     <div className="login-form">
-                        Welcome to MerryMoney
-                        <br/>
-                        <label>First Name:
-                            <input type="text"
-                                    value={this.state.first_name}
-                                    onChange={this.update('first_name')}
-                                    className="login-input"
-                                />
-                        </label>
-                        <br/>
-                        <label>Last Name:
-                            <input type="text"
-                                    value={this.state.last_name}
-                                    onChange={this.update('last_name')}
-                                    className="login-input"
-                                />
-                        </label>
-                        <br/>
+                        <h2>Welcome to MerryMoney</h2>
+                        
+                        { name }
+
                         <label>Email:
                             <input type="text"
                                     value={this.state.email}

@@ -1,10 +1,29 @@
 
-.login-form-box{
-    display: -webkit-box;  /* WebKit */
-    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+.login-form-container{
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    /* height: 100vh; */
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
+.login-form-box{
+    -webkit-box-pack: center;
+    overflow: visible;
+    margin-left: 52px;
+}
+
+
 .login-form-img{
-    width: 50px;
+    background-position: center;
+    background-size: cover;
     height: 100%;
+    overflow: hidden;
 }

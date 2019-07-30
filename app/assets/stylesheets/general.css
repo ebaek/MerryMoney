@@ -1,0 +1,15 @@
+html {
+    box-sizing: border-box;
+    display: block
+}
+
+#root {
+    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+    line-height: 19px;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+}

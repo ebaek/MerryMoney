@@ -33,11 +33,15 @@ class SessionForm extends React.Component {
     render() {
         return (
             <div className="login-form-container">
+                <div className="login-form-img">
+                    <img src={window.loginImg}/>
+                </div>
+
                 <form onSubmit={this.handleSubmit} className="login-form-box">
                 <br/>
-                    Please {this.props.formType} or {this.props.navLink}
                     {this.renderErrors()}
                     <div className="login-form">
+                        Welcome to MerryMoney
                         <br/>
                         <label>First Name:
                             <input type="text"

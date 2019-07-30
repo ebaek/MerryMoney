@@ -1,9 +1,18 @@
-<main id="root"></main>
+<main id="root">
 
-<% if logged_in? %>
   <script type="text/javascript">
-    window.currentUser = <%= render(
-      "api/users/user.json.jbuilder",
-      user: current_user
-    ).html_safe %></script>
-<% end %>
+    window.loginImg = "<%= image_url('login_abstract.png') %>"
+  </script>
+
+  
+
+  <% if logged_in? %>
+    <script type="text/javascript">
+      window.currentUser = <%= render(
+        "api/users/user.json.jbuilder",
+        user: current_user
+      ).html_safe %>
+    </script>
+  <% end %>
+
+</main>

@@ -33,21 +33,20 @@ class SessionForm extends React.Component {
     render() {
        const name = this.props.formType === 'Sign Up' ? (
            <>
-            <label>First Name:
-                    <input type="text"
-                    value={this.state.first_name}
-                    onChange={this.update('first_name')}
-                    className="login-input"
-                />
-            </label>
+               <label>First Name</label>
+                <br/>
+                <input type="text"
+                value={this.state.first_name}
+                onChange={this.update('first_name')}
+                className="login-input"/>
+            
             <br/>
-            <label>Last Name:
-                    <input type="text"
-                    value={this.state.last_name}
-                    onChange={this.update('last_name')}
-                    className="login-input"
-                />
-            </label>
+               <label>Last Name</label>
+            <br/>
+                <input type="text"
+                value={this.state.last_name}
+                onChange={this.update('last_name')}
+                className="login-input"/>
             <br/>
             </>
         ) : null

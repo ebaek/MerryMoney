@@ -1,4 +1,3 @@
-
 .login-form-container{
     -webkit-box-align: center;
     display: flex;
@@ -18,6 +17,7 @@
     -webkit-box-pack: center;
     overflow: visible;
     margin-left: 52px;
+    margin-right: 20%;
     flex-basis: 50%;
     white-space: nowrap;
 }
@@ -35,24 +35,27 @@
     letter-spacing: -0.14px;
     line-height: 30px;
     margin: 0 0 16px;
+    margin-bottom: 30px;
+    margin-top: 30%;
 }
 
 .login-form-box label{
+    margin-top: 2%;
+    margin-bottom: 2%;
     padding: 9px 0;
     color: #171718;
 }
 
 .login-input {
-    border: 1px;
-    border-color: white;
+    border: 1px solid white;
     border-radius: 4px;
-    height: 36px;
+    height: 45px;
     line-height: 1.5em;
     outline: 0;
     padding: 0 13px;
     -webkit-transition: border-color 200ms;
     transition: border-color 200ms;
-    width: 80%;
+    width: 400px;
     margin-top: 1%;
     margin-bottom: 1%;
 }
@@ -82,12 +85,16 @@
 }
 
 .login-form-img{
-    flex-grow: 1;
+    overflow: hidden;
+    height: auto;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.login-form-img img{
+    flex-grow: 2;
     background-position: center;
-    background-size: 100%;
     height: 100%;
     display: block;
     margin-top: 0em;
-    overflow: hidden;
-    flex-basis: 50%;
 }

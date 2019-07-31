@@ -107,10 +107,10 @@
   opacity: 1; 
 }
 
-
 .signup-input:hover {
     border: 1px solid #21ce99;
     background-color:white;
+    /* outline:none; */
 }
 
 .signup-input:focus {
@@ -136,4 +136,10 @@
     width: 100%;
     padding: 2%;
     margin-top: 6%;
+    outline: none;
+}
+
+.signup-continue:hover {
+    border: 1px solid #199972;
+    background-color: #1aa278;
 }

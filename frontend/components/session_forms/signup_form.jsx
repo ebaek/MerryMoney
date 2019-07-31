@@ -21,12 +21,15 @@ class SignupForm extends React.Component {
     }
 
     renderErrors() {
+        const icon = (this.props.errors.length === 0) ? null : (<i className="fas fa-exclamation-circle"></i>);
+
         return (
-            <ul>
-                {this.props.errors.map((error, i) => (
-                    <li key={`error-${i}`}>{error}</li>
+            <div className="invalid-credentials">
+                {icon}
+                {this.props.errors.map((error) => (
+                    <p key={`error-${error.index}`}>{error}</p>
                 ))}
-            </ul>
+            </div>
         );
     }
 
@@ -40,7 +43,6 @@ class SignupForm extends React.Component {
 
                 <form onSubmit={this.handleSubmit} className="signup-form-box">
                     <br />
-                    {this.renderErrors()}
                     <div className="signup-form">
                         <h1>Make Your Money Move</h1>
                         <h3>MerryMoney lets you invest in companies you love, commission-free.</h3>
@@ -63,7 +65,7 @@ class SignupForm extends React.Component {
                         </div>
 
                         <br/>
-                        <input type="text"
+                        <input type="email"
                             placeholder="Email address"
                             onChange={this.update('email')}
                             className="signup-input" 
@@ -72,11 +74,13 @@ class SignupForm extends React.Component {
 
                         <br/>
                         <input type="password"
-                            placeholder="Password (min. 10 characters)"
+                            placeholder="Password (min. 6 characters)"
                             onChange={this.update('password')}
                             className="signup-input password" 
                             required/>
                         <br/>
+
+                        {this.renderErrors()}
 
                         <input className="signup-continue" type="submit" value="Continue" />
                     </div>

@@ -90,7 +90,7 @@
 .invalid-credentials {
     display: flex;
     margin-top: 2%;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 400;
     align-items: center;
 }
@@ -130,6 +130,12 @@
     width: 125px;
     padding: 2.5%;
     margin-top: 6%;
+    outline: none;
+}
+
+.session-submit:hover {
+    border: 1px solid #199972;
+    background-color: #1aa278;
 }
 
 .login-form-img{

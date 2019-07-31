@@ -9,7 +9,6 @@ import LogInFormContainer from './session_forms/login_form_container';
 // Routes
 import { AuthRoute } from '../util/route_util';
 
-
 const App = () => (
     <div>
         <Switch>

@@ -32,48 +32,45 @@ class SignupForm extends React.Component {
 
     render() {
         return (
-            <div className="login-form-container">
-                <div className="login-form-img">
-                    <img src={window.loginImg} />
-                </div>
+            <div className="signup-form-container">
 
-                <form onSubmit={this.handleSubmit} className="login-form-box">
+                <form onSubmit={this.handleSubmit} className="signup-form-box">
                     <br />
                     {this.renderErrors()}
-                    <div className="login-form">
-                        <h2>Welcome to MerryMoney</h2>
-
-                        <label>First Name</label>
-                        <br />
-                        <input type="text"
-                            value={this.state.first_name}
-                            onChange={this.update('first_name')}
-                            className="login-input" />
+                    <div className="signup-form">
+                        <h1>Make Your Money Move</h1>
+                        <h3>MerryMoney lets you invest in companies you love, commission-free.</h3>
 
                         <br/>
-                        <label>Last Name</label>
-                        <br/>
-                        <input type="text"
-                            value={this.state.last_name}
-                            onChange={this.update('last_name')}
-                            className="login-input" />
-                        <br/>
+                        
+                        <div className="fl_name">
+                            <input type="text"
+                                placeholder="First name"
+                                onChange={this.update('first_name')}
+                                className="signup-input f_name" />
 
-                        <label>Email or Username</label>
-                        <br />
+                            <input type="text"
+                                placeholder="Last name"
+                                onChange={this.update('last_name')}
+                                className="signup-input l_name" />
+                            <br/>                        
+                        </div>
+
+                        <br/>
                         <input type="text"
-                            value={this.state.email}
+                            placeholder="Email address"
                             onChange={this.update('email')}
-                            className="login-input" />
-                        <br />
-                        <label>Password</label>
-                        <br />
+                            className="signup-input" />
+                        <br/>
+
+                        <br/>
                         <input type="password"
-                            value={this.state.password}
+                            placeholder="Password (min. 10 characters)"
                             onChange={this.update('password')}
-                            className="login-input" />
-                        <br />
-                        <input className="session-submit" type="submit" value={this.props.formType} />
+                            className="signup-input password" />
+                        <br/>
+
+                        <input className="signup-continue" type="submit" value="Continue" />
                     </div>
                 </form>
             </div>

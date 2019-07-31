@@ -1,0 +1,139 @@
+.signup-form-container{
+    -webkit-box-align: center;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    height: 100vh;
+    -webkit-box-flex: 1;
+    justify-content: center;
+    /* flex: 1 1 50%; */
+    overflow: hidden;
+}
+
+.signup-form-box{
+    display: block;
+    box-sizing: border-box;
+    text-size-adjust: 100%;
+    -webkit-box-pack: center;
+    overflow: visible;
+    margin-left: 10%;
+    margin-right: 20%;
+    flex-basis: 50%;
+    white-space: nowrap;
+    margin-top: 10%;
+    top: 50%;
+    left: 50%;
+    transform: translate(0%, -5%);
+
+}
+
+.signup-form-box h2 {
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.signup-form-box h2{
+    font-size: 26px;
+    font-weight: 500;
+    word-spacing: px;
+    letter-spacing: -0.14px;
+    line-height: 30px;
+    margin: 0 0 16px;
+    margin-bottom: 30px;
+}
+
+.signup-input {
+    border: 1px solid #b1bfc4;
+    background-color: white;
+    border-radius: 4px;
+    height: 45px;
+    line-height: 1.5em;
+    font-size: 15px;
+    font-weight: 250;
+    color: #040d14;
+    outline: 0;
+    padding: 0 13px;
+    -webkit-transition: border-color 200ms;
+    transition: border-color 200ms;
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    box-sizing: border-box;
+}
+
+.signup-form-box h1 {
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.signup-form-box h1, h3{
+    letter-spacing: -0.14px;
+    line-height: 30px;
+    margin: 0 0 16px;
+    margin-bottom: 30px;
+}
+
+.signup-form-box h1 {
+    font-size: 48px;
+    font-weight: 200;
+}
+
+.signup-form-box h3 {
+    font-size: 24px;
+    font-weight: 150;
+}
+
+.fl_name {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.f_name {
+    margin-right: 2%;
+} 
+
+.l_name {
+   margin-left: 2%;
+}
+
+::placeholder { 
+  color: Gainsboro;
+  opacity: 1; 
+}
+
+
+.signup-input:hover {
+    border: 1px solid #21ce99;
+    background-color:white;
+}
+
+.signup-input:focus {
+    border: 1px solid #21ce99;
+    background-color:white;
+}
+
+.signup-continue {
+    background: #21ce99;
+    border-color: #21ce99;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: normal;
+    color: white;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    border-radius: 7px;
+    text-align: center;
+    width: 100%;
+    padding: 2%;
+    margin-top: 6%;
+}

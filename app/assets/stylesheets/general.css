@@ -1,10 +1,18 @@
 html {
-    /* margin: 0; */
-    /* padding: 0; */
-    /* border: 0; */
-    /* border: 5px solid green; */
-    margin: 10px solid yellow;
-    padding: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+}
+
+input, h1, p, div {
+  margin: 0;
+  padding: 0;
 }
 
 #root {

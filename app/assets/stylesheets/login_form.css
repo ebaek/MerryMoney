@@ -1,29 +1,93 @@
 
 .login-form-container{
     -webkit-box-align: center;
-    align-items: center;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     flex-direction: row;
-    /* height: 100vh; */
+    height: 100vh;
     -webkit-box-flex: 1;
-    flex-grow: 1;
     justify-content: center;
-    width: 100%;
-    height: 100%;
+    /* flex: 1 1 50%; */
 }
 
 .login-form-box{
+    display: block;
+    box-sizing: border-box;
+    text-size-adjust: 100%;
     -webkit-box-pack: center;
     overflow: visible;
     margin-left: 52px;
+    flex-basis: 50%;
+    white-space: nowrap;
 }
 
+.login-form-box h2 {
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.login-form-box h2{
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.14px;
+    line-height: 30px;
+    margin: 0 0 16px;
+}
+
+.login-form-box label{
+    padding: 9px 0;
+    color: #171718;
+}
+
+.login-input {
+    border: 1px;
+    border-color: white;
+    border-radius: 4px;
+    height: 36px;
+    line-height: 1.5em;
+    outline: 0;
+    padding: 0 13px;
+    -webkit-transition: border-color 200ms;
+    transition: border-color 200ms;
+    width: 80%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.login-input:hover {
+    border: 1px solid Gainsboro;
+}
+
+.login-input:focus {
+    border: 1px solid #21ce99;
+}
+
+.session-submit {
+    background: #21ce99;
+    border-color: #21ce99;
+    font-family: inherit;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    border-radius: 4px;
+    text-align: center;
+    width: 25%;
+    padding: 2.5%;
+}
 
 .login-form-img{
+    flex-grow: 1;
     background-position: center;
-    background-size: cover;
+    background-size: 100%;
     height: 100%;
+    display: block;
+    margin-top: 0em;
     overflow: hidden;
+    flex-basis: 50%;
 }

@@ -54,6 +54,9 @@
 .login-input {
     border: 1px solid white;
     background-color: #fafafa;
+    font-size: 15px;
+    font-weight: 250;
+    color: #040d14;
     border-radius: 4px;
     height: 45px;
     line-height: 1.5em;

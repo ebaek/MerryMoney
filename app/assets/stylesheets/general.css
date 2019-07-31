@@ -17,6 +17,34 @@ input, h1, p, div {
   padding: 0;
 }
 
+@media screen and (max-width: 1200px) {
+    #logo-header {
+        display: none !important;
+    }
+}
+
+#logo-header {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 2%;
+  margin-left: -22%;
+  padding: 0;
+  position: absolute;
+  width: 200px;
+  position: fixed;
+}
+
+
+#logo-header{
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.fa-money-bill {
+  margin-right: 3%;
+}
+
 #root {
     font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 13px;

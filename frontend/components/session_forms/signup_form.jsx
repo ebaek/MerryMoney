@@ -40,49 +40,58 @@ class SignupForm extends React.Component {
     render() {
         return (
             <div className="signup-form-container">
+                <div>
+                    <h1 id="logo-header">
+                        <i className="fas fa-money-bill"></i>
+                        MerryMoney
+                    </h1>
+                </div>   
+            
+            <form onSubmit={this.handleSubmit} className="signup-form-box">
+            
+            <br/>
+            
+            <div className="signup-form">
+                    <br/>
+                    <h1 className="money-move">Make Your Money Move</h1>
+                    <h3>MerryMoney lets you invest in companies you love, commission-free.</h3>
 
-                <form onSubmit={this.handleSubmit} className="signup-form-box">
-                    <br />
-                    <div className="signup-form">
-                        <h1>Make Your Money Move</h1>
-                        <h3>MerryMoney lets you invest in companies you love, commission-free.</h3>
-
-                        <br/>
-                        
-                        <div className="fl_name">
-                            <input type="text"
-                                placeholder="First name"
-                                onChange={this.update('first_name')}
-                                className="signup-input f_name" 
-                                required/>
-
-                            <input type="text"
-                                placeholder="Last name"
-                                onChange={this.update('last_name')}
-                                className="signup-input l_name" 
-                                required/>
-                            <br/>                        
-                        </div>
-
-                        <br/>
-                        <input type="email"
-                            placeholder="Email address"
-                            onChange={this.update('email')}
-                            className="signup-input" 
+                    <br/>
+                    
+                    <div className="fl_name">
+                        <input type="text"
+                            placeholder="First name"
+                            onChange={this.update('first_name')}
+                            className="signup-input f_name" 
                             required/>
-                        <br/>
 
-                        <br/>
-                        <input type="password"
-                            placeholder="Password (min. 6 characters)"
-                            onChange={this.update('password')}
-                            className="signup-input password" 
+                        <input type="text"
+                            placeholder="Last name"
+                            onChange={this.update('last_name')}
+                            className="signup-input l_name" 
                             required/>
-                        <br/>
+                        <br/>                        
+                    </div>
 
-                        {this.renderErrors()}
+                    <br/>
+                    <input type="email"
+                        placeholder="Email address"
+                        onChange={this.update('email')}
+                        className="signup-input" 
+                        required/>
+                    <br/>
 
-                        <input className="signup-continue" type="submit" value="Continue" />
+                    <br/>
+                    <input type="password"
+                        placeholder="Password (min. 6 characters)"
+                        onChange={this.update('password')}
+                        className="signup-input password" 
+                        required/>
+                    <br/>
+
+                    {this.renderErrors()}
+
+                    <input className="signup-continue" type="submit" value="Continue" />
                     </div>
                 </form>
             </div>

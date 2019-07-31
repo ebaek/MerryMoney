@@ -5,27 +5,25 @@
     -webkit-box-direction: normal;
     flex-direction: row;
     height: 100vh;
+    /* width: 80%; */
     -webkit-box-flex: 1;
     justify-content: center;
-    /* flex: 1 1 50%; */
     overflow: hidden;
 }
 
 .signup-form-box{
-    display: block;
+    display: flex;
+    justify-content: center;
     box-sizing: border-box;
     text-size-adjust: 100%;
     -webkit-box-pack: center;
     overflow: visible;
-    margin-left: 10%;
-    margin-right: 20%;
     flex-basis: 50%;
     white-space: nowrap;
     margin-top: 10%;
     top: 50%;
     left: 50%;
     transform: translate(0%, -5%);
-
 }
 
 .signup-form-box h2 {
@@ -35,10 +33,10 @@
     margin-inline-end: 0px;
 }
 
+
 .signup-form-box h2{
     font-size: 26px;
     font-weight: 500;
-    word-spacing: px;
     letter-spacing: -0.14px;
     line-height: 30px;
     margin: 0 0 16px;

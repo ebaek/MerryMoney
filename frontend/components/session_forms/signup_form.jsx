@@ -54,7 +54,8 @@ class SignupForm extends React.Component {
                 </div>
             
             <form onSubmit={this.handleSubmit} className="signup-form-box">
-                        
+            
+            
             <div className="signup-form">
                     <br/>
                     <h1 className="money-move">Make Your Money Move</h1>

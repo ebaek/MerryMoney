@@ -104,6 +104,44 @@
   opacity: 1; 
 }
 
+@media screen and (max-width: 1200px) {
+    #logo-header {
+        display: none !important;
+    }
+}
+
+#logo-header {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 2%;
+  margin-left: -22%;
+  padding: 0;
+  position: absolute;
+  width: 200px;
+  position: fixed;
+}
+
+#logo-header:focus {
+  outline: none;
+}
+
+#logo-header:hover {
+  color: #21ce99;
+}
+
+#logo-header{
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.fa-money-bill {
+  margin-right: 3%;
+}
+
 .signup-input:hover {
     border: 1px solid #21ce99;
     background-color:white;

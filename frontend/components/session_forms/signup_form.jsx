@@ -51,12 +51,14 @@ class SignupForm extends React.Component {
                             <input type="text"
                                 placeholder="First name"
                                 onChange={this.update('first_name')}
-                                className="signup-input f_name" />
+                                className="signup-input f_name" 
+                                required/>
 
                             <input type="text"
                                 placeholder="Last name"
                                 onChange={this.update('last_name')}
-                                className="signup-input l_name" />
+                                className="signup-input l_name" 
+                                required/>
                             <br/>                        
                         </div>
 
@@ -64,14 +66,16 @@ class SignupForm extends React.Component {
                         <input type="text"
                             placeholder="Email address"
                             onChange={this.update('email')}
-                            className="signup-input" />
+                            className="signup-input" 
+                            required/>
                         <br/>
 
                         <br/>
                         <input type="password"
                             placeholder="Password (min. 10 characters)"
                             onChange={this.update('password')}
-                            className="signup-input password" />
+                            className="signup-input password" 
+                            required/>
                         <br/>
 
                         <input className="signup-continue" type="submit" value="Continue" />

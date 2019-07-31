@@ -1,5 +1,6 @@
 .splash-header {
     margin-left: 3%;
+    margin-right: 3%;
 }
 
 .esther-links {
@@ -12,15 +13,33 @@
     flex-wrap: nowrap;
 }
 
-.esther-links a {
+.esther-links a, .login-redirect-button {
     font-size: 16px;
     color: #140d14;
     letter-spacing: 0.32px;
     font-weight: 800;
+    text-decoration: none;
+}
+
+.login-signup-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#linkedin:hover, #github:hover {
+    color: #21ce99;
 }
 
 #linkedin {
     margin-right: 5%;
+}
+
+#github {
+    margin-right: 40%;
+}
+
+.login-redirect-button {
+    border: none;
 }
 
 .splash-header {

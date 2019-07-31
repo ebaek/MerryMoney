@@ -24,7 +24,10 @@ input, h1, p, div {
 }
 
 #logo-header {
+  background: none;
+  border: none;
   display: flex;
+  align-items: center;
   justify-content: center;
   overflow: hidden;
   margin-top: 2%;
@@ -35,6 +38,13 @@ input, h1, p, div {
   position: fixed;
 }
 
+#logo-header:focus {
+  outline: none;
+}
+
+#logo-header:hover {
+  color: #21ce99;
+}
 
 #logo-header{
   font-weight: 400;

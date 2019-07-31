@@ -6,6 +6,7 @@ class SignupForm extends React.Component {
         super(props);
         this.state = { email: "", first_name: "", last_name: "", password: "" };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.homepageRedirect = this.homepageRedirect.bind(this);
     }
 
     update(field) {
@@ -37,20 +38,23 @@ class SignupForm extends React.Component {
         this.props.clearErrors();
     }
 
+    homepageRedirect(e) {
+        e.preventDefault();
+        this.props.history.push('/');
+    }
+
     render() {
         return (
             <div className="signup-form-container">
                 <div>
-                    <h1 id="logo-header">
+                    <button id="logo-header" onClick={this.homepageRedirect}>
                         <i className="fas fa-money-bill"></i>
                         MerryMoney
-                    </h1>
-                </div>   
+                    </button>
+                </div>
             
             <form onSubmit={this.handleSubmit} className="signup-form-box">
-            
-            <br/>
-            
+                        
             <div className="signup-form">
                     <br/>
                     <h1 className="money-move">Make Your Money Move</h1>

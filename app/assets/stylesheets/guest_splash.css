@@ -13,6 +13,13 @@
     flex-wrap: nowrap;
 }
 
+.links-buttons {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
 .esther-links a, .login-redirect-button {
     font-size: 16px;
     color: #140d14;
@@ -24,6 +31,28 @@
 .login-signup-buttons {
     display: flex;
     flex-wrap: nowrap;
+    white-space: nowrap;
+    width: 200px;
+}
+
+.login-redirect-button {
+    border: none;
+    margin-right: 15%;
+}
+
+.signup-redirect-button {
+    padding: 0 24px;
+    background: #21ce99;
+    border: 0;
+    color: #fff;
+    border-radius: 36px;
+    height: 48px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.login-redirect-button:hover {
+    color: #21ce99;
 }
 
 #linkedin:hover, #github:hover {
@@ -35,12 +64,9 @@
 }
 
 #github {
-    margin-right: 40%;
+    /* margin-right: 40%; */
 }
 
-.login-redirect-button {
-    border: none;
-}
 
 .splash-header {
   background: none;

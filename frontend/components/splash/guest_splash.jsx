@@ -34,15 +34,19 @@ class GuestSplash extends React.Component {
                             <i className="fas fa-money-bill"></i>
                             MerryMoney
                         </button>
-                
-                        <a href="https://www.linkedin.com/in/ebaek5/" id="linkedin">LinkedIn</a>
-                        <a href="https://github.com/ebaek" id="github">Github</a>
-                    
-                        <div className="login-signup-buttons">
-                            <button onClick={this.loginRedirect} className='login-redirect-button'>
-                                Log In</button>
-                            <button onClick={this.signupRedirect} className='signup-redirect-button'>
-                                Sign Up</button>
+
+                        <div className="links-buttons">
+                            <div className="personal-links">
+                                <a href="https://www.linkedin.com/in/ebaek5/" id="linkedin">LinkedIn</a>
+                                <a href="https://github.com/ebaek" id="github">Github</a>
+                            </div>
+                        
+                            <div className="login-signup-buttons">
+                                <button onClick={this.loginRedirect} className='login-redirect-button'>
+                                    Log In</button>
+                                <button onClick={this.signupRedirect} className='signup-redirect-button'>
+                                    Sign Up</button>
+                            </div>
                         </div>
 
                     </div>

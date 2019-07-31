@@ -1,6 +1,10 @@
 html {
-    box-sizing: border-box;
-    display: block
+    /* margin: 0; */
+    /* padding: 0; */
+    /* border: 0; */
+    /* border: 5px solid green; */
+    margin: 10px solid yellow;
+    padding: 0;
 }
 
 #root {

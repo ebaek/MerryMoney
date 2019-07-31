@@ -1,10 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-class SessionForm extends React.Component {
+class SignupForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {email: "", first_name: "", last_name: "", password: ""};
+        this.state = { email: "", first_name: "", last_name: "", password: "" };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -31,54 +31,48 @@ class SessionForm extends React.Component {
     }
 
     render() {
-       const name = this.props.formType === 'Sign Up' ? (
-           <>
-               <label>First Name</label>
-                <br/>
-                <input type="text"
-                value={this.state.first_name}
-                onChange={this.update('first_name')}
-                className="login-input"/>
-            
-            <br/>
-               <label>Last Name</label>
-            <br/>
-                <input type="text"
-                value={this.state.last_name}
-                onChange={this.update('last_name')}
-                className="login-input"/>
-            <br/>
-            </>
-        ) : null
-
         return (
             <div className="login-form-container">
                 <div className="login-form-img">
-                    <img src={window.loginImg}/>
+                    <img src={window.loginImg} />
                 </div>
 
                 <form onSubmit={this.handleSubmit} className="login-form-box">
-                <br/>
+                    <br />
                     {this.renderErrors()}
                     <div className="login-form">
                         <h2>Welcome to MerryMoney</h2>
-                        
-                        { name }
+
+                        <label>First Name</label>
+                        <br />
+                        <input type="text"
+                            value={this.state.first_name}
+                            onChange={this.update('first_name')}
+                            className="login-input" />
+
+                        <br/>
+                        <label>Last Name</label>
+                        <br/>
+                        <input type="text"
+                            value={this.state.last_name}
+                            onChange={this.update('last_name')}
+                            className="login-input" />
+                        <br/>
 
                         <label>Email or Username</label>
-                        <br/>
+                        <br />
                         <input type="text"
                             value={this.state.email}
                             onChange={this.update('email')}
-                            className="login-input"/>
-                        <br/>
+                            className="login-input" />
+                        <br />
                         <label>Password</label>
-                        <br/>
+                        <br />
                         <input type="password"
                             value={this.state.password}
                             onChange={this.update('password')}
-                            className="login-input"/>
-                        <br/>
+                            className="login-input" />
+                        <br />
                         <input className="session-submit" type="submit" value={this.props.formType} />
                     </div>
                 </form>
@@ -87,4 +81,4 @@ class SessionForm extends React.Component {
     }
 }
 
-export default withRouter(SessionForm);
+export default withRouter(SignupForm);

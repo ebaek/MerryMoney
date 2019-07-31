@@ -8,6 +8,7 @@
     -webkit-box-flex: 1;
     justify-content: center;
     /* flex: 1 1 50%; */
+    overflow: hidden;
 }
 
 .login-form-box{
@@ -20,7 +21,10 @@
     margin-right: 20%;
     flex-basis: 50%;
     white-space: nowrap;
-    margin-top: 100px;
+    margin-top: 15%;
+    top: 50%;
+    left: 50%;
+    transform: translate(0%, -5%);
 }
 
 .login-form-box h2 {
@@ -33,6 +37,7 @@
 .login-form-box h2{
     font-size: 26px;
     font-weight: 500;
+    word-spacing: px;
     letter-spacing: -0.14px;
     line-height: 30px;
     margin: 0 0 16px;
@@ -48,6 +53,7 @@
 
 .login-input {
     border: 1px solid white;
+    background-color: #fafafa;
     border-radius: 4px;
     height: 45px;
     line-height: 1.5em;
@@ -62,10 +68,12 @@
 
 .login-input:hover {
     border: 1px solid Gainsboro;
+    background-color:white;
 }
 
 .login-input:focus {
     border: 1px solid #21ce99;
+    background-color:white;
 }
 
 .session-submit {
@@ -85,19 +93,26 @@
     text-align: center;
     width: 125px;
     padding: 2.5%;
+    margin-top: 10%;
 }
 
 .login-form-img{
+    position: relative;
     overflow: hidden;
     height: 100%;
-    display: flex;
-    overflow: hidden;
+    margin: 0;
+    display: inline-block;
+    /* box-sizing: inherit; */
+    /* display: flex; */
+    width: 50%;
 }
 
 .login-form-img img{
     /* flex-grow: 2; */
     background-position: center;
     height: 100%;
-    display: block;
-    margin-top: 0em;
+    min-width: 600px;
+    padding: 0;
+    border: 0;
+    margin: 0;
 }

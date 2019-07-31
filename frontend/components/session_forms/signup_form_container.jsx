@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { signup } from '../../actions/session_actions';
-import SessionForm from './session_form';
+import SignupForm from './signup_form';
 
 const msp = ({errors}) => {
     return ({
@@ -18,5 +18,5 @@ const mdp = (dispatch) => {
     })
 }
 
-export default connect(msp, mdp)(SessionForm)
+export default connect(msp, mdp)(SignupForm)
 

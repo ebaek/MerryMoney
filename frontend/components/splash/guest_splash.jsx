@@ -92,9 +92,23 @@ class GuestSplash extends React.Component {
                                 make bigger instant deposits with Robinhood Gold—all starting <br />
                                 at $5 a month.</h3>
                         </div>
-                        
+                    </section>
+
+                    <section className="fifth">
+                        <div className="keep-tabs-blurb">
+                            <h1>Keep Tabs on the <br /> Market</h1>
+                            <h3>Access tools and features such as price movement <br />
+                                notifications and customized investment news so you <br />
+                                can find the right moment to invest.</h3>
+                        </div>
+
+                        <div className="keep-tabs-div">
+                            <img src={window.keepTabsImg} className="keep-tabs-pic" alt="iPhone displaying collection of stock performances, popular collecrtions, and recent news on Merry Money app." />
+                        </div>
+
                     </section>
                 </div>
+
             </div>
         );
     }

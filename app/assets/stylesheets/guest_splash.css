@@ -197,14 +197,10 @@
 }
 
 .bottom-splash-scroll {
-    color: black;
+    color: #040D14;
 }
 
-.bottom-splash-scroll{
-    /* background-color: black; */
-}
-
-.fourth {
+.fourth, .fifth {
     margin-top: 2%;
     display: flex;
     flex-direction: row;
@@ -217,8 +213,7 @@
 .next-level-blurb {
     float: right;
     width: 50%;
-    /* z-index: -2; */
-    background: black;
+    background: #040D14;
 }
 
 .next-level-div {
@@ -233,7 +228,7 @@
     height: 220%;
     width: auto;
     z-index: -2;
-    background: black;
+    background: #040D14;
 }
 
 .bottom-splash-scroll h1 {
@@ -251,5 +246,32 @@
     line-height: 180%;
     font-weight: 200;
     color: #fff;
-} 
+}
+
+.keep-tabs-div {
+    width: 40%;
+    overflow: hidden;
+}
+
+.keep-tabs-pic {
+    top: 2px;
+    margin-top: -5%;
+    margin-left: -25%;
+    height: 110%;
+    width: auto;
+    z-index: -2;
+}
+
+.keep-tabs-blurb {
+    margin-top: 5%;
+    margin-right: 10%;
+}
+
+.keep-tabs-blurb h1, .keep-tabs-blurb h3 {
+    color: #040D14;
+}
+
+
+
+
 

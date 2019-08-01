@@ -65,7 +65,18 @@ class GuestSplash extends React.Component {
 
                     <section className="second">
                         <h2>Cash management, <br /> coming soon.</h2>
-                        <img src={window.catImg} className="cat-pic" />
+                        <img src={window.catImg} className="cat-pic" alt="flying cat."/>
+                    </section>
+
+                    <section className="third">
+                        <img src={window.noManualImg} className="no-manual-pic" alt="iPhone with analyst ratings from Merry Money app." />
+                        <div className="no-manual-blurb">
+                            <h1>No Manual Needed</h1>
+                            <h3>Intuitively designed for newcomers and experts alike, 
+                            <br /> Robinhood gives you a clear picture of your portfolio’s 
+                            <br /> performance over time, so you can adjust your positions 
+                            <br /> and learn by doing.</h3>
+                        </div>
                     </section>
                 </div>
             </div>

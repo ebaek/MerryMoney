@@ -8,6 +8,7 @@ class SessionForm extends React.Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.signupRedirect = this.signupRedirect.bind(this);
+        this.loginDemoUser = this.loginDemoUser.bind(this);
     }
 
     update(field) {
@@ -44,11 +45,11 @@ class SessionForm extends React.Component {
         this.props.history.push('/signup');
     }
 
-    // loginDemoUser(e) {
-    //     e.preventDefault();
-    //     this.props.login({ email: 'batman34@gmail.com', password: 'watermelon'}).then(
-    //         () => this.props.history.push("/")
-    // }
+    loginDemoUser(e) {
+        e.preventDefault();
+        this.props.login({ email: 'batman34@gmail.com', password: 'watermelon'}).then(
+            () => this.props.history.push("/"))
+    }
 
     render() {
         return (
@@ -86,7 +87,10 @@ class SessionForm extends React.Component {
 
                             {this.renderErrors()}
 
-                            <input className="session-submit" type="submit" value={this.props.formType} />
+                            <div className="login-buttons">
+                                <input className="session-submit" type="submit" value={this.props.formType} />
+                                <button onClick={this.loginDemoUser} className='session-submit'>Demo User</button>
+                            </div>
                         </div>
                     </form>
                 

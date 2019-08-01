@@ -9,9 +9,7 @@
     -webkit-box-flex: 1;
     justify-content: center;
     flex: 1 1 50%;
-    /* overflow: hidden; */
     position: absolute;
-    /* overflow-y: scroll; */
 }
 
 .login-form-box{
@@ -110,6 +108,15 @@
     border: none;
     padding: 0px;
     margin-top: 1%;
+}
+
+.login-buttons {
+    display: flex;
+    justify-content: flex-start
+}
+
+.login-buttons input {
+    margin-right: 5%;
 }
 
 .session-submit {

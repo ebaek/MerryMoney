@@ -78,6 +78,15 @@ class GuestSplash extends React.Component {
                             <br /> and learn by doing.</h3>
                         </div>
                     </section>
+
+                    <section className="fourth">
+                        <div className="next-level-blurb">
+                            <h1>Next Level Investing</h1>
+                            <h3>Access professional research reports, trade on margin, and <br />
+                            make bigger instant deposits with Robinhood Gold—all starting <br />
+                            at $5 a month.</h3>
+                        </div>
+                    </section>
                 </div>
             </div>
         );

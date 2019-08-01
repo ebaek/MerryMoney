@@ -5,6 +5,7 @@
     top: 0; 
     width: 100%; 
     background-color: white;
+    z-index: 1;
 }
 
 .splash-header {
@@ -128,7 +129,7 @@
     color: #040D14;
     left: 10%;
     top: 50%;
-    z-index: -1;
+    z-index: 0;
 }
 
 .splash-scroll h1 {
@@ -178,7 +179,7 @@
 }
 
 .third {
-    margin-top: 5%;
+    margin-top: 2%;
     display: flex;
     flex-direction: row;
     align-items: center;

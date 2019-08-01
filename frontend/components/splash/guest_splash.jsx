@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class GuestSplash extends React.Component {
     constructor(props) {
@@ -175,24 +176,6 @@ class GuestSplash extends React.Component {
             </div>
         );
     }
-
-
-    // sessionLinks = () => (
-    //     <nav className="login-signup">
-    //         <Link to="/login">Login</Link>
-    //         &nbsp;
-    //         <Link to="/signup">Sign Up</Link>
-    //     </nav>
-    // )
-
-    // personalGreeting = () => (
-    //     <hgroup className="header-group">
-    //         <h2 className="header-name">Welcome, {currentUser.first_name}!</h2>
-    //         <button className="header-button" onClick={logout}>Log Out</button>
-    //     </hgroup>
-    // )
-
-    // return currentUser ? personalGreeting() : sessionLinks();
 }
 
-export default GuestSplash;
+export default withRouter(GuestSplash);

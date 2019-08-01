@@ -103,9 +103,41 @@ class GuestSplash extends React.Component {
                         </div>
 
                         <div className="keep-tabs-div">
-                            <img src={window.keepTabsImg} className="keep-tabs-pic" alt="iPhone displaying collection of stock performances, popular collecrtions, and recent news on Merry Money app." />
+                            <img src={window.keepTabsImg} className="keep-tabs-pic" alt="iPhone displaying collection of stock performances, popular collections, and recent news on Merry Money app." />
                         </div>
+                    </section>
 
+                    
+                    <section className="sixth">
+                        <div className="trusted-div">
+
+                            <div className="eagle-div">
+                                <img src={window.trustedImg} className="trusted-pic" alt="Sprite of patriotic American eagle holding baseball bat and under three stars." />
+                            </div>
+                            
+                            <div className="trusted-blurb">
+                                <h1>Trusted by Millions <br /> in the USA</h1>
+                                <h3>Robinhood is a member of SIPC, which protects securities customers of its  <br />
+                                    members up to $500,000 (including $250,000 for claims for cash).  <br />
+                                    Explanatory brochure available upon request or at <a href="https://www.sipc.org/">www.sipc.org.</a></h3>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="seventh">
+                        <div className="get-started-div">
+
+                            <div className="get-started-blurb">
+                                <h1>Get Started</h1>
+                                <h3>It only takes a few minutes to take control of your financial future. Sign up now to <br />
+                                    start investing with Robinhood.</h3>
+                            </div>
+                            
+                            <div className="get-started-button">
+                                <button onClick={this.signupRedirect} className='signup-redirect-button'>
+                                    Sign Up</button>
+                            </div>
+                        </div>
                     </section>
                 </div>
 

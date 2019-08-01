@@ -81,8 +81,12 @@
     color: #21ce99;
 }
 
+.personal-links {
+    width: 100%;
+}
+
 #linkedin {
-    margin-right: 30%;
+    margin-right: 5%;
 }
 
 .splash-header {
@@ -269,6 +273,95 @@
 
 .keep-tabs-blurb h1, .keep-tabs-blurb h3 {
     color: #040D14;
+}
+
+.sixth {
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    height: 750px;
+    width: 100%;
+    overflow: hidden;
+    background: #040D14;
+}
+
+.trusted-blurb h1, .trusted-blurb h3 {
+    margin-top: 5%;
+    color: #fff;
+    text-align: center;
+    margin: none;
+    padding: none;
+}
+
+.trusted-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background: #040D14;
+}
+
+.eagle-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.trusted-pic {
+    margin-top: 15%;
+    max-width: 30%;
+    height: auto;
+}
+
+.trusted-blurb a {
+    color: #21ce99;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.trusted-blurb a:hover {
+    text-decoration: underline;
+}
+
+.seventh {
+    display: flex;
+    justify-content: center;
+    background: #21ce99;
+}
+
+.get-started-div {
+    /* display: flex; */
+    justify-content: center;
+    align-content: center;
+    height: 500px;
+    background: #21ce99;
+}
+
+.get-started-blurb{
+    text-align: center;
+}
+
+.get-started-div h1 {
+    color: black;
+}
+
+.get-started-div h3 {
+    color: black;
+}
+
+.get-started-button {
+    display: flex;
+    justify-content: center;
+    width: 100%
+}
+
+.get-started-button button {
+    color: #21ce99;
+    background: white;
+}
+
+.get-started-button button:hover {
+    box-shadow: 3px 2px 10px 2px rgb(129, 129, 129);
 }
 
 

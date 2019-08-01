@@ -110,6 +110,14 @@
     margin-top: 1%;
 }
 
+.redirect-button:hover {
+    text-decoration: underline;
+}
+
+.redirect-button:focus {
+    outline: 0;
+}
+
 .login-buttons {
     display: flex;
     justify-content: flex-start

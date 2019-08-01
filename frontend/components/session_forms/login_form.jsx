@@ -47,7 +47,7 @@ class SessionForm extends React.Component {
 
     loginDemoUser(e) {
         e.preventDefault();
-        this.props.login({ email: 'batman34@gmail.com', password: 'watermelon'}).then(
+        this.props.processForm({ email: 'batman34@gmail.com', password: 'watermelon'}).then(
             () => this.props.history.push("/"))
     }
 
@@ -79,7 +79,6 @@ class SessionForm extends React.Component {
                                 onChange={this.update('password')}
                                 className="login-input" 
                                 required/>
-
                             <br/>
                             
                             <button onClick={this.signupRedirect} className='redirect-button'>

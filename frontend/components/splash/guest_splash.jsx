@@ -78,14 +78,21 @@ class GuestSplash extends React.Component {
                             <br /> and learn by doing.</h3>
                         </div>
                     </section>
-
+                </div>
+                
+                <div className="bottom-splash-scroll">
                     <section className="fourth">
+                        <div className="next-level-div">
+                            <img src={window.nextLevelImg} className="next-level-pic" alt="iPhones with stock performance charts from Merry Money app." />
+                        </div>
+
                         <div className="next-level-blurb">
                             <h1>Next Level Investing</h1>
                             <h3>Access professional research reports, trade on margin, and <br />
-                            make bigger instant deposits with Robinhood Gold—all starting <br />
-                            at $5 a month.</h3>
+                                make bigger instant deposits with Robinhood Gold—all starting <br />
+                                at $5 a month.</h3>
                         </div>
+                        
                     </section>
                 </div>
             </div>

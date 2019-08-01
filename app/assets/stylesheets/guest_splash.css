@@ -1,9 +1,10 @@
 .nav-bar {
-    margin-top: 1%;
+    padding-top: 1%;
     overflow: hidden;
     position: fixed; 
     top: 0; 
     width: 100%; 
+    background-color: white;
 }
 
 .splash-header {
@@ -43,6 +44,7 @@
     white-space: nowrap;
     width: 200px;
     margin-right: 10%;
+    z-index: 1;
 }
 
 .login-redirect-button {
@@ -80,12 +82,6 @@
 
 #linkedin {
     margin-right: 30%;
-    /* height: 100%; */
-}
-
-#github {
-    /* margin-right: 40%; */
-    /* height: 100%; */
 }
 
 .splash-header {
@@ -114,18 +110,18 @@
     margin-left: 10%;
     margin-right: 10%;
     overflow-x: hidden;
+    z-index: -1;
 }
 
 .splash-scroll section img {
     margin-top: 6%;
     max-width: 70%;
     height: auto;
-    border: 1px solid black;
-    z-index: 2;
 }
 
 .first {
     display: flex;
+    justify-content: space-between;
 }
 
 .invest-commission-blurb {
@@ -138,7 +134,6 @@
     line-height: 120%;
     overflow: visible;
     white-space: nowrap;
-    z-index: 1;
 }
 
 .invest-commission-blurb h3 {
@@ -147,4 +142,28 @@
     line-height: 180%;
     font-weight: 200;
     z-index: 1;
+}
+
+.second {
+    margin-top: 5%;
+    display: flex;
+    justify-content: flex-start;
+    background-color: black;
+    width: 100%;
+    max-height: 10%;
+}
+
+.second h2 {
+    margin-top: 8%;
+    font-size: 36px;
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    line-height: 36px;
+    margin-left: 10%;
+}
+
+.second img {
+    margin-right: 5%;
+    /* object-fit: fill; */
 }

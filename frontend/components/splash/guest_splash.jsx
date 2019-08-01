@@ -55,12 +55,17 @@ class GuestSplash extends React.Component {
                     <section className="first">
                         <div className="invest-commission-blurb">
                             <h1>Invest <br /> Commission-Free</h1>
-                            <h3>Invest in stocks, ETFs, options, and cryptocurrencies, all commission-free, right from your phone or desktop.</h3>
+                            <h3>Invest in stocks, ETFs, options, and <br /> cryptocurrencies, all commission-free, <br /> right from your phone or desktop.</h3>
                             <br />
-                            <button onClick={this.signupRedirect} className='signup-redirect-button smaller-button'>
+                            <button onClick={this.signupRedirect} className='signup-redirect-button'>
                                 Sign Up</button>
                         </div>
                         <img src="https://cdn.robinhood.com/assets-about/6b2e66f81aef0f0d7dbeef37392e0eca.png" class="invest-com-free" alt="iPhones with MerryMoney app open."></img>
+                    </section>
+
+                    <section className="second">
+                        <h2>Cash management, <br /> coming soon.</h2>
+                        <img src={window.catImg} />
                     </section>
                 </div>
             </div>

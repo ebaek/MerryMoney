@@ -28,12 +28,12 @@ class UserSplash extends React.Component {
                     </button>
 
                     <div className="nav-searchbar-links">
-                        <input type="text" placeholder="Search"/>
+                        <input className="nav-search" type="text" placeholder="Search"/>
 
                         <div className="personal-links-user">
                             <a href="https://www.linkedin.com/in/ebaek5/">LinkedIn</a>
                             <a href="https://github.com/ebaek">Github</a>
-                            <button onClick={this.handleLogout}>Sign Out</button>                            
+                            <button onClick={this.handleLogout} className="signout-button">Sign Out</button>                            
                         </div>
                     </div>
                 </div>

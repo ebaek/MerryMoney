@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 class GuestSplash extends React.Component {
     constructor(props) {
@@ -60,7 +59,7 @@ class GuestSplash extends React.Component {
                             <button onClick={this.signupRedirect} className='signup-redirect-button'>
                                 Sign Up</button>
                         </div>
-                        <img src="https://cdn.robinhood.com/assets-about/6b2e66f81aef0f0d7dbeef37392e0eca.png" class="invest-com-free" alt="iPhones with MerryMoney app open."></img>
+                        <img src="https://cdn.robinhood.com/assets-about/6b2e66f81aef0f0d7dbeef37392e0eca.png" className="invest-com-free" alt="iPhones with MerryMoney app open."></img>
                     </section>
 
                     <section className="second">

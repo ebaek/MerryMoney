@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import GuestSplash from './guest_splash';
+import Splash from './splash';
 
 const msp = ({session, entities: { users } }) => {
     return({
@@ -7,4 +7,4 @@ const msp = ({session, entities: { users } }) => {
     });
 };
 
-export default connect(msp, null)(GuestSplash);
+export default connect(msp, null)(Splash);

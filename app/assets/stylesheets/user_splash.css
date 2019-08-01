@@ -1,0 +1,93 @@
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    position: absolute; 
+}
+
+.nav-logo {
+    margin-left: 5%;
+    margin-right: 1.5%;
+    background: transparent;
+    border: none;
+}
+
+.nav-logo i:hover {
+    color: #21ce99;
+}
+
+.nav-logo i {
+    font-size: 36px;
+    color: #040D14;
+}
+
+.nav-logo:focus {
+    outline: 0;
+}
+
+.nav-search {
+    width: 40%;
+    height: 36px;
+}
+
+.nav-search {
+    border: 1px solid Gainsboro;
+    font-size: 13px;
+    font-weight: 250;
+    color: #040d14;
+    border-radius: 4px;
+    line-height: 1.5em;
+    outline: 0;
+    padding: 0 13px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.nav-search:hover {
+    box-shadow: 2.5px 2px 10px 4px rgb(219, 219, 219);
+}
+
+.nav-searchbar-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.personal-links-user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 20%;
+    margin-right: 5%;
+}
+
+.personal-links-user a:hover{
+    color: #21ce99;
+}
+
+.personal-links-user a {
+    cursor: default;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #040d14;
+}
+
+.signout-button {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.signout-button:hover{
+    color: #21ce99;
+}
+
+.signout-button:focus {
+    outline:0;
+}

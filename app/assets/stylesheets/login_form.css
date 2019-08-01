@@ -11,7 +11,7 @@
     flex: 1 1 50%;
     /* overflow: hidden; */
     position: absolute;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 .login-form-box{

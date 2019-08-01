@@ -62,7 +62,7 @@
 }
 
 .signup-redirect-button:hover {
-    box-shadow: 0px 3px 5px 2px rgb(206, 206, 206);
+    box-shadow: 2.5px 2px 4px 2px rgb(226, 226, 226);
     transition: background-color 300ms, box-shadow 300ms;
     transition-property: background-color, box-shadow;
     transition-duration: 300ms, 300ms;
@@ -108,4 +108,43 @@
 .splash-header{
   font-weight: 400;
   font-size: 22px;
+}
+
+.splash-scroll {
+    margin-left: 10%;
+    margin-right: 10%;
+    overflow-x: hidden;
+}
+
+.splash-scroll section img {
+    margin-top: 6%;
+    max-width: 70%;
+    height: auto;
+    border: 1px solid black;
+    z-index: 2;
+}
+
+.first {
+    display: flex;
+}
+
+.invest-commission-blurb {
+    margin-top: 20%;
+    color: #040D14;
+}
+
+.invest-commission-blurb h1 {
+    font-size: 46px;
+    line-height: 120%;
+    overflow: visible;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.invest-commission-blurb h3 {
+    margin-top: 10%;
+    font-size: 16px;
+    line-height: 180%;
+    font-weight: 200;
+    z-index: 1;
 }

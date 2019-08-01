@@ -87,6 +87,7 @@
 
 #linkedin:hover, #github:hover {
     color: #21ce99;
+    cursor: default;
 }
 
 .personal-links {

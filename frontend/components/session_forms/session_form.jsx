@@ -44,6 +44,12 @@ class SessionForm extends React.Component {
         this.props.history.push('/signup');
     }
 
+    // loginDemoUser(e) {
+    //     e.preventDefault();
+    //     this.props.login({ email: 'batman34@gmail.com', password: 'watermelon'}).then(
+    //         () => this.props.history.push("/")
+    // }
+
     render() {
         return (
             <div className="login-form-container">

@@ -53,6 +53,14 @@
     margin-right: 15%;
 }
 
+.login-redirect-button:focus {
+    outline: 0;
+}
+
+.signup-redirect-button:focus {
+    outline: 0;
+}
+
 .signup-redirect-button {
     padding: 0 24px;
     background-color: #21ce99;

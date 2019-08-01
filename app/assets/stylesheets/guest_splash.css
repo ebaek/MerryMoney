@@ -147,7 +147,7 @@
 .second {
     margin-top: 5%;
     display: flex;
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
     background-color: black;
     width: 100%;
     max-height: 10%;
@@ -164,6 +164,7 @@
 }
 
 .second img {
-    margin-right: 5%;
+    max-height: 5%;
+    margin-right: 10%;
     /* object-fit: fill; */
 }

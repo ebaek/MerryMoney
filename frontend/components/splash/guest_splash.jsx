@@ -65,7 +65,7 @@ class GuestSplash extends React.Component {
 
                     <section className="second">
                         <h2>Cash management, <br /> coming soon.</h2>
-                        <img src={window.catImg} />
+                        <img src={window.catImg} className="cat-pic" />
                     </section>
                 </div>
             </div>

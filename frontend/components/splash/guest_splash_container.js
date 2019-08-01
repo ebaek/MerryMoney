@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-// import { login, signup } from '../../actions/session_actions';
 import GuestSplash from './guest_splash';
 
 const msp = ({session, entities: { users } }) => {
@@ -8,11 +7,4 @@ const msp = ({session, entities: { users } }) => {
     });
 };
 
-const mdp = dispatch => {
-    return({
-        // login: () => dispatch(login()),
-        // signup: (user) => dispatch(signup(user)),
-    })
-}
-
-export default connect(msp, mdp)(GuestSplash);
+export default connect(msp, null)(GuestSplash);

@@ -3,7 +3,7 @@ import * as APICompUtil from '../util/company_api_util';
 export const RECEIVE_COMPANY = "RECEIVE_COMPANY";
 export const RECEIVE_COMPANIES = "RECEIVE_COMPANIES";
 export const RECEIVE_COMPANY_BASICS = "RECEIVE_COMPANY_BASICS";
-export const RECEIVE_COMPANY_KEY_STATS = "RECEIVE_COMPANY_KEY_STATS"
+export const RECEIVE_COMPANY_KEY_STATS = "RECEIVE_COMPANY_KEY_STATS";
 
 const receiveCompany = (company) => {
     return({
@@ -17,18 +17,19 @@ const receiveCompanies = companies => ({
     companies,
 });
 
-const receiveCompanyBasics = (company_data) => {
+const receiveCompanyBasics = (company_basics) => {
     return({
         type: RECEIVE_COMPANY_BASICS,
-        ticker: company_data.symbol,
-        company_data,
+        ticker: company_basics.symbol,
+        company_basics,
     })
 }
 
-const receiveCompanyKeyStats = (stats) => {
+const receiveCompanyKeyStats = (stats, ticker) => {
     return({
         type: RECEIVE_COMPANY_KEY_STATS,
         stats, 
+        ticker,
     })
 }
 
@@ -45,11 +46,11 @@ export const createCompany = (company) => (dispatch) => {
 }
 
 export const fetchCompanyBasics = (ticker) => (dispatch) => {
-    return APICompUtil.fetchCompanyBasics(ticker).then( (company_data) => dispatch(receiveCompanyBasics(company_data)));
+    return APICompUtil.fetchCompanyBasics(ticker).then( (company_basics) => dispatch(receiveCompanyBasics(company_basics)));
 }
 
 export const fetchCompanyKeyStats = (ticker) => (dispatch) => {
-    return APICompUtil.fetchCompanyKeyStats(ticker).then( (stats) => dispatch(receiveCompanyKeyStats(stats)));
+    return APICompUtil.fetchCompanyKeyStats(ticker).then( (stats) => dispatch(receiveCompanyKeyStats(stats, ticker)));
 }
 
 

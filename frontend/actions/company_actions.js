@@ -4,6 +4,7 @@ export const RECEIVE_COMPANY = "RECEIVE_COMPANY";
 export const RECEIVE_COMPANIES = "RECEIVE_COMPANIES";
 export const RECEIVE_COMPANY_BASICS = "RECEIVE_COMPANY_BASICS";
 export const RECEIVE_COMPANY_KEY_STATS = "RECEIVE_COMPANY_KEY_STATS";
+export const RECEIVE_COMPANY_QUOTE = "RECEIVE_COMPANY_QUOTE";
 
 const receiveCompany = (company) => {
     return({
@@ -17,11 +18,11 @@ const receiveCompanies = companies => ({
     companies,
 });
 
-const receiveCompanyBasics = (company_basics) => {
+const receiveCompanyBasics = (company_data) => {
     return({
         type: RECEIVE_COMPANY_BASICS,
-        ticker: company_basics.symbol,
-        company_basics,
+        ticker: company_data.symbol,
+        company_data,
     })
 }
 
@@ -30,6 +31,14 @@ const receiveCompanyKeyStats = (stats, ticker) => {
         type: RECEIVE_COMPANY_KEY_STATS,
         stats, 
         ticker,
+    })
+}
+
+const receiveCompanyQuote = (quote) => {
+    return ({
+        type: RECEIVE_COMPANY_QUOTE,
+        ticker: quote.symbol,
+        quote,
     })
 }
 
@@ -46,11 +55,15 @@ export const createCompany = (company) => (dispatch) => {
 }
 
 export const fetchCompanyBasics = (ticker) => (dispatch) => {
-    return APICompUtil.fetchCompanyBasics(ticker).then( (company_basics) => dispatch(receiveCompanyBasics(company_basics)));
+    return APICompUtil.fetchCompanyBasics(ticker).then( (company_data) => dispatch(receiveCompanyBasics(company_data)));
 }
 
 export const fetchCompanyKeyStats = (ticker) => (dispatch) => {
     return APICompUtil.fetchCompanyKeyStats(ticker).then( (stats) => dispatch(receiveCompanyKeyStats(stats, ticker)));
+}
+
+export const fetchCompanyQuote = (ticker) => (dispatch) => {
+    return APICompUtil.fetchCompanyQuote(ticker).then( (quote) => dispatch(receiveCompanyQuote(quote)));
 }
 
 

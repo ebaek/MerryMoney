@@ -1,4 +1,6 @@
-import {RECEIVE_COMPANY, RECEIVE_COMPANIES, RECEIVE_COMPANY_BASICS, RECEIVE_COMPANY_KEY_STATS} from '../actions/company_actions';
+import {RECEIVE_COMPANY, RECEIVE_COMPANIES, 
+    RECEIVE_COMPANY_BASICS, RECEIVE_COMPANY_KEY_STATS,
+    RECEIVE_COMPANY_QUOTE} from '../actions/company_actions';
 
 const companiesReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -9,12 +11,16 @@ const companiesReducer = (state = {}, action) => {
         case RECEIVE_COMPANIES:
             return Object.assign({}, action.companies);
         case RECEIVE_COMPANY_BASICS:
-            return Object.assign({}, state, {[action.ticker]: action.company_basics});
+            return Object.assign({}, state, {[action.ticker]: action.company_data});
         case RECEIVE_COMPANY_KEY_STATS: 
             const newCompanyStats = Object.assign({}, state[action.ticker], action.stats);
             const newState = Object.assign({}, state, {[action.ticker]: newCompanyStats});
-            debugger
             return newState;
+        case RECEIVE_COMPANY_QUOTE:
+            const newCompanyQuote = Object.assign({}, state[action.ticker], action.quote);
+            const newQuoteState = Object.assign({}, state, { [action.ticker]: newCompanyQuote });
+            debugger
+            return newQuoteState;
         default:
             return state;
     }

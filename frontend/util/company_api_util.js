@@ -8,6 +8,7 @@ export const fetchCompany = id => {
 export const fetchCompanyBasics = (ticker) => {
     return $.ajax({
         method: 'GET',
-        url: `/stock/${ticker}/company`,
+        //add token here
+        url: `https://cloud.iexapis.com/stable/stock/${ticker}/company/batch?&types=quote&token=`,
     })
 }

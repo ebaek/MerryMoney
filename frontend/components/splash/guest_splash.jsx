@@ -74,7 +74,7 @@ class GuestSplash extends React.Component {
                         <div className="no-manual-blurb">
                             <h1>No Manual Needed</h1>
                             <h3>Intuitively designed for newcomers and experts alike, 
-                            <br /> Robinhood gives you a clear picture of your portfolio’s 
+                            <br /> MerryMoney gives you a clear picture of your portfolio’s 
                             <br /> performance over time, so you can adjust your positions 
                             <br /> and learn by doing.</h3>
                         </div>
@@ -90,7 +90,7 @@ class GuestSplash extends React.Component {
                         <div className="next-level-blurb">
                             <h1>Next Level Investing</h1>
                             <h3>Access professional research reports, trade on margin, and <br />
-                                make bigger instant deposits with Robinhood Gold—all starting <br />
+                                make bigger instant deposits with MerryMoney Gold—all starting <br />
                                 at $5 a month.</h3>
                         </div>
                     </section>
@@ -118,7 +118,7 @@ class GuestSplash extends React.Component {
                             
                             <div className="trusted-blurb">
                                 <h1>Trusted by Millions <br /> in the USA</h1>
-                                <h3>Robinhood is a member of SIPC, which protects securities customers of its  <br />
+                                <h3>MerryMoney is a member of SIPC, which protects securities customers of its  <br />
                                     members up to $500,000 (including $250,000 for claims for cash).  <br />
                                     Explanatory brochure available upon request or at <a href="https://www.sipc.org/">www.sipc.org.</a></h3>
                             </div>
@@ -131,7 +131,7 @@ class GuestSplash extends React.Component {
                             <div className="get-started-blurb">
                                 <h1>Get Started</h1>
                                 <h3>It only takes a few minutes to take control of your financial future. Sign up now to <br />
-                                    start investing with Robinhood.</h3>
+                                    start investing with MerryMoney.</h3>
                             </div>
                             
                             <div className="get-started-button">

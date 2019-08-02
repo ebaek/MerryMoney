@@ -10,16 +10,36 @@ require 'csv'
 
 # clear the database 
 User.destroy_all
+Company.destroy_all
+
+
 
 # demo user 
 robert = User.create(email: 'batman34@gmail.com', password: 'watermelon', first_name: 'Robert', last_name: 'Smith')
 
+
+
+# add nasdaq companies
 csv_nasdaq = File.read(Rails.root.join('lib', 'seeds', 'nasdaq.csv'))
 csv_nasdaq = CSV.parse(csv_nasdaq, :headers => true, :encoding => 'ISO-8859-1')
 
 csv_nasdaq.each do |row|
-  puts row.to_hash
+  company = Company.create(ticker: row['Symbol'])
 end
 
-# puts csv_nasdaq
+# add nyse companies
+csv_nyse = File.read(Rails.root.join('lib', 'seeds', 'nyse.csv'))
+csv_nyse = CSV.parse(csv_nyse, :headers => true, :encoding => 'ISO-8859-1')
+
+csv_nyse.each do |row|
+  company = Company.create(ticker: row['Symbol'])
+end
+
+# add amex companies 
+csv_amex = File.read(Rails.root.join('lib', 'seeds', 'amex.csv'))
+csv_amex = CSV.parse(csv_amex, :headers => true, :encoding => 'ISO-8859-1')
+
+csv_amex.each do |row|
+  company = Company.create(ticker: row['Symbol'])
+end
 

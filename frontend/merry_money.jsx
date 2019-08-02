@@ -39,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         window.createCompany = createCompany;
     // TEST END
 
+    debugger
+
     const root = document.getElementById('root');
     ReactDOM.render(<Root store={store}/>, root);
 });

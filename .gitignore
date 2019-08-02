@@ -18,8 +18,8 @@
 !/storage/.keep
 
 /node_modules
-bundle.js
-bundle.js.map
+/bundle.js
+/bundle.js.map
 /yarn-error.log
 
 

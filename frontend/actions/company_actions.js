@@ -22,6 +22,11 @@ export const fetchCompany = (ticker) => (dispatch) => {
     return APICompUtil.fetchCompany(ticker).then( (company) => dispatch(receiveCompany(company)));
 }
 
+export const createCompany = (company) => (dispatch) => {
+    debugger
+    return APICompUtil.createCompany(company).then( (company) => dispatch(receiveCompany(company)));
+}
+
 export const fetchCompanyBasics = (ticker) => (dispatch) => {
     return APICompUtil.fetchCompanyBasics(ticker).then( (company_data) => dispatch(receiveCompanyFinancials(company_data)))
 }

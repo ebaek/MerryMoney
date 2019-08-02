@@ -16,6 +16,8 @@ export const createCompany = company => (
 export const fetchCompanyBasics = (ticker) => {
     return $.ajax({
         method: 'GET',
-        url: `https://cloud.iexapis.com/stable/stock/${ticker}/company/batch?&types=quote&token=pk_706ac5ada3a7426a80d503d37ee02a8d`,
+        url: `https://cloud.iexapis.com/stable/stock/${ticker}/company/batch?&types=quote&token=${window.iexAPIKey}`,
     })
 }
+
+

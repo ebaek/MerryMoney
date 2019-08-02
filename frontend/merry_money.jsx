@@ -8,7 +8,7 @@ import configureStore from './store/store'
 
 // TEST
 import { login, logout, signup } from './actions/session_actions'
-import { fetchCompany, fetchCompanyBasics, createCompany } from './actions/company_actions'
+import { fetchCompany, fetchCompanies, fetchCompanyBasics, createCompany } from './actions/company_actions'
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
         window.logout = logout;
         window.signup = signup;
 
-
         window.fetchCompany = fetchCompany;
+        window.fetchCompanies = fetchCompanies;
         window.fetchCompanyBasics = fetchCompanyBasics;
         window.createCompany = createCompany;
     // TEST END

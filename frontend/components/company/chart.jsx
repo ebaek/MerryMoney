@@ -10,7 +10,11 @@ class Chart extends React.Component {
             name: "",
             prices: [],
             yrDate: [],
+            hoverPrice: 0,
+            hoverXPosition: 0,
         };
+
+        this.hoverPrice = this.hoverPrice.bind(this);
     }
 
     componentDidMount() {
@@ -44,15 +48,21 @@ class Chart extends React.Component {
         return newDate;
     }
 
+    hoverPrice(e){
+        this.setState({ hoverPrice: e.activePayload[0].payload.uClose });
+        this.setState({ hoverXPosition: e.activeCoordinate.x });
+    }
+
     render() {
         return (
             <div className="chart-container">
                 <h1>{this.state.name}</h1>
+                <p>{this.state.hoverPrice}</p>
 
-                <ResponsiveContainer width='100%' aspect={7.0 / 3.0}>
-
+                <ResponsiveContainer width='100%' aspect={7 / 4.0}>
+                    
                     <LineChart className="linechart" data={this.state.yrDate} 
-                        margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                        margin={{ top: 5, right: 20, bottom: 5, left: 0 }} onMouseMove={this.hoverPrice}>
 
                     <Line type="monotone" dataKey="uClose" stroke="#21CE99" 
                         strokeWidth={2} dot={false} />
@@ -60,14 +70,18 @@ class Chart extends React.Component {
                     <XAxis dataKey="date" hide={true} />
 
                     <Tooltip className='tooltip' content={this.state.yrDate.date}
-                            contentStyle={{ border: '0', backgroundColor: 'transparent' }} position={{ y: 0, x: 0 }}
-                            formatter={() => []} isAnimationActive={false} cursor={{ stroke: "Gainsboro", strokeWidth: 1.5}}
+                            contentStyle={{ border: '0', backgroundColor: 'transparent' }} 
+                            formatter={(value, name, props) => {return [""] } } 
+                            position={{x: this.state.hoverXPosition - 20, y: -25}}
+                            isAnimationActive={false} cursor={{ stroke: "Gainsboro", strokeWidth: 1.5}}
                             />
-                    </LineChart>
-                </ResponsiveContainer>
-            </div>
-        );
-    }
-}
-            
-export default withRouter(Chart);
+                            </LineChart>
+                            </ResponsiveContainer>
+                            </div>
+                            );
+                        }
+                    }
+                    
+                    export default withRouter(Chart);
+                    
+                    // position={{ x: event.clientX, y: -15}}

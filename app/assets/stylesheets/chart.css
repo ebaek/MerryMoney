@@ -13,16 +13,10 @@
     font-weight: 500;
     letter-spacing: -0.29px;
     line-height: 42px;
-    margin: 0;
+    margin-bottom: 3%;
     display: block;
     margin-block-start: 0.67em;
     margin-block-end: 0.67em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
-
-/* .recharts-default-tooltip {
-    position: absolute !important;
-    display: flex !important;
-    flex-direction: column-reverse !important;
-} */

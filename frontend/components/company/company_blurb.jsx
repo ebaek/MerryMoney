@@ -11,7 +11,6 @@ class CompanyBlurb extends React.Component {
     componentDidMount() {
         const ticker = this.props.ticker;
         this.props.fetchCompanyBasics(ticker).then(res => this.setState(res));
-        // this.props.fetchCompanyKeyStats(ticker).then(res => this.setState(res));
         this.props.fetchCompanyQuote(ticker).then(res => this.setState(res));
     }
 
@@ -35,7 +34,6 @@ class CompanyBlurb extends React.Component {
 
     render() {
         const { company_data } = this.state; 
-        // const { stats } = this.state; 
         const { quote } = this.state;
 
         return (

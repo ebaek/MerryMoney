@@ -1,12 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer} from 'recharts';
 
 class Chart extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            name: "",
             prices: [],
             yrDate: [],
         };
@@ -21,15 +22,17 @@ class Chart extends React.Component {
                     yrDate: this.convertDateYrs(res.prices),
                 });
             });
-
+        this.props.fetchCompanyKeyStats(this.ticker).then( (res) => {
+            this.setState({
+                name: res.stats.companyName,
+            })
+        })
     }
-
 
     convertDateYrs(prices) {
         prices.forEach( (price, idx) => {
             prices[idx]["date"] = this.formatDayDate(price["date"]);
         })
-
         return prices;
     }
 
@@ -44,14 +47,27 @@ class Chart extends React.Component {
     render() {
         return (
             <div className="chart-container">
-                <LineChart width={600} height={300} data={this.state.yrDate} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                    <Line type="monotone" dataKey="uClose" stroke="#8884d8" dot={false}/>
+                <h1>{this.state.name}</h1>
+
+                <ResponsiveContainer width='100%' aspect={7.0 / 3.0}>
+
+                    <LineChart className="linechart" data={this.state.yrDate} 
+                        margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+
+                    <Line type="monotone" dataKey="uClose" stroke="#21CE99" 
+                        strokeWidth={2} dot={false} />
+
                     <XAxis dataKey="date" hide={true} />
-                    <Tooltip />
+
+                    <Tooltip className='tooltip' content={this.state.yrDate.date}
+                            contentStyle={{ border: '0', backgroundColor: 'transparent' }} position={{ y: 0, x: 0 }}
+                            formatter={() => []} isAnimationActive={false} cursor={{ stroke: "Gainsboro", strokeWidth: 1.5}}
+                            />
                     </LineChart>
-                    </div>
-                    );
-                }
-            }
+                </ResponsiveContainer>
+            </div>
+        );
+    }
+}
             
 export default withRouter(Chart);

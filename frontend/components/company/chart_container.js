@@ -11,7 +11,7 @@ const msp = (state, ownProps) => {
 
 const mdp = dispatch => {
     return ({
-        fetchCompanyHistoricPrices: (ticker) => dispatch(fetchCompanyHistoricPrices(ticker)),
+        fetchCompanyHistoricPrices: (ticker, range, interval) => dispatch(fetchCompanyHistoricPrices(ticker, range, interval)),
         fetchCompanyKeyStats: (ticker) => dispatch(fetchCompanyKeyStats(ticker)),
         fetchCompanyQuote: (ticker) => dispatch(fetchCompanyQuote(ticker)),
     })

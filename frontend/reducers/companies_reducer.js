@@ -1,6 +1,6 @@
 import {RECEIVE_COMPANY, RECEIVE_COMPANIES, 
     RECEIVE_COMPANY_BASICS, RECEIVE_COMPANY_KEY_STATS,
-    RECEIVE_COMPANY_QUOTE} from '../actions/company_actions';
+    RECEIVE_COMPANY_QUOTE, RECEIVE_COMPANY_HISTORIC_PRICES} from '../actions/company_actions';
 
 const companiesReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -20,6 +20,8 @@ const companiesReducer = (state = {}, action) => {
             const newCompanyQuote = Object.assign({}, state[action.ticker], action.quote);
             const newQuoteState = Object.assign({}, state, { [action.ticker]: newCompanyQuote });
             return newQuoteState;
+        case RECEIVE_COMPANY_HISTORIC_PRICES:
+            return Object.assign({}, state, { [action.ticker]: action.prices });
         default:
             return state;
     }

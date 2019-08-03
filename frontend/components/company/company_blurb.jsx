@@ -74,7 +74,7 @@ class CompanyBlurb extends React.Component {
 
                     <div>
                         <h4>Price-Earnings Ratio</h4>
-                        <p><NumberFormat value={quote.peRatio * (100)} displayType={'text'} format="##.##" /></p>
+                        <p><NumberFormat value={quote.peRatio} displayType={'text'} format="#####" /></p>
                     </div>
 
                     <div>

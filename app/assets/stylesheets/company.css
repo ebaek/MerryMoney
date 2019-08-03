@@ -6,11 +6,17 @@
     border: 2px solid red;
 }
 
+.chart-container {
+    width: 100%;
+    border: 1px solid pink;
+}
+
 .company-info {
     margin-top: 10%;
     display: flex;
+    flex-direction: column;
     max-width: 70%;
-    border: 2px solid green;
+    /* border: 2px solid green; */
 }
 
 .about-container {
@@ -18,7 +24,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    border: 2px solid pink;
     overflow: hidden;
 }
 

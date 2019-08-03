@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import CompanyBlurb from './company_blurb_container';
+import Chart from './chart_container';
 
 class Company extends React.Component {
     constructor(props) {
@@ -41,6 +42,7 @@ class Company extends React.Component {
 
                 <div className="company-show">
                     <div className="company-info">
+                        <Chart />
                         <CompanyBlurb />
                     </div>
                 </div>

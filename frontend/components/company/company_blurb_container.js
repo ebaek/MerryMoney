@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 
 const msp = (state, ownProps) => {
     return ({
-        user: state.entities.users[state.session.id],
         ticker: ownProps.match.params.ticker,
     })
 }

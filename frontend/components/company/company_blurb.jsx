@@ -73,6 +73,11 @@ class CompanyBlurb extends React.Component {
                     </div>
 
                     <div>
+                        <h4>Price-Earnings Ratio</h4>
+                        <p><NumberFormat value={quote.peRatio * (100)} displayType={'text'} format="##.##" /></p>
+                    </div>
+
+                    <div>
                         <h4>High Today</h4>
                         <p>{quote.high}</p>
                     </div>
@@ -83,15 +88,8 @@ class CompanyBlurb extends React.Component {
                     </div>
 
                     <div>
-                        <h4>Price-Earnings Ratio</h4>
-                        <p><NumberFormat value={quote.peRatio * (100)} displayType={'text'} format="##.##" /></p>
-
-                    </div>
-
-                    <div>
-                        <h4>Dividend Yield</h4>
-                        <p><NumberFormat value={stats.dividendYield * 100} displayType={'text'} format="####" /></p>
-
+                        <h4>Volume</h4>
+                        <p>{this.formatNumber(quote.volume)}</p>
                     </div>
 
                     <div>

@@ -41,4 +41,11 @@ export const fetchCompanyQuote = (ticker) => {
     })
 }
 
+export const fetchCompanyHistoricPrices = (ticker, interval) => {
+    return $.ajax({
+        method: "GET",
+        url: `https://cloud.iexapis.com/stable/stock/${ticker}/chart/${interval}/batch?&types=quote&token=${window.iexAPIKey}`,
+    })
+}
+
 

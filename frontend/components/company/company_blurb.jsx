@@ -50,12 +50,12 @@ class CompanyBlurb extends React.Component {
             
                     <div>
                         <h4>Market Cap</h4>
-                        <p>{stats.marketcap}</p>
+                        <p>{quote.marketCap}</p>
                     </div>
 
                     <div>
                         <h4>Price-Earnings Ratio</h4>
-                        <p>{stats.peRatio}</p>
+                        <p>{quote.peRatio}</p>
                     </div>
 
                     <div>
@@ -69,8 +69,18 @@ class CompanyBlurb extends React.Component {
                     </div>
 
                     <div>
-                        <h4>High Today</h4>
-                        <p>{stats.dividendYield}</p>
+                        <h4>Avg. Total Volume</h4>
+                        <p>{quote.avgTotalVolume}</p>
+                    </div>
+
+                    <div>
+                        <h4>52 Week High</h4>
+                        <p>{quote.week52High}</p>
+                    </div>
+
+                    <div>
+                        <h4>52 Week Low</h4>
+                        <p>{quote.week52Low}</p>
                     </div>
 
                 </div>

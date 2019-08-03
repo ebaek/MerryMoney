@@ -19,7 +19,6 @@ const companiesReducer = (state = {}, action) => {
         case RECEIVE_COMPANY_QUOTE:
             const newCompanyQuote = Object.assign({}, state[action.ticker], action.quote);
             const newQuoteState = Object.assign({}, state, { [action.ticker]: newCompanyQuote });
-            debugger
             return newQuoteState;
         default:
             return state;

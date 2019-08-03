@@ -1,0 +1,71 @@
+.company-show{
+    display: flex;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    border: 2px solid red;
+}
+
+.company-info {
+    margin-top: 10%;
+    display: flex;
+    max-width: 70%;
+    border: 2px solid green;
+}
+
+.about-container {
+    margin-top: 40%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 2px solid pink;
+    overflow: hidden;
+}
+
+.about-container h2 {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.14px;
+    line-height: 30px;
+    color: #140d14;
+    border-bottom: 4px solid #EEF1F7;
+    padding-bottom: 2%;
+}
+
+.about-blurb p {
+    font-size: 16px;
+}
+
+.about-snippets {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    margin-top: 4%;
+}
+
+.about-snippets div {
+    display: block;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 200px;
+    height: 10%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-right: 1.5%;
+}
+
+.about-snippets div h4 {
+    color: #140d14;
+    font-weight: 500;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.about-snippets div p {
+    font-size: 13px;
+    letter-spacing: 0.25px;
+    line-height: 19px;
+    color: #140d14;
+    margin: 0;
+    white-space: nowrap;
+}

@@ -38,8 +38,14 @@ class Company extends React.Component {
                         </div>
                     </div>
                 </div>
+
+                <div className="company-show">
+                    <div className="company-info">
+                        <CompanyBlurb />
+                    </div>
+                </div>
                 
-                <CompanyBlurb />
+                
             </div>
         );
     }

@@ -57,7 +57,7 @@ class Chart extends React.Component {
         return (
             <div className="chart-container">
                 <h1>{this.state.name}</h1>
-                <p>{this.state.hoverPrice}</p>
+                <div id="odometer" className="odometer">{this.state.hoverPrice}</div>
 
                 <ResponsiveContainer width='100%' aspect={7 / 4.0}>
                     

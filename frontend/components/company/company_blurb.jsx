@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import NumberFormat from 'react-number-format';
 
 class CompanyBlurb extends React.Component {
     constructor(props) {
@@ -12,6 +13,24 @@ class CompanyBlurb extends React.Component {
         this.props.fetchCompanyBasics(ticker).then(res => this.setState(res));
         this.props.fetchCompanyKeyStats(ticker).then(res => this.setState(res));
         this.props.fetchCompanyQuote(ticker).then(res => this.setState(res));
+    }
+
+    formatNumber(num) {
+        if(num >= 1000000 && num < 10000000) {
+            return <NumberFormat value={num} displayType={'text'} format="#.##M" />
+        } else if (num >= 10000000 && num < 100000000) {
+            return <NumberFormat value={num} displayType={'text'} format="##.##M" />
+        } else if (num >= 100000000 && num < 1000000000) {
+            return <NumberFormat value={num} displayType={'text'} format="###.##M" />
+        } else if (num >= 1000000000 && num < 10000000000 ) {
+            return <NumberFormat value={num} displayType={'text'} format="#.##B" />
+        } else if (num >= 10000000000 && num < 100000000000) {
+            return <NumberFormat value={num} displayType={'text'} format="##.##B" />
+        } else if (num >= 100000000000 && num < 1000000000000) {
+            return <NumberFormat value={num} displayType={'text'} format="###B" />
+        } else if (num >= 1000000000000 && num < 10000000000000) {
+            return <NumberFormat value={num} displayType={'text'} format="#.##T" />
+        }
     }
 
     render() {
@@ -35,7 +54,7 @@ class CompanyBlurb extends React.Component {
             
                     <div>
                         <h4>Employees</h4>
-                        <p>{company_data.employees}</p>
+                        <p><NumberFormat value={company_data.employees} displayType={'text'} thousandSeparator={true} /></p>
                     </div>
             
                     <div>
@@ -50,27 +69,34 @@ class CompanyBlurb extends React.Component {
             
                     <div>
                         <h4>Market Cap</h4>
-                        <p>{quote.marketCap}</p>
+                        <p>{this.formatNumber(quote.marketCap)}</p>
+                    </div>
+
+                    <div>
+                        <h4>High Today</h4>
+                        <p>{quote.high}</p>
+                    </div>
+
+                    <div>
+                        <h4>Low Today</h4>
+                        <p>{quote.low}</p>
                     </div>
 
                     <div>
                         <h4>Price-Earnings Ratio</h4>
-                        <p>{quote.peRatio}</p>
+                        <p><NumberFormat value={quote.peRatio * (100)} displayType={'text'} format="##.##" /></p>
+
                     </div>
 
                     <div>
                         <h4>Dividend Yield</h4>
-                        <p>{stats.dividendYield}</p>
-                    </div>
+                        <p><NumberFormat value={stats.dividendYield * 100} displayType={'text'} format="####" /></p>
 
-                    <div>
-                        <h4>Avg. 30 Day Volume</h4>
-                        <p>{stats.dividendYield}</p>
                     </div>
 
                     <div>
                         <h4>Avg. Total Volume</h4>
-                        <p>{quote.avgTotalVolume}</p>
+                        <p>{this.formatNumber(quote.avgTotalVolume)}</p>
                     </div>
 
                     <div>

@@ -56,10 +56,14 @@ class Chart extends React.Component {
     render() {
         return (
             <div className="chart-container">
-                <h1>{this.state.name}</h1>
-                <div id="odometer" className="odometer">{this.state.hoverPrice}</div>
+                <div className="name-price">
+                    <h1>{this.state.name}</h1>
+                    <div className="price">
+                        <h1>$</h1><div id="odometer" className="odometer">{this.state.hoverPrice}</div>
+                    </div>
+                </div>
 
-                <ResponsiveContainer width='100%' aspect={7 / 4.0}>
+                <ResponsiveContainer width='100%' aspect={7 / 2.0}>
                     
                     <LineChart className="linechart" data={this.state.yrDate} 
                         margin={{ top: 5, right: 20, bottom: 5, left: 0 }} onMouseMove={this.hoverPrice}>
@@ -72,7 +76,7 @@ class Chart extends React.Component {
                     <Tooltip className='tooltip' content={this.state.yrDate.date}
                             contentStyle={{ border: '0', backgroundColor: 'transparent' }} 
                             formatter={(value, name, props) => {return [""] } } 
-                            position={{x: this.state.hoverXPosition - 20, y: -25}}
+                            position={{x: this.state.hoverXPosition - 50, y: -25}}
                             isAnimationActive={false} cursor={{ stroke: "Gainsboro", strokeWidth: 1.5}}
                             />
                             </LineChart>

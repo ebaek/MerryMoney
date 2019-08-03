@@ -6,11 +6,6 @@
     border: 2px solid red;
 }
 
-.chart-container {
-    width: 100%;
-    border: 1px solid pink;
-}
-
 .company-info {
     margin-top: 10%;
     display: flex;
@@ -19,7 +14,6 @@
 }
 
 .about-container {
-    margin-top: 5%;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -72,4 +66,9 @@
     color: #140d14;
     margin: 0;
     white-space: nowrap;
+}
+
+.name-price {
+    display: flex;
+    flex-direction: column;
 }

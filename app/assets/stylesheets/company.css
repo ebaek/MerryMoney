@@ -1,23 +1,23 @@
 .company-show{
     display: flex;
-    width: 70%;
+    width: 50%;
     margin-left: 15%;
     margin-right: 15%;
-    border: 2px solid red;
 }
 
 .company-info {
-    margin-top: 10%;
-    display: flex;
-    flex-direction: column;
-    max-width: 70%;
-}
-
-.about-container {
+    margin-top: 5%;
     display: flex;
     flex-direction: column;
     width: 100%;
-    overflow: hidden;
+}
+
+.about-container {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* overflow: hidden; */
 }
 
 .about-container h2 {
@@ -26,7 +26,7 @@
     letter-spacing: -0.14px;
     line-height: 30px;
     color: #140d14;
-    border-bottom: 4px solid #EEF1F7;
+    border-bottom: 2px solid #EEF1F7;
     padding-bottom: 2%;
 }
 

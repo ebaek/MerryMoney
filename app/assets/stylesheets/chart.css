@@ -1,12 +1,27 @@
 .chart-container {
     display: flex;
     flex-direction: column;
-    margin-top: 5%;
     width: 100%;
+    padding-bottom: 2%;
+    border-bottom: 2px solid #EEF1F7;
 }
 
 .linechart {
     max-width: 100%;
+    position: fixed;
+}
+
+.recharts-responsive-container {
+    width: 100%;
+}
+
+.recharts-wrapper {
+    width: 50%;
+}
+
+.recharts-surface {
+    display: flex;
+    align-content: center;
 }
 
 .chart-container h1 {
@@ -16,26 +31,50 @@
     font-size: 36px;
     font-weight: 500;
     letter-spacing: -0.29px;
-    margin-top: 2%;
-    margin-bottom: 3%;
+    margin-bottom: 2%;
+    color: #040D14;
+}
+
+.timeframe-buttons {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    justify-content: space-between;
+
+}
+
+.timeframe-buttons button {
+    border: none;
+    font-family:  "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+    background: none;
+    color: #040D14;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.timeframe-buttons button:hover {
+    color: #21ce99;
 }
 
 .name-price{
     margin-top: 5%;
-    margin-bottom: 10%;
+    margin-bottom: 15%;
 }
 
 .price{
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+    height: 45px;
+    align-content: baseline;
 }
 
-.price h1 {
+.dollar-sign {
     font-size: 33px;
     font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1;
-    margin-right: 0.25%;
+    margin: 0;
+    padding: 0;
+    color: #040D14;
 }
 
 .price-change {
@@ -45,6 +84,7 @@
 
 .price-change h3 {
     margin-right: 2%;
+    color: #040D14;
 }
 
 .price-info {
@@ -58,6 +98,7 @@
     font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 500;
     line-height: 1;
+    color: #040D14;
 }
 
 

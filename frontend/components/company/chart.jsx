@@ -84,7 +84,7 @@ class Chart extends React.Component {
 
                     <div className="price-info">
                         <div className="price">
-                            <h1>$</h1><div id="odometer" className="odometer">{this.state.hoverPrice}</div>
+                            <p className="dollar-sign">$</p><div id="odometer" className="odometer">{this.state.hoverPrice}</div>
                             </div>
                         <div className="price-change">
                             <h3>{this.formatPriceChange(this.state.change)}</h3>
@@ -96,7 +96,7 @@ class Chart extends React.Component {
                 <ResponsiveContainer width='100%' aspect={7 / 2.0}>
                     
                     <LineChart className="linechart" data={this.state.yrDate} 
-                        margin={{ top: 5, right: 20, bottom: 5, left: 0 }} onMouseMove={this.hoverPrice}>
+                        onMouseMove={this.hoverPrice}>
 
                     <Line type="monotone" dataKey="uClose" stroke="#21CE99" 
                         strokeWidth={2} dot={false} />
@@ -111,6 +111,15 @@ class Chart extends React.Component {
                             />
                             </LineChart>
                 </ResponsiveContainer>
+
+                <div className="timeframe-buttons">
+                    <button>1D</button>
+                    <button>1W</button>
+                    <button>1M</button>
+                    <button>3M</button>
+                    <button>5Y</button>
+                </div>
+
             </div>
         );
     }

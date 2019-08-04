@@ -10,14 +10,16 @@ class Chart extends React.Component {
         this.state = {
             name: "",
             prices: [],
-            yrDate: [],
+            label: [],
             change: 0,
             changePercent: 0,
             hoverPrice: 0,
             hoverXPosition: "",
+            currentChart: "fiveYrPrices",
         };
 
         this.hoverPrice = this.hoverPrice.bind(this);
+        this.fetchDates = this.fetchDates.bind(this);
     }
 
     componentDidMount() {
@@ -26,14 +28,29 @@ class Chart extends React.Component {
             .then( (res) => {
                 this.setState({
                     data: res,
-                    yrDate: this.convertDateYrs(res.prices),
+                    fiveYrPrices: this.convertDateYrs(res.prices),
                 });
             });
+        
         this.props.fetchCompanyKeyStats(this.ticker).then( (res) => {
             this.setState({
                 name: res.stats.companyName,
             })
         })
+    }
+
+    fetchDates(interval, numPoints, label){
+        this.ticker = this.props.ticker;
+
+        this.props.fetchCompanyHistoricPrices(this.ticker, interval, numPoints)
+            .then((res) => {
+                this.setState({
+                    data: res,
+                    [label]: this.convertDateYrs(res.prices),
+                    currentChart: label,
+                });
+            });
+        
     }
 
     convertDateYrs(prices) {
@@ -77,6 +94,9 @@ class Chart extends React.Component {
     }
 
     render() {
+
+        let chart = this.state[this.state.currentChart] || [];
+
         return (
             <div className="chart-container">
                 <div className="name-price">
@@ -94,8 +114,7 @@ class Chart extends React.Component {
                 </div>
 
                 <ResponsiveContainer width='100%' aspect={7 / 2.0}>
-                    
-                    <LineChart className="linechart" data={this.state.yrDate} 
+                    <LineChart className="linechart" data={chart} 
                         onMouseMove={this.hoverPrice}>
 
                     <Line type="monotone" dataKey="uClose" stroke="#21CE99" 
@@ -103,7 +122,7 @@ class Chart extends React.Component {
 
                     <XAxis dataKey="date" hide={true} />
 
-                    <Tooltip className='tooltip' content={this.state.yrDate.date}
+                    <Tooltip className='tooltip' content={chart.date}
                             contentStyle={{ border: '0', backgroundColor: 'transparent' }} 
                             formatter={(value, name, props) => {return [""] } } 
                             position={{x: this.state.hoverXPosition - 50, y: -25}}
@@ -113,11 +132,11 @@ class Chart extends React.Component {
                 </ResponsiveContainer>
 
                 <div className="timeframe-buttons">
-                    <button>1D</button>
-                    <button>1W</button>
-                    <button>1M</button>
-                    <button>3M</button>
-                    <button>5Y</button>
+                    <button onClick={() => this.fetchDates("1d", "30", "oneDayPrices")}>1D</button>
+                    <button onClick={() => this.fetchDates("1w", "10", "oneWeekPrices")}>1W</button>
+                    <button onClick={() => this.fetchDates("1m", "10", "oneMonthPrices")}>1M</button>
+                    <button onClick={() => this.fetchDates("3m", "30", "threeMonthPrices")}>3M</button>
+                    <button onClick={() => this.fetchDates("5y", "300", "fiveYrPrices")}>5Y</button>
                 </div>
 
             </div>

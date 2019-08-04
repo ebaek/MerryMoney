@@ -29,7 +29,6 @@
     display: flex;
     flex-direction: row;
     align-items: baseline;
-    
 }
 
 .price h1 {
@@ -37,6 +36,24 @@
     font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1;
     margin-right: 0.25%;
+}
+
+.price-change {
+    display: flex;
+    flex-direction: row;
+}
+
+.price-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.price-info h3{
+    font-size: 15px;
+    font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 500;
+    line-height: 1;
 }
 
 

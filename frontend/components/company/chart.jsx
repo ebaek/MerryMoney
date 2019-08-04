@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer} from 'recharts';
+import NumberFormat from 'react-number-format';
 
 class Chart extends React.Component {
     constructor(props) {
@@ -10,8 +11,10 @@ class Chart extends React.Component {
             name: "",
             prices: [],
             yrDate: [],
-            hoverPrice: 0,
-            hoverXPosition: 0,
+            change: "",
+            changePercent: "",
+            hoverPrice: "",
+            hoverXPosition: "",
         };
 
         this.hoverPrice = this.hoverPrice.bind(this);
@@ -49,8 +52,16 @@ class Chart extends React.Component {
     }
 
     hoverPrice(e){
-        this.setState({ hoverPrice: e.activePayload[0].payload.uClose });
-        this.setState({ hoverXPosition: e.activeCoordinate.x });
+        if (e.isTooltipActive !== false) {
+            this.setState({ hoverPrice: e.activePayload[0].payload.uClose });
+            this.setState({ hoverXPosition: e.activeCoordinate.x });
+            this.setState({ change: e.activePayload[0].payload.change });
+            this.setState({ changeOverTime: e.activePayload[0].payload.changeOverTime });
+        }
+    }
+
+    formatPercent(decimal) {
+        return <NumberFormat value={decimal * 100} displayType={'text'} format="####%" />
     }
 
     render() {
@@ -58,8 +69,15 @@ class Chart extends React.Component {
             <div className="chart-container">
                 <div className="name-price">
                     <h1>{this.state.name}</h1>
-                    <div className="price">
-                        <h1>$</h1><div id="odometer" className="odometer">{this.state.hoverPrice}</div>
+
+                    <div className="price-info">
+                        <div className="price">
+                            <h1>$</h1><div id="odometer" className="odometer">{this.state.hoverPrice}</div>
+                            </div>
+                        <div className="price-change">
+                            <h3>{this.state.change}</h3>
+                            <h3>{this.formatPercent(this.state.changeOverTime)}</h3>
+                        </div>
                     </div>
                 </div>
 
@@ -80,12 +98,12 @@ class Chart extends React.Component {
                             isAnimationActive={false} cursor={{ stroke: "Gainsboro", strokeWidth: 1.5}}
                             />
                             </LineChart>
-                            </ResponsiveContainer>
-                            </div>
-                            );
-                        }
-                    }
+                </ResponsiveContainer>
+            </div>
+        );
+    }
+}
                     
-                    export default withRouter(Chart);
+
+export default withRouter(Chart);
                     
-                    // position={{ x: event.clientX, y: -15}}

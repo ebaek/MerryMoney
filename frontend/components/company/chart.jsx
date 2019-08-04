@@ -11,9 +11,9 @@ class Chart extends React.Component {
             name: "",
             prices: [],
             yrDate: [],
-            change: "",
-            changePercent: "",
-            hoverPrice: "",
+            change: 0,
+            changePercent: 0,
+            hoverPrice: 0,
             hoverXPosition: "",
         };
 
@@ -61,7 +61,19 @@ class Chart extends React.Component {
     }
 
     formatPercent(decimal) {
-        return <NumberFormat value={decimal * 100} displayType={'text'} format="####%" />
+        if(decimal === 0) return "";
+
+        return <NumberFormat value={decimal * 100} displayType={'text'} format="(####%)" />
+    }
+
+    formatPriceChange(price) {
+        if (price === 0) return "";
+        const newPrice = price.toString().split("")
+        if(newPrice[0] === "-") {
+            return newPrice[0] + "$" + newPrice.slice(1).join("");
+        } else {
+            return "+" + "$" + newPrice.slice(0).join("");
+        }
     }
 
     render() {
@@ -75,7 +87,7 @@ class Chart extends React.Component {
                             <h1>$</h1><div id="odometer" className="odometer">{this.state.hoverPrice}</div>
                             </div>
                         <div className="price-change">
-                            <h3>{this.state.change}</h3>
+                            <h3>{this.formatPriceChange(this.state.change)}</h3>
                             <h3>{this.formatPercent(this.state.changeOverTime)}</h3>
                         </div>
                     </div>

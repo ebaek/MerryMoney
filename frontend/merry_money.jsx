@@ -7,6 +7,7 @@ import Root from './components/root';
 import configureStore from './store/store'
 
 // TEST
+import { createTransaction, fetchTransactions } from './actions/transactions_actions'
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
@@ -26,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // TEST START
         window.getState = store.getState;
         window.dispatch = store.dispatch;
+
+        window.createTransaction = createTransaction;
+        window.fetchTransactions = fetchTransactions;
     // TEST END
 
     const root = document.getElementById('root');

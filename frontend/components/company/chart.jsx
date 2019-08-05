@@ -24,7 +24,7 @@ class Chart extends React.Component {
 
     componentDidMount() {
         this.ticker = this.props.ticker;
-        this.props.fetchCompanyHistoricPrices(this.ticker, "5y", "5")
+        this.props.fetchCompanyHistoricPrices(this.ticker, "5y", "360")
             .then( (res) => {
                 this.setState({
                     data: res,
@@ -68,13 +68,23 @@ class Chart extends React.Component {
         return newDate;
     }
 
-    hoverPrice(e){
+    hoverPrice(e) {
         if (e.isTooltipActive !== false) {
             this.setState({ hoverPrice: e.activePayload[0].payload.uClose });
             this.setState({ hoverXPosition: e.activeCoordinate.x });
-            this.setState({ change: e.activePayload[0].payload.change });
-            this.setState({ changeOverTime: e.activePayload[0].payload.changeOverTime });
+
+            if (e.activePayload[0].payload.change !== undefined) {
+                this.setState({ change: e.activePayload[0].payload.change, 
+                    changeOverTime: e.activePayload[0].payload.changeOverTime });
+            } else {
+                this.setState({ change: "", changeOverTime: "" });
+            }
+            //add the minute label here 
         }
+    }
+
+    calculateChange(first, second) {
+        return (second - first) / first;
     }
 
     formatPercent(decimal) {
@@ -94,9 +104,8 @@ class Chart extends React.Component {
     }
 
     render() {
-
         let chart = this.state[this.state.currentChart] || [];
-
+        debugger
         return (
             <div className="chart-container">
                 <div className="name-price">
@@ -132,11 +141,11 @@ class Chart extends React.Component {
                 </ResponsiveContainer>
 
                 <div className="timeframe-buttons">
-                    <button onClick={() => this.fetchDates("1d", "30", "oneDayPrices")}>1D</button>
-                    <button onClick={() => this.fetchDates("1w", "10", "oneWeekPrices")}>1W</button>
-                    <button onClick={() => this.fetchDates("1m", "10", "oneMonthPrices")}>1M</button>
+                    <button onClick={() => this.fetchDates("1d", "1", "oneDayPrices")}>1D</button>
+                    <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
+                    <button onClick={() => this.fetchDates("1m", "1", "oneMonthPrices")}>1M</button>
                     <button onClick={() => this.fetchDates("3m", "30", "threeMonthPrices")}>3M</button>
-                    <button onClick={() => this.fetchDates("5y", "300", "fiveYrPrices")}>5Y</button>
+                    <button onClick={() => this.fetchDates("5y", "360", "fiveYrPrices")}>5Y</button>
                 </div>
 
             </div>

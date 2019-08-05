@@ -56,6 +56,10 @@
     color: #21ce99;
 }
 
+.timeframe-buttons button:focus {
+    outline:0;
+}
+
 .name-price{
     margin-top: 5%;
     margin-bottom: 15%;
@@ -80,6 +84,8 @@
 .price-change {
     display: flex;
     flex-direction: row;
+    margin: 0;
+    height: 20px;
 }
 
 .price-change h3 {

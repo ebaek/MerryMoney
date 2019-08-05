@@ -79,6 +79,7 @@ class Chart extends React.Component {
             } else {
                 this.setState({ change: "", changeOverTime: "" });
             }
+            
             //add the minute label here 
         }
     }
@@ -105,7 +106,6 @@ class Chart extends React.Component {
 
     render() {
         let chart = this.state[this.state.currentChart] || [];
-        debugger
         return (
             <div className="chart-container">
                 <div className="name-price">

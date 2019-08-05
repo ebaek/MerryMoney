@@ -8,7 +8,7 @@ import configureStore from './store/store'
 
 // TEST
 import { login, logout, signup } from './actions/session_actions'
-import { fetchCompany, fetchCompanies, fetchCompanyBasics, createCompany } from './actions/company_actions'
+import { fetchNews } from './actions/news_actions'
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
@@ -29,14 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
         window.getState = store.getState;
         window.dispatch = store.dispatch;
 
-        window.login = login;
-        window.logout = logout;
-        window.signup = signup;
+        window.fetchNews = store.fetchNews;
 
-        window.fetchCompany = fetchCompany;
-        window.fetchCompanies = fetchCompanies;
-        window.fetchCompanyBasics = fetchCompanyBasics;
-        window.createCompany = createCompany;
+        window.login = login;
     // TEST END
 
     const root = document.getElementById('root');

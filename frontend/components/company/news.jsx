@@ -20,10 +20,17 @@ class News extends React.Component {
         
         return articles.map(article => {
             return(
-                <a href="{article.url}" key={article.title}>
-                    <p>{article.source.name}</p>
-                    <p>{article.title}</p>
-                    <p>{article.description}</p>
+                <a href={article.url} key={article.title}>
+                    <div className="news-box">
+                        <div className="news-description">
+                            <p className="article-source">{article.source.name}</p>
+                            <p className="article-title">{article.title}</p>
+                        </div>
+
+                        <div className="news-img-container">
+                            <img src={article.urlToImage} />
+                        </div>
+                    </div>
                 </a>
             );
         });

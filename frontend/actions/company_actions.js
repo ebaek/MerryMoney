@@ -61,10 +61,10 @@ export const fetchCompanies = () => dispatch => (
         .then(companies => dispatch(receiveCompanies(companies)))
 );
 
-export const createCompany = (company) => (dispatch) => {
-    return APICompUtil.createCompany(company)
-        .then( (company) => dispatch(receiveCompany(company)));
-}
+// export const createCompany = (company) => (dispatch) => {
+//     return APICompUtil.createCompany(company)
+//         .then( (company) => dispatch(receiveCompany(company)));
+// }
 
 export const fetchCompanyBasics = (ticker) => (dispatch) => {
     return APICompUtil.fetchCompanyBasics(ticker)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_05_201502) do
+ActiveRecord::Schema.define(version: 2019_08_05_215628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(version: 2019_08_05_201502) do
     t.boolean "buy", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "company_id", null: false
+    t.string "ticker", null: false
     t.index ["buy"], name: "index_transactions_on_buy"
-    t.index ["company_id"], name: "index_transactions_on_company_id"
+    t.index ["ticker"], name: "index_transactions_on_ticker"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 

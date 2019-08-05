@@ -12,13 +12,13 @@ export const fetchCompanies = () => {
     })
 };
 
-export const createCompany = company => {
-    $.ajax({
-        method: 'POST',
-        url: 'api/companies',
-        data: { company: company },
-    })
-};
+// export const createCompany = company => {
+//     $.ajax({
+//         method: 'POST',
+//         url: 'api/companies',
+//         data: { company: company },
+//     })
+// };
 
 export const fetchCompanyBasics = (ticker) => {
     return $.ajax({
@@ -41,7 +41,6 @@ export const fetchCompanyQuote = (ticker) => {
     })
 }
 
-//change interval here
 export const fetchCompanyHistoricPrices = (ticker, range, interval) => {
     return $.ajax({
         method: "GET",

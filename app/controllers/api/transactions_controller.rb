@@ -1,13 +1,14 @@
 
 class Api::TransactionsController < ApplicationController 
     def show
-        @transaction = Company.find_by(ticker: params[:company_id])
+        @transaction = Company.find_by(ticker: params[:ticker])
         render :show
     end
 
     def create
         @transaction = Transaction.new(transaction_params);
         @transaction.user_id = current_user.id;
+        debugger
         if @transaction.save
             render :show
         else
@@ -27,6 +28,6 @@ class Api::TransactionsController < ApplicationController
     private
     def transaction_params
         params.require(:transaction)
-            .permit(:company_id, :purchase_price, :quantity, :buy)
+            .permit(:ticker, :purchase_price, :quantity, :buy)
     end
 end

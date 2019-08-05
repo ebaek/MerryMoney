@@ -13,7 +13,10 @@ class Company < ApplicationRecord
 
     # has_many :watchlists
 
-    has_many :transactions
+    has_many :transactions,
+    primary_key: :id,
+    foreign_key: :ticker,
+    class_name: 'Transaction'
 
     # has_many :watchers,
     # through: :watchlists,

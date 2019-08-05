@@ -2,7 +2,7 @@ class Api::CompaniesController < ApplicationController
     before_action :ensure_logged_in
 
     def show
-        @company = Company.find_by(ticker: params[:id])
+        @company = Company.find_by(ticker: params[:ticker])
 
         render :show
     end

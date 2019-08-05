@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import CompanyBlurb from './company_blurb';
+import {logout} from '../../actions/session_actions'
 import {fetchCompanyBasics, fetchCompanyKeyStats, fetchCompanyQuote} from '../../actions/company_actions';
 import { withRouter } from 'react-router-dom';
 

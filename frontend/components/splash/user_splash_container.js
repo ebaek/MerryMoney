@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import UserSplash from './user_splash';
+import { logout } from '../../actions/session_actions';
 
 const msp = state => {
     return({

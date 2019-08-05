@@ -7,7 +7,6 @@ import Root from './components/root';
 import configureStore from './store/store'
 
 // TEST
-import { login, logout, signup } from './actions/session_actions'
 import { fetchNews } from './actions/news_actions'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,8 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.dispatch = store.dispatch;
 
         window.fetchNews = fetchNews;
-
-        window.login = login;
     // TEST END
 
     const root = document.getElementById('root');

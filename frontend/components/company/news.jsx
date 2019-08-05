@@ -59,8 +59,10 @@ class News extends React.Component {
                 <a href={article.url} key={article.title}>
                     <div className="news-box">
                         <div className="news-description">
-                            <p className="article-source">{article.source.name}</p>
-                            <p className="publication-date">{this.publicationDate(article.publishedAt)}</p>
+                            <div className="outlet-time">
+                                <p className="article-source">{article.source.name}</p>
+                                <p className="publication-date">{this.publicationDate(article.publishedAt)}</p>
+                            </div>
                             <p className="article-title">{article.title}</p>
                         </div>
 

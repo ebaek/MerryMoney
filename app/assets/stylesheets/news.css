@@ -12,6 +12,19 @@
     cursor: default;
 }
 
+.article-source {
+    margin-right: 2%;
+}
+
+.publication-date {
+    font-weight: 400;
+}
+
+.outlet-time{
+    display: flex;
+    flex-direction: row;
+}
+
 .article-title {
     font-size: 14px;
 }

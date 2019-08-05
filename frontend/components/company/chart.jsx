@@ -2,6 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer} from 'recharts';
 import NumberFormat from 'react-number-format';
+import Odometer from 'react-odometerjs';
+
 
 class Chart extends React.Component {
     constructor(props) {
@@ -139,22 +141,28 @@ class Chart extends React.Component {
             lineDataKey = "uClose";
             xAxisLabel = "date";
         }
-
+        // <Odometer value={1234} format="(.ddd),dd" />
+        
         return (
             <div className="chart-container">
-                <div className="name-price">
-                    <h1>{this.state.name}</h1>
-
-                    <div className="price-info">
+            <div className="name-price">
+                <h1>{this.state.name}</h1>
+            
+                <div className="price-info">
                         <div className="price">
-                            <p className="dollar-sign">$</p><div id="odometer" className="odometer">{this.state.hoverPrice}</div>
-                            </div>
+
+                            <p className="dollar-sign">$</p>
+                            <Odometer duration={500} value={this.state.hoverPrice} />
+
+                        </div>
+
                         <div className="price-change">
                             <h3>{this.formatPriceChange(this.state.change)}</h3>
                             <h3>{this.formatPercent(this.state.changeOverTime)}</h3>
                         </div>
-                    </div>
                 </div>
+
+            </div>
 
                 <ResponsiveContainer width='100%' aspect={7 / 2.0}>
                     <LineChart className="linechart" data={chart} 

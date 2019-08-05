@@ -7,7 +7,6 @@ import Root from './components/root';
 import configureStore from './store/store'
 
 // TEST
-import { fetchNews } from './actions/news_actions'
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
@@ -27,8 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // TEST START
         window.getState = store.getState;
         window.dispatch = store.dispatch;
-
-        window.fetchNews = fetchNews;
     // TEST END
 
     const root = document.getElementById('root');

@@ -18,6 +18,7 @@
 
 .publication-date {
     font-weight: 400;
+    color: rgb(219, 219, 219);
 }
 
 .outlet-time{
@@ -39,7 +40,7 @@
 }
 
 .news-box:hover {
-    background: rgb(243, 243, 243);
+    background: rgb(251, 252, 255);
 }
 
 .news-description{

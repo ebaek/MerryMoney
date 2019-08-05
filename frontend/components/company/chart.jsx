@@ -60,7 +60,7 @@ class Chart extends React.Component {
         return prices;
     }
 
-    formatDayDate(date){
+    formatDayDate(date) {
         let dateObj = new Date(date);
         let newDate = dateObj.toDateString().split(" ");
 
@@ -69,28 +69,50 @@ class Chart extends React.Component {
     }
 
     hoverPrice(e) {
-        if (e.isTooltipActive !== false) {
-            this.setState({ hoverPrice: e.activePayload[0].payload.uClose });
+        let hoverClose = "";
+
+        if (e.isTooltipActive !== false) {  
+            if (this.state.currentChart === "oneDayPrices") {
+                hoverClose = e.activePayload[0].payload.close
+            } else {
+                hoverClose = e.activePayload[0].payload.uClose;
+            }
+
+            this.setState({ hoverPrice: hoverClose });
             this.setState({ hoverXPosition: e.activeCoordinate.x });
 
             if (e.activePayload[0].payload.change !== undefined) {
                 this.setState({ change: e.activePayload[0].payload.change, 
                     changeOverTime: e.activePayload[0].payload.changeOverTime });
             } else {
-                this.setState({ change: "", changeOverTime: "" });
+                const change = this.dayChange(e.activePayload[0].payload.label);
+                this.setState({ change: change["dollarChange"], 
+                    changeOverTime: change["percentChange"] });
             }
-            
-            //add the minute label here 
         }
     }
 
+    dayChange(minuteLabel) {
+        const { oneDayPrices } = this.state;
+        for(let idx = 0; idx < oneDayPrices.length; idx++) {
+            if (oneDayPrices[idx].label === minuteLabel) {
+                if(oneDayPrices[idx - 1] !== undefined) {
+                    return this.calculateChange(oneDayPrices[idx - 1].close, oneDayPrices[idx].close);
+                }
+            }
+        }
+        return {dollarChange: 0, percentChange: 0}
+    }
+
     calculateChange(first, second) {
-        return (second - first) / first;
+        const dollarChange = (second - first).toFixed(2);
+        const percentChange = (second - first) / second;
+
+        return {dollarChange: dollarChange, percentChange: percentChange}
     }
 
     formatPercent(decimal) {
         if(decimal === 0) return "";
-
         return <NumberFormat value={decimal * 100} displayType={'text'} format="(####%)" />
     }
 
@@ -105,7 +127,19 @@ class Chart extends React.Component {
     }
 
     render() {
+        let lineDataKey = "";
+        let xAxisLabel = "";
+
         let chart = this.state[this.state.currentChart] || [];
+
+        if(this.state.currentChart === "oneDayPrices") {
+            lineDataKey = "close";
+            xAxisLabel = "label";
+        } else {
+            lineDataKey = "uClose";
+            xAxisLabel = "date";
+        }
+
         return (
             <div className="chart-container">
                 <div className="name-price">
@@ -126,12 +160,12 @@ class Chart extends React.Component {
                     <LineChart className="linechart" data={chart} 
                         onMouseMove={this.hoverPrice}>
 
-                    <Line type="monotone" dataKey="uClose" stroke="#21CE99" 
+                    <Line type="monotone" dataKey={lineDataKey} stroke="#21CE99" 
                         strokeWidth={2} dot={false} />
 
-                    <XAxis dataKey="date" hide={true} />
+                    <XAxis dataKey={xAxisLabel} hide={true} />
 
-                    <Tooltip className='tooltip' content={chart.date}
+                    <Tooltip className='tooltip' 
                             contentStyle={{ border: '0', backgroundColor: 'transparent' }} 
                             formatter={(value, name, props) => {return [""] } } 
                             position={{x: this.state.hoverXPosition - 50, y: -25}}
@@ -141,7 +175,7 @@ class Chart extends React.Component {
                 </ResponsiveContainer>
 
                 <div className="timeframe-buttons">
-                    <button onClick={() => this.fetchDates("1d", "1", "oneDayPrices")}>1D</button>
+                    <button onClick={() => this.fetchDates("1d", "60", "oneDayPrices")}>1D</button>
                     <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
                     <button onClick={() => this.fetchDates("1m", "1", "oneMonthPrices")}>1M</button>
                     <button onClick={() => this.fetchDates("3m", "30", "threeMonthPrices")}>3M</button>

@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.getState = store.getState;
         window.dispatch = store.dispatch;
 
-        window.fetchNews = store.fetchNews;
+        window.fetchNews = fetchNews;
 
         window.login = login;
     // TEST END

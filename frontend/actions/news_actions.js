@@ -1,4 +1,4 @@
-import * APIUtil from '../util/news_api_util';
+import * as APIUtil from '../util/news_api_util';
 
 export const RECEIVE_NEWS = "RECEIVE_NEWS";
 

@@ -141,7 +141,6 @@ class Chart extends React.Component {
             lineDataKey = "uClose";
             xAxisLabel = "date";
         }
-        // <Odometer value={1234} format="(.ddd),dd" />
         
         return (
             <div className="chart-container">
@@ -150,7 +149,6 @@ class Chart extends React.Component {
             
                 <div className="price-info">
                         <div className="price">
-
                             <p className="dollar-sign">$</p>
                             <Odometer duration={500} value={this.state.hoverPrice} />
 
@@ -172,6 +170,7 @@ class Chart extends React.Component {
                         strokeWidth={2} dot={false} />
 
                     <XAxis dataKey={xAxisLabel} hide={true} />
+                        <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true} />
 
                     <Tooltip className='tooltip' 
                             contentStyle={{ border: '0', backgroundColor: 'transparent' }} 

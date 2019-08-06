@@ -93,7 +93,6 @@ class Chart extends React.Component {
 
     dayChange(minuteLabel) {
         const { oneDayPrices } = this.state;
-        debugger
         for(let idx = 0; idx < oneDayPrices.length; idx++) {
             if (oneDayPrices[idx].label === minuteLabel) {
                 if(oneDayPrices[idx - 1] !== undefined) {
@@ -127,13 +126,10 @@ class Chart extends React.Component {
     }
 
     render() {
-        let lineDataKey = "";
-        let xAxisLabel = "";
-
         let chart = this.state[this.state.currentChart] || [];
 
-        lineDataKey = "close";
-        xAxisLabel = "label";
+        let lineDataKey = "close";
+        let xAxisLabel = "label";
         
         return (
             <div className="chart-container">

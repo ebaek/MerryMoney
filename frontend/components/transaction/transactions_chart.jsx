@@ -1,14 +1,16 @@
 import React from 'react';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+
 
 class TransactionsChart extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {transactions: [], portValues: {}, companyPrices: []};
+        this.state = {transactions: [], portValues: []};
     }
 
     componentDidMount() {
-        this.props.fetchTransactions().then( (res) => this.setState(res));
+        this.props.fetchTransactions().then((res) => this.setState(res, () => this.chartData("5d", "1")));
     }
 
     chartData(timeframe, interval) {
@@ -27,9 +29,8 @@ class TransactionsChart extends React.Component {
                             if(newPortValues[price.date] === undefined) {
                                 newPortValues[price.date] = 0;
                             }
-                            debugger
+
                             if (transaction.buy) {
-                                // add the portfolio value of specified date by closing price * quantity
                                 newPortValues[price.date] += (transaction.quantity * price.close);
                             } else {
                                 newPortValues[price.date] -= (transaction.quantity * price.close);
@@ -38,8 +39,8 @@ class TransactionsChart extends React.Component {
                     })
                 });
         })
-        
-        return newPortValues;
+
+        this.setState({portValues: [newPortValues]});
     }
 
     // priceWithinMonthRange(priceTime, transactionTime, monthRange){
@@ -77,21 +78,33 @@ class TransactionsChart extends React.Component {
         //     return date <= priceDate + dayRange - 31 ? true : false;
         // }
 
-        debugger
         if (priceTime >= transactionTime || priceYear === year && priceMonth === month && priceDate === date) {
             return true;
         } else {
             return false;
         }
-
     }
 
     render(){
-        this.chartData("5d", "1");
         debugger
         return(
             <div>
-                <p>pineapple</p>      
+                <ResponsiveContainer width='100%' aspect={7 / 2.0}>
+                    <LineChart className="linechart" data={this.state.portValues}>
+
+                        <Line type="monotone" stroke="#21CE99"
+                            strokeWidth={2} dot={false} />
+
+                        <XAxis hide={true} />
+                        <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true} />
+
+                        <Tooltip className='tooltip'
+                            contentStyle={{ border: '0', backgroundColor: 'transparent' }}
+                            formatter={(value, name, props) => { return [""] }}
+                            isAnimationActive={false} cursor={{ stroke: "Gainsboro", strokeWidth: 1.5 }}
+                        />
+                    </LineChart>
+                </ResponsiveContainer>     
             </div>
         );
     }

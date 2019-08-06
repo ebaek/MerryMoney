@@ -87,7 +87,7 @@ class Chart extends React.Component {
 
     formatPercent(decimal) {
         if(decimal === 0) return "";
-        return <NumberFormat value={decimal * 100} displayType={'text'} format="(####%)" />
+        return <NumberFormat value={decimal * 100} displayType={'text'} format="(#####%)" />
     }
 
     formatPriceChange(price) {

@@ -12,6 +12,7 @@ class TransactionsChart extends React.Component {
             transactions: [], 
             portValues: [],
             hoverPrice: 0,
+            hoverXPosition: "",
             change: 0,
             changeOverTime: 0,
         };
@@ -20,6 +21,7 @@ class TransactionsChart extends React.Component {
         this.reformatPortData = this.reformatPortData.bind(this);
 
         this.hoverPrice = this.hoverPrice.bind(this);
+        this.formatDayDate = this.formatDayDate.bind(this);
     }
 
     componentDidMount() {
@@ -39,15 +41,17 @@ class TransactionsChart extends React.Component {
                         const priceTime = new Date(price.date);
                         const transactionTime = new Date(transaction.created_at);
 
-                        if (this.priceWithinDayRange(priceTime, transactionTime)) {                          
-                            if(newPortValues[price.date] === undefined) {
-                                newPortValues[price.date] = 0;
+                        if (this.priceWithinDayRange(priceTime, transactionTime)) {  
+                            const date = this.formatDayDate(price.date);
+
+                            if(newPortValues[date] === undefined) {
+                                newPortValues[date] = 0;
                             }
 
                             if (transaction.buy) {
-                                newPortValues[price.date] += (transaction.quantity * price.close);
+                                newPortValues[date] += (transaction.quantity * price.close);
                             } else {
-                                newPortValues[price.date] -= (transaction.quantity * price.close);
+                                newPortValues[date] -= (transaction.quantity * price.close);
                             }
                         }
                     });
@@ -55,6 +59,14 @@ class TransactionsChart extends React.Component {
             })).then( () => {        
                 this.setState({ portValues: this.reformatPortData(newPortValues)});
             });
+    }
+
+    formatDayDate(date) {
+        let dateObj = new Date(date);
+        let newDate = dateObj.toDateString().split(" ");
+
+        newDate = newDate[1] + " " + newDate[2] + ", " + newDate[3];
+        return newDate;
     }
 
     reformatPortData(newPortValues){
@@ -111,15 +123,15 @@ class TransactionsChart extends React.Component {
 
     formatPercent(decimal) {
         if (decimal === 0) return "";
-        return <NumberFormat value={decimal * 100} displayType={'text'} format="(####%)" />
+        return <NumberFormat value={decimal * 100} displayType={'text'} format="(#####%)" />
     }
 
     hoverPrice(e) {
         let hoverClose = "";
 
         if (e.isTooltipActive !== false) {
-            hoverClose = e.activePayload[0].payload.close;
-
+            hoverClose = e.activePayload[0].payload.value;
+            debugger
             this.setState({ hoverPrice: hoverClose });
             this.setState({ hoverXPosition: e.activeCoordinate.x });
 

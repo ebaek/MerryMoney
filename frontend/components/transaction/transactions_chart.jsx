@@ -7,18 +7,24 @@ class TransactionsChart extends React.Component {
         super(props);
 
         this.state = {transactions: [], portValues: []};
+        this.portfolioData = this.portfolioData.bind(this);
+        this.reformatPortData = this.reformatPortData.bind(this);
     }
 
     componentDidMount() {
-        this.props.fetchTransactions().then((res) => this.setState(res, () => this.chartData("5d", "1")));
+        this.props.fetchTransactions().then((res) => this.setState(res, () => {
+            debugger
+            this.portfolioData("5d", "1")}));
     }
 
-    chartData(timeframe, interval) {
+    portfolioData(timeframe, interval) {
         const {transactions} = this.state;
         let newPortValues = {};
 
-        transactions.forEach( (transaction) => {
-            this.props.fetchCompanyHistoricPrices(transaction.ticker, timeframe, interval)
+        debugger
+
+        Promise.all(transactions.map( (transaction) => {
+            return this.props.fetchCompanyHistoricPrices(transaction.ticker, timeframe, interval)
                 .then( (res) => {
                     const companyPrices = Object.assign([], res.prices);
                     companyPrices.forEach((price) => {
@@ -36,11 +42,26 @@ class TransactionsChart extends React.Component {
                                 newPortValues[price.date] -= (transaction.quantity * price.close);
                             }
                         }
-                    })
+                    });
                 });
-        })
+            })).then( () => {
+                const notFormatted = newPortValues;
+                const formatted = this.reformatPortData(newPortValues);
+                debugger
+        
+                this.setState({portValues: formatted});
+            });
+    }
 
-        this.setState({portValues: [newPortValues]});
+    reformatPortData(newPortValues){
+        const chartData = [];
+        debugger
+
+        for(let i = 0; i < Object.keys(newPortValues).length; i++) {
+            chartData.push( {time: Object.keys(newPortValues)[i], value: Object.values(newPortValues)[i]} );
+        }
+        debugger
+        return chartData;
     }
 
     // priceWithinMonthRange(priceTime, transactionTime, monthRange){
@@ -86,16 +107,17 @@ class TransactionsChart extends React.Component {
     }
 
     render(){
+        const { portValues } = this.state;
         debugger
         return(
             <div>
                 <ResponsiveContainer width='100%' aspect={7 / 2.0}>
-                    <LineChart className="linechart" data={this.state.portValues}>
+                    <LineChart className="linechart" data={portValues}>
 
                         <Line type="monotone" stroke="#21CE99"
                             strokeWidth={2} dot={false} />
 
-                        <XAxis hide={true} />
+                        <XAxis hide={true} dataKey={portValues.time}/>
                         <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true} />
 
                         <Tooltip className='tooltip'

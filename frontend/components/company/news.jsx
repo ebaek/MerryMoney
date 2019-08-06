@@ -11,7 +11,6 @@ class News extends React.Component {
 
     componentDidMount() {
         const ticker = this.props.ticker;
-        this.props.fetchCompanyBasics(ticker).then(res => this.setState(res));
         this.props.fetchNews(ticker).then(res => this.setState(res));
     }
 

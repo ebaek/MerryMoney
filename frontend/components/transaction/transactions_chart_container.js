@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import TransactionsChart from './transactions_chart';
 import { fetchTransactions } from '../../actions/transactions_actions';
-import { fetchCompanyClosePrices } from '../../actions/company_actions'
+import { fetchCompanyHistoricPrices } from '../../actions/company_actions'
 
 const msp = (state) => {
     return({
@@ -12,7 +12,7 @@ const msp = (state) => {
 const mdp = (dispatch) => {
     return({
         fetchTransactions: () => dispatch(fetchTransactions()),
-        fetchCompanyClosePrices: (ticker, timeframe, interval) => dispatch(fetchCompanyClosePrices(ticker, timeframe, interval)),
+        fetchCompanyHistoricPrices: (ticker, timeframe, interval) => dispatch(fetchCompanyHistoricPrices(ticker, timeframe, interval)),
     });
 }
 

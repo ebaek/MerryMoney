@@ -29,7 +29,7 @@ class TransactionsChart extends React.Component {
             let companyPrices = [];
             
             // this is return an empty array for the companyPrices state for some reason 
-            this.props.fetchCompanyClosePrices(transaction.ticker, timeframe, interval)
+            this.props.fetchCompanyHistoricPrices(transaction.ticker, timeframe, interval)
                 .then( (res) => {
                     debugger
                     return this.setState({companyPrices: res.prices})

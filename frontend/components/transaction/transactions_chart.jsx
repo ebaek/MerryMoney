@@ -13,15 +13,12 @@ class TransactionsChart extends React.Component {
 
     componentDidMount() {
         this.props.fetchTransactions().then((res) => this.setState(res, () => {
-            debugger
             this.portfolioData("5d", "1")}));
     }
 
     portfolioData(timeframe, interval) {
         const {transactions} = this.state;
         let newPortValues = {};
-
-        debugger
 
         Promise.all(transactions.map( (transaction) => {
             return this.props.fetchCompanyHistoricPrices(transaction.ticker, timeframe, interval)
@@ -44,23 +41,17 @@ class TransactionsChart extends React.Component {
                         }
                     });
                 });
-            })).then( () => {
-                const notFormatted = newPortValues;
-                const formatted = this.reformatPortData(newPortValues);
-                debugger
-        
-                this.setState({portValues: formatted});
+            })).then( () => {        
+                this.setState({ portValues: this.reformatPortData(newPortValues)});
             });
     }
 
     reformatPortData(newPortValues){
         const chartData = [];
-        debugger
 
         for(let i = 0; i < Object.keys(newPortValues).length; i++) {
             chartData.push( {time: Object.keys(newPortValues)[i], value: Object.values(newPortValues)[i]} );
         }
-        debugger
         return chartData;
     }
 
@@ -90,15 +81,6 @@ class TransactionsChart extends React.Component {
         const date = transactionTime.getDate();
         const year = transactionTime.getYear();
 
-        // if(priceYear === year) {
-        //     if(priceMonth === month) {
-        //         return date <= priceDate + dayRange ? true : false;
-        //     }
-        // } else if (year - priceYear === 1) {
-            
-        //     return date <= priceDate + dayRange - 31 ? true : false;
-        // }
-
         if (priceTime >= transactionTime || priceYear === year && priceMonth === month && priceDate === date) {
             return true;
         } else {
@@ -108,16 +90,16 @@ class TransactionsChart extends React.Component {
 
     render(){
         const { portValues } = this.state;
-        debugger
         return(
             <div>
                 <ResponsiveContainer width='100%' aspect={7 / 2.0}>
-                    <LineChart className="linechart" data={portValues}>
+                    <LineChart className="linechart" data={portValues} width={730} height={250}
+                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
 
-                        <Line type="monotone" stroke="#21CE99"
+                        <Line type="monotone" stroke="#21CE99" dataKey="value"
                             strokeWidth={2} dot={false} />
 
-                        <XAxis hide={true} dataKey={portValues.time}/>
+                        <XAxis hide={true} dataKey="time" />
                         <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true} />
 
                         <Tooltip className='tooltip'
@@ -126,7 +108,8 @@ class TransactionsChart extends React.Component {
                             isAnimationActive={false} cursor={{ stroke: "Gainsboro", strokeWidth: 1.5 }}
                         />
                     </LineChart>
-                </ResponsiveContainer>     
+                </ResponsiveContainer>
+
             </div>
         );
     }

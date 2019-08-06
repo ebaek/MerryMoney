@@ -11,73 +11,84 @@ class TransactionsChart extends React.Component {
         this.props.fetchTransactions().then( (res) => this.setState(res));
     }
 
-    // iterate through all of the transactions
-    // fetchCompany historic prices 
-    // find key in hash with fetchCompany date 
-    // value of hash is + (quantity * price from fetchCompany) or - (quantity * price from fetchCompany)
-    // pass up the hash to recharts 
-
-    //array of tickers
-    //dates
-    //only fetch dates
-
     chartData(timeframe, interval) {
         const {transactions} = this.state;
-        
-        debugger
+        let newPortValues = {};
+
         transactions.forEach( (transaction) => {
-            let companyPrices = [];
-            
-            // this is return an empty array for the companyPrices state for some reason 
             this.props.fetchCompanyHistoricPrices(transaction.ticker, timeframe, interval)
                 .then( (res) => {
-                    debugger
-                    return this.setState({companyPrices: res.prices})
-                });
+                    const companyPrices = Object.assign([], res.prices);
+                    companyPrices.forEach((price) => {
+                        const priceTime = new Date(price.date);
+                        const transactionTime = new Date(transaction.created_at);
 
-            let transactionInfo = new Date(transaction.created_at);
-
-
-            let month = transactionInfo.getMonth();
-            let date = transactionInfo.getDate();
-            let year = transactionInfo.getYear();
-            // let time = transactionInfo[4];
-
-            //let transactionDate = month + " " + date + ", " + year;
-            
-            this.state.companyPrices.forEach( (price) => {
-                debugger
-                let priceInfo = new Date(price.date);
-                let priceMonth = priceInfo.getMonth();
-                let priceDate = priceInfo.getDate();
-                let priceYear = priceInfo.getYear();
-
-                if( priceYear === year && priceMonth === month ) {
-                    // check if the transaction date is within the specified interval
-                    // if (date >= priceDate && date < priceDate + interval) {
-
-                        // IMPORTANT**
-                        // might have issues because hash doesn't have initialized 0
-                        if(transaction.buy) {
-                            // add the portfolio value of specified date by closing price * quantity
-                            this.state.portValues[price.date] += (transaction.quantity * price.close);
-                        } else {
-                            this.state.portValues[price.date] -= (transaction.quantity * price.close);
+                        if (this.priceWithinDayRange(priceTime, transactionTime)) {                          
+                            if(newPortValues[price.date] === undefined) {
+                                newPortValues[price.date] = 0;
+                            }
+                            debugger
+                            if (transaction.buy) {
+                                // add the portfolio value of specified date by closing price * quantity
+                                newPortValues[price.date] += (transaction.quantity * price.close);
+                            } else {
+                                newPortValues[price.date] -= (transaction.quantity * price.close);
+                            }
                         }
-                    }
-                // }
-            })
+                    })
+                });
         })
-        return this.state.portValues;
+        
+        return newPortValues;
     }
 
-    calculatePortVal() {
+    // priceWithinMonthRange(priceTime, transactionTime, monthRange){
+    //     const priceMonth = priceTime.getMonth();
+    //     const priceYear = priceTime.getYear();
+
+    //     const month = transactionTime.getMonth();
+    //     const year = transactionTime.getYear();
+
+    //     if(priceYear === year) {
+    //         return priceMonth - month <= monthRange ? true : false;
+    //     } else if (year - priceYear === 1) {
+    //         const newPriceMonth = priceMonth + 12;
+    //         return newPriceMonth - month <= monthRange ? true : false; 
+    //     }
+
+    //     return false;
+    // }
+
+    priceWithinDayRange(priceTime, transactionTime){
+        let priceMonth = priceTime.getMonth();
+        let priceDate = priceTime.getDate() + 1;
+        let priceYear = priceTime.getYear();
+
+        const month = transactionTime.getMonth();
+        const date = transactionTime.getDate();
+        const year = transactionTime.getYear();
+
+        // if(priceYear === year) {
+        //     if(priceMonth === month) {
+        //         return date <= priceDate + dayRange ? true : false;
+        //     }
+        // } else if (year - priceYear === 1) {
+            
+        //     return date <= priceDate + dayRange - 31 ? true : false;
+        // }
+
+        debugger
+        if (priceTime >= transactionTime || priceYear === year && priceMonth === month && priceDate === date) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     render(){
+        this.chartData("5d", "1");
         debugger
-        this.chartData("5y", "150");
-
         return(
             <div>
                 <p>pineapple</p>      

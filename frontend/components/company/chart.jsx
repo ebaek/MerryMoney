@@ -74,19 +74,16 @@ class Chart extends React.Component {
         let hoverClose = "";
 
         if (e.isTooltipActive !== false) {  
-            if (this.state.currentChart === "oneDayPrices") {
-                hoverClose = e.activePayload[0].payload.close
-            } else {
-                hoverClose = e.activePayload[0].payload.uClose;
-            }
+            hoverClose = e.activePayload[0].payload.close
 
             this.setState({ hoverPrice: hoverClose });
             this.setState({ hoverXPosition: e.activeCoordinate.x });
-
+            
             if (e.activePayload[0].payload.change !== undefined) {
                 this.setState({ change: e.activePayload[0].payload.change, 
                     changeOverTime: e.activePayload[0].payload.changeOverTime });
-            } else {
+            }  else {
+                
                 const change = this.dayChange(e.activePayload[0].payload.label);
                 this.setState({ change: change["dollarChange"], 
                     changeOverTime: change["percentChange"] });
@@ -96,6 +93,7 @@ class Chart extends React.Component {
 
     dayChange(minuteLabel) {
         const { oneDayPrices } = this.state;
+        debugger
         for(let idx = 0; idx < oneDayPrices.length; idx++) {
             if (oneDayPrices[idx].label === minuteLabel) {
                 if(oneDayPrices[idx - 1] !== undefined) {
@@ -134,13 +132,8 @@ class Chart extends React.Component {
 
         let chart = this.state[this.state.currentChart] || [];
 
-        if(this.state.currentChart === "oneDayPrices") {
-            lineDataKey = "close";
-            xAxisLabel = "label";
-        } else {
-            lineDataKey = "uClose";
-            xAxisLabel = "date";
-        }
+        lineDataKey = "close";
+        xAxisLabel = "label";
         
         return (
             <div className="chart-container">

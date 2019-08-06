@@ -61,11 +61,6 @@ export const fetchCompanies = () => dispatch => (
         .then(companies => dispatch(receiveCompanies(companies)))
 );
 
-// export const createCompany = (company) => (dispatch) => {
-//     return APICompUtil.createCompany(company)
-//         .then( (company) => dispatch(receiveCompany(company)));
-// }
-
 export const fetchCompanyBasics = (ticker) => (dispatch) => {
     return APICompUtil.fetchCompanyBasics(ticker)
         .then( (company_data) => dispatch(receiveCompanyBasics(company_data)));
@@ -84,6 +79,11 @@ export const fetchCompanyQuote = (ticker) => (dispatch) => {
 export const fetchCompanyHistoricPrices = (ticker, range, interval) => (dispatch) => {
     return APICompUtil.fetchCompanyHistoricPrices(ticker, range, interval)
         .then( (prices) => dispatch(receiveCompanyHistoricPrices(prices)));
+} 
+
+export const fetchCompanyClosePrices = (ticker, range, interval) => (dispatch) => {
+    return APICompUtil.fetchCompanyClosePrices(ticker, range, interval)
+        .then((prices) => dispatch(receiveCompanyHistoricPrices(prices)));
 } 
 
 

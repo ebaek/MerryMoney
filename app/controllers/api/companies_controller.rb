@@ -3,7 +3,6 @@ class Api::CompaniesController < ApplicationController
 
     def show
         @company = Company.find_by(ticker: params[:ticker])
-
         render :show
     end
 

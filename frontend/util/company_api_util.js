@@ -12,14 +12,6 @@ export const fetchCompanies = () => {
     })
 };
 
-// export const createCompany = company => {
-//     $.ajax({
-//         method: 'POST',
-//         url: 'api/companies',
-//         data: { company: company },
-//     })
-// };
-
 export const fetchCompanyBasics = (ticker) => {
     return $.ajax({
         method: 'GET',
@@ -44,8 +36,18 @@ export const fetchCompanyQuote = (ticker) => {
 export const fetchCompanyHistoricPrices = (ticker, range, interval) => {
     return $.ajax({
         method: "GET",
-        url: `https://cloud.iexapis.com/stable/stock/${ticker}/chart/${range}/?chartInterval=${interval}&types=quote&token=${window.iexAPIKey}`,
+        // url: `https://cloud.iexapis.com/stable/stock/${ticker}/chart/${range}/?chartInterval=${interval}&types=quote&token=${window.iexAPIKey}`,
+        url: `https://cloud.iexapis.com/stable/stock/${ticker}/chart/${range}/?filter=date,close,label,change,changeOverTime&chartInterval=${interval}&types=quote&token=${window.iexAPIKey}`,
+    });
+}
+
+export const fetchCompanyClosePrices = (ticker, range, interval) => {
+    return $.ajax({
+        method: "GET",
+        url: `https://cloud.iexapis.com/stable/stock/${ticker}/chart/?chartCloseOnly=true&filter=date,close&chartInterval=${filter}&types=quote&token=${window.iexAPIKey}`
     })
 }
+
+
 
 

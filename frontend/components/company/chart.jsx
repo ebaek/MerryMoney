@@ -104,7 +104,9 @@ class Chart extends React.Component {
         let chart = this.state[this.state.currentChart] || [];
 
         let lineDataKey = "close";
-        let xAxisLabel = "label";
+        let xAxisLabel = "date";
+
+        debugger
         
         return (
             <div className="chart-container">

@@ -16,35 +16,6 @@ Transaction.destroy_all
 # demo user 
 robert = User.create!(email: 'batman34@gmail.com', password: 'watermelon', first_name: 'Robert', last_name: 'Smith')
 
-# add robert's (demo user) transactions
-amazon = {buy: true,
-user_id: robert.id,
-created_at: "2019-08-03T04:21:41.217Z",
-purchase_price: 1784.00,
-quantity: 1,
-ticker: "AMZN"}
-
-microsoft_buy = {buy: true,
-user_id: robert.id,
-created_at: "2019-08-04T01:21:41.217Z",
-purchase_price: 134.60,
-quantity: 2,
-ticker: "MSFT"}
-
-microsoft_sell = {buy: false,
-user_id: robert.id,
-created_at: "2019-08-05T03:43:45.217Z",
-purchase_price: 142.34,
-quantity: 1,
-ticker: "MSFT"}
-
-etsy = {buy: true,
-user_id: robert.id,
-created_at: "2019-08-06T02:43:45.217Z",
-purchase_price: 55.55,
-quantity: 3,
-ticker: "ETSY"}
-
 # add nasdaq companies
 csv_nasdaq = File.read(Rails.root.join('lib', 'seeds', 'nasdaq.csv'))
 csv_nasdaq = CSV.parse(csv_nasdaq, :headers => true, :encoding => 'ISO-8859-1')
@@ -72,4 +43,37 @@ csv_amex.each do |row|
     company = Company.create!(ticker: row['Symbol'])
   end
 end
+
+# add robert's (demo user) transactions
+amazon = Transaction.create!({
+buy: true,
+user_id: robert.id,
+created_at: "2019-07-30T04:21:41.217Z",
+purchase_price: 1784.00,
+quantity: 1,
+ticker: "AMZN"})
+
+microsoft_buy = Transaction.create!({
+buy: true,
+user_id: robert.id,
+created_at: "2019-08-01T01:21:41.217Z",
+purchase_price: 134.60,
+quantity: 2,
+ticker: "MSFT"})
+
+microsoft_sell = Transaction.create!({
+buy: false,
+user_id: robert.id,
+created_at: "2019-08-02T03:43:45.217Z",
+purchase_price: 142.34,
+quantity: 1,
+ticker: "MSFT"})
+
+etsy = Transaction.create!({
+buy: true,
+user_id: robert.id,
+created_at: "2019-08-05T02:43:45.217Z",
+purchase_price: 55.55,
+quantity: 3,
+ticker: "ETSY"})
 

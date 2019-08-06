@@ -14,7 +14,7 @@ class Chart extends React.Component {
             prices: [],
             label: [],
             change: 0,
-            changePercent: 0,
+            changeOverTime: 0,
             hoverPrice: 0,
             hoverXPosition: "",
             currentChart: "fiveYrPrices",
@@ -52,7 +52,6 @@ class Chart extends React.Component {
                     currentChart: label,
                 });
             });
-        
     }
 
     convertDateYrs(prices) {
@@ -82,32 +81,8 @@ class Chart extends React.Component {
             if (e.activePayload[0].payload.change !== undefined) {
                 this.setState({ change: e.activePayload[0].payload.change, 
                     changeOverTime: e.activePayload[0].payload.changeOverTime });
-            }  else {
-                
-                const change = this.dayChange(e.activePayload[0].payload.label);
-                this.setState({ change: change["dollarChange"], 
-                    changeOverTime: change["percentChange"] });
-            }
+            }  
         }
-    }
-
-    dayChange(minuteLabel) {
-        const { oneDayPrices } = this.state;
-        for(let idx = 0; idx < oneDayPrices.length; idx++) {
-            if (oneDayPrices[idx].label === minuteLabel) {
-                if(oneDayPrices[idx - 1] !== undefined) {
-                    return this.calculateChange(oneDayPrices[idx - 1].close, oneDayPrices[idx].close);
-                }
-            }
-        }
-        return {dollarChange: 0, percentChange: 0}
-    }
-
-    calculateChange(first, second) {
-        const dollarChange = (second - first).toFixed(2);
-        const percentChange = (second - first) / second;
-
-        return {dollarChange: dollarChange, percentChange: percentChange}
     }
 
     formatPercent(decimal) {

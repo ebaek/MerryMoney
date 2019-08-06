@@ -1,14 +1,25 @@
 import React from 'react';
+import NumberFormat from 'react-number-format';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import Odometer from 'react-odometerjs';
 
 
 class TransactionsChart extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {transactions: [], portValues: []};
+        this.state = {
+            transactions: [], 
+            portValues: [],
+            hoverPrice: 0,
+            change: 0,
+            changeOverTime: 0,
+        };
+
         this.portfolioData = this.portfolioData.bind(this);
         this.reformatPortData = this.reformatPortData.bind(this);
+
+        this.hoverPrice = this.hoverPrice.bind(this);
     }
 
     componentDidMount() {
@@ -88,32 +99,100 @@ class TransactionsChart extends React.Component {
         }
     }
 
+    formatPriceChange(price) {
+        if (price === 0) return "";
+        const newPrice = price.toString().split("")
+        if (newPrice[0] === "-") {
+            return newPrice[0] + "$" + newPrice.slice(1).join("");
+        } else {
+            return "+" + "$" + newPrice.slice(0).join("");
+        }
+    }
+
+    formatPercent(decimal) {
+        if (decimal === 0) return "";
+        return <NumberFormat value={decimal * 100} displayType={'text'} format="(####%)" />
+    }
+
+    hoverPrice(e) {
+        let hoverClose = "";
+
+        if (e.isTooltipActive !== false) {
+            hoverClose = e.activePayload[0].payload.close;
+
+            this.setState({ hoverPrice: hoverClose });
+            this.setState({ hoverXPosition: e.activeCoordinate.x });
+
+            const change = this.portChange(e.activePayload[0].payload.time);
+            this.setState({
+                change: change["dollarChange"],
+                changeOverTime: change["percentChange"]
+            });
+        }
+    }
+
+    portChange(time) {
+        const { portValues } = this.state;
+        for (let idx = 0; idx < portValues.length; idx++) {
+            if (portValues[idx].time === time) {
+                if (portValues[idx - 1] !== undefined) {
+                    return this.calculateChange(portValues[idx - 1].value, portValues[idx].value);
+                }
+            }
+        }
+        return { dollarChange: 0, percentChange: 0 }
+    }
+
+    calculateChange(first, second) {
+        const dollarChange = (second - first).toFixed(2);
+        const percentChange = (second - first) / second;
+
+        return { dollarChange: dollarChange, percentChange: percentChange }
+    }
+
     render(){
         const { portValues } = this.state;
         return(
-            <div>
-                <ResponsiveContainer width='100%' aspect={7 / 2.0}>
-                    <LineChart className="linechart" data={portValues} width={730} height={250}
-                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+            <div className="chart-container">
+                <div className="name-price">
+                    <h1>{this.state.name}</h1>
 
-                        <Line type="monotone" stroke="#21CE99" dataKey="value"
+                    <div className="price-info">
+                        <div className="price">
+                            <p className="dollar-sign">$</p>
+                            <Odometer duration={500} value={this.state.hoverPrice} />
+
+                        </div>
+
+                        <div className="price-change">
+                            <h3>{this.formatPriceChange(this.state.change)}</h3>
+                            <h3>{this.formatPercent(this.state.changeOverTime)}</h3>
+                        </div>
+                    </div>
+
+                </div>
+
+                <ResponsiveContainer width='100%' aspect={7 / 2.0}>
+                    <LineChart className="linechart" data={portValues}
+                        onMouseMove={this.hoverPrice}>
+
+                        <Line type="monotone" dataKey="value" stroke="#21CE99"
                             strokeWidth={2} dot={false} />
 
-                        <XAxis hide={true} dataKey="time" />
+                        <XAxis dataKey="time" hide={true} />
                         <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true} />
 
                         <Tooltip className='tooltip'
                             contentStyle={{ border: '0', backgroundColor: 'transparent' }}
                             formatter={(value, name, props) => { return [""] }}
+                            position={{ x: this.state.hoverXPosition - 50, y: -25 }}
                             isAnimationActive={false} cursor={{ stroke: "Gainsboro", strokeWidth: 1.5 }}
                         />
                     </LineChart>
                 </ResponsiveContainer>
 
             </div>
-        );
+        )}
     }
-}
-
-
+        
 export default TransactionsChart;

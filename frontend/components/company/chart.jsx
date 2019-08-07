@@ -17,6 +17,11 @@ class Chart extends React.Component {
             changeOverTime: 0,
             hoverPrice: 0,
             hoverXPosition: "",
+            oneDayPrices: "",
+            oneWeekPrices: "",
+            oneMonthPrices: "",
+            threeMonthPrices: "",
+            fiveYrPrices: "",
             currentChart: "fiveYrPrices",
         };
 
@@ -44,14 +49,20 @@ class Chart extends React.Component {
     fetchDates(interval, numPoints, label){
         this.ticker = this.props.ticker;
 
-        this.props.fetchCompanyHistoricPrices(this.ticker, interval, numPoints)
-            .then((res) => {
-                this.setState({
-                    data: res,
-                    [label]: this.convertDateYrs(res.prices),
-                    currentChart: label,
+        if (this.state[label] === "") {
+            this.props.fetchCompanyHistoricPrices(this.ticker, interval, numPoints)
+                .then((res) => {
+                    this.setState({
+                        data: res,
+                        [label]: this.convertDateYrs(res.prices),
+                        currentChart: label,
+                    });
                 });
-            });
+        } else {
+            this.setState({
+                currentChart: label,
+            })
+        }
     }
 
     convertDateYrs(prices) {
@@ -106,8 +117,6 @@ class Chart extends React.Component {
         let lineDataKey = "close";
         let xAxisLabel = "date";
 
-        debugger
-        
         return (
             <div className="chart-container">
             <div className="name-price">

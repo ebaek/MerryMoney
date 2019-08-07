@@ -15,6 +15,12 @@ class TransactionsChart extends React.Component {
             hoverXPosition: "",
             change: 0,
             changeOverTime: 0,
+            oneDayPrices: "",
+            oneWeekPrices: "",
+            oneMonthPrices: "",
+            threeMonthPrices: "",
+            fiveYrPrices: "",
+            currentChart: "oneWeekPrices",
         };
 
         this.portfolioData = this.portfolioData.bind(this);
@@ -26,10 +32,10 @@ class TransactionsChart extends React.Component {
 
     componentDidMount() {
         this.props.fetchTransactions().then((res) => this.setState(res, () => {
-            this.portfolioData("5d", "1")}));
+            this.portfolioData("5d", "1", "oneWeekPrices")}));
     }
 
-    portfolioData(timeframe, interval) {
+    portfolioData(timeframe, interval, label) {
         const {transactions} = this.state;
         let newPortValues = {};
 
@@ -57,7 +63,9 @@ class TransactionsChart extends React.Component {
                     });
                 });
             })).then( () => {        
-                this.setState({ portValues: this.reformatPortData(newPortValues)});
+                this.setState({ 
+                    [label]: this.reformatPortData(newPortValues),
+                });
             });
     }
 
@@ -78,10 +86,45 @@ class TransactionsChart extends React.Component {
         return chartData;
     }
 
-    /// IMPORTANT //
-    // CALLBACK FUNCTION FOR BUTTONS!!!!///
-    fetchDates() {
+    fetchDates(timeframe, interval, label) {
+        const { transactions } = this.state;
+        let newPortValues = {};
 
+        if (this.state[label] === "") {
+            Promise.all(transactions.map((transaction) => {
+                return this.props.fetchCompanyHistoricPrices(transaction.ticker, timeframe, interval)
+                    .then((res) => {
+                        const companyPrices = Object.assign([], res.prices);
+                        companyPrices.forEach((price) => {
+                            const priceTime = new Date(price.date);
+                            const transactionTime = new Date(transaction.created_at);
+
+                            if (this.priceWithinDayRange(priceTime, transactionTime)) {
+                                const date = this.formatDayDate(price.date);
+
+                                if (newPortValues[date] === undefined) {
+                                    newPortValues[date] = 0;
+                                }
+
+                                if (transaction.buy) {
+                                    newPortValues[date] += (transaction.quantity * price.close);
+                                } else {
+                                    newPortValues[date] -= (transaction.quantity * price.close);
+                                }
+                            }
+                        });
+                    });
+            })).then(() => {
+                this.setState({ 
+                    [label]: this.reformatPortData(newPortValues),
+                    currentChart: label,
+                });
+            });
+        } else {
+            this.setState({
+                currentChart: label,
+            })
+        }
     }
 
     // priceWithinMonthRange(priceTime, transactionTime, monthRange){
@@ -137,7 +180,6 @@ class TransactionsChart extends React.Component {
 
         if (e.isTooltipActive !== false) {
             hoverClose = e.activePayload[0].payload.value;
-            debugger
             this.setState({ hoverPrice: hoverClose });
             this.setState({ hoverXPosition: e.activeCoordinate.x });
 
@@ -169,7 +211,10 @@ class TransactionsChart extends React.Component {
     }
 
     render(){
-        const { portValues } = this.state;
+        // const { portValues } = this.state;
+
+        let portValues = this.state[this.state.currentChart] || [];
+        debugger
         return(
             <div className="chart-container">
                 <div className="name-price">

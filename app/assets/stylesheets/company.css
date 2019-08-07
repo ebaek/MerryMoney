@@ -1,8 +1,15 @@
+.user-container {
+    width: 100%;
+    border: 1px solid pink;
+}
+
 .chart-show{
     display: flex;
-    width: 50%;
+    width: 70%;
     margin-left: 15%;
     margin-right: 15%;
+    justify-content: space-between;
+    border: 1px solid orange;
 }
 
 .body-info {

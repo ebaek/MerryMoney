@@ -14,7 +14,7 @@ const receiveCompany = (company) => {
     })
 }
 
-const receiveCompanies = companies => ({
+const receiveCompanies = (companies) => ({
     type: RECEIVE_COMPANIES,
     companies,
 });

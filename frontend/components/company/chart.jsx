@@ -113,7 +113,7 @@ class Chart extends React.Component {
         for (let idx = 0; idx < portValues.length; idx++) {
             if (portValues[idx].label === time) {
                 if (portValues[idx - 1] !== undefined) {
-                    return this.calculateChange(portValues[idx - 1].value, portValues[idx].value);
+                    return this.calculateChange(portValues[idx - 1].average, portValues[idx].average);
                 }
             }
         }
@@ -121,6 +121,7 @@ class Chart extends React.Component {
     }
 
     calculateChange(first, second) {
+        debugger
         const dollarChange = (second - first).toFixed(2);
         const percentChange = (second - first) / second;
 
@@ -196,9 +197,9 @@ class Chart extends React.Component {
                 <div className="timeframe-buttons">
                     <button onClick={() => this.fetchDates("1d", "60", "oneDayPrices")}>1D</button>
                     <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
-                    <button onClick={() => this.fetchDates("1m", "1", "oneMonthPrices")}>1M</button>
-                    <button onClick={() => this.fetchDates("3m", "30", "threeMonthPrices")}>3M</button>
-                    <button onClick={() => this.fetchDates("5y", "360", "fiveYrPrices")}>5Y</button>
+                    <button onClick={() => this.fetchDates("1m", "2", "oneMonthPrices")}>1M</button>
+                    <button onClick={() => this.fetchDates("3m", "15", "threeMonthPrices")}>3M</button>
+                    <button onClick={() => this.fetchDates("5y", "100", "fiveYrPrices")}>5Y</button>
                 </div>
 
             </div>

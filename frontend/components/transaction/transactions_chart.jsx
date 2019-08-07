@@ -49,7 +49,6 @@ class TransactionsChart extends React.Component {
 
                         if (this.priceWithinDayRange(priceTime, transactionTime)) {  
                             const date = this.formatDayDate(price.date);
-
                             if(newPortValues[date] === undefined) {
                                 newPortValues[date] = 0;
                             }
@@ -73,6 +72,7 @@ class TransactionsChart extends React.Component {
         let dateObj = new Date(date);
         let newDate = dateObj.toDateString().split(" ");
 
+        
         newDate = newDate[1] + " " + newDate[2] + ", " + newDate[3];
         return newDate;
     }
@@ -91,8 +91,7 @@ class TransactionsChart extends React.Component {
         let newPortValues = {};
         let rangeFunc = this.priceWithinDayRange;
 
-        // if(label === "oneDayPrices") {
-        //     rangeFunc = this.priceWithinHourRange;
+        
         if (label === "fiveYrPrices") {
             rangeFunc = this.priceWithinMonthRange;
         }
@@ -107,10 +106,8 @@ class TransactionsChart extends React.Component {
                             
                             const priceTime = new Date(price.date);
                             const transactionTime = new Date(transaction.created_at);
-                            
                             if (rangeFunc(priceTime, transactionTime)) {
-
-                                let time = this.formatDayDate(price.time);
+                                let time = this.formatDayDate(price.date);
 
                                 if(label === "oneDayPrices") {
                                     time = price.label;
@@ -165,6 +162,7 @@ class TransactionsChart extends React.Component {
         const date = transactionTime.getDate();
         const year = transactionTime.getYear();
 
+        
         if (priceTime >= transactionTime || priceYear === year && priceMonth === month && priceDate === date) {
             return true;
         } else {

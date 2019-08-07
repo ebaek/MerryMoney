@@ -86,15 +86,47 @@ class Chart extends React.Component {
         if (e.isTooltipActive !== false) {  
             hoverClose = e.activePayload[0].payload.close
 
-            this.setState({ hoverPrice: hoverClose });
-            this.setState({ hoverXPosition: e.activeCoordinate.x });
+            debugger
+            const change = this.portChange(e.activePayload[0].payload.label);
+
+
+            this.setState({ hoverPrice: hoverClose, 
+                hoverXPosition: e.activeCoordinate.x });
             
-            if (e.activePayload[0].payload.change !== undefined) {
-                this.setState({ change: e.activePayload[0].payload.change, 
+            if (this.state.currentChart !== "oneDayPrices") {
+                this.setState({ 
+                    change: e.activePayload[0].payload.change, 
                     changeOverTime: e.activePayload[0].payload.changeOverTime });
+            } else {
+                this.setState({
+                    change: change["dollarChange"],
+                    changeOverTime: change["percentChange"],
+                });
             }  
         }
     }
+
+    portChange(time) {
+        debugger
+        const portValues = this.state[this.state.currentChart];
+
+        for (let idx = 0; idx < portValues.length; idx++) {
+            if (portValues[idx].label === time) {
+                if (portValues[idx - 1] !== undefined) {
+                    return this.calculateChange(portValues[idx - 1].value, portValues[idx].value);
+                }
+            }
+        }
+        return { dollarChange: 0, percentChange: 0 }
+    }
+
+    calculateChange(first, second) {
+        const dollarChange = (second - first).toFixed(2);
+        const percentChange = (second - first) / second;
+
+        return { dollarChange: dollarChange, percentChange: percentChange }
+    }
+
 
     formatPercent(decimal) {
         if(decimal === 0) return "";
@@ -117,6 +149,11 @@ class Chart extends React.Component {
         let lineDataKey = "close";
         let xAxisLabel = "date";
 
+        if (this.state.currentChart === "oneDayPrices") {
+            xAxisLabel = "label";
+        }
+
+        debugger
         return (
             <div className="chart-container">
             <div className="name-price">

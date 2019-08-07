@@ -14,7 +14,6 @@ class News extends React.Component {
         const page = this.props.match.url;
 
         this.props.fetchTransactions().then(res => {
-            debugger
             if(page === "/") {
                 const companies = this.parsePortCompanies(res.transactions);
                 this.props.fetchNews(companies).then(news => this.setState(news));
@@ -35,7 +34,6 @@ class News extends React.Component {
             }
         })
 
-        debugger
         return allTransactions;
     }
 

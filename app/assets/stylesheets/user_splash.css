@@ -95,3 +95,11 @@
 .signout-button:focus {
     outline:0;
 }
+
+.user-financials {
+    display: flex;
+    border: 2px solid pink;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}

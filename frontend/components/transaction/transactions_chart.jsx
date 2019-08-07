@@ -78,6 +78,12 @@ class TransactionsChart extends React.Component {
         return chartData;
     }
 
+    /// IMPORTANT //
+    // CALLBACK FUNCTION FOR BUTTONS!!!!///
+    fetchDates() {
+
+    }
+
     // priceWithinMonthRange(priceTime, transactionTime, monthRange){
     //     const priceMonth = priceTime.getMonth();
     //     const priceYear = priceTime.getYear();
@@ -197,11 +203,19 @@ class TransactionsChart extends React.Component {
                         <Tooltip className='tooltip'
                             contentStyle={{ border: '0', backgroundColor: 'transparent' }}
                             formatter={(value, name, props) => { return [""] }}
-                            position={{ x: this.state.hoverXPosition - 50, y: -25 }}
+                            position={{ x: this.state.hoverXPosition - 50, y: -30 }}
                             isAnimationActive={false} cursor={{ stroke: "Gainsboro", strokeWidth: 1.5 }}
                         />
                     </LineChart>
                 </ResponsiveContainer>
+
+                <div className="timeframe-buttons">
+                    <button onClick={() => this.fetchDates("1d", "60", "oneDayPrices")}>1D</button>
+                    <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
+                    <button onClick={() => this.fetchDates("1m", "1", "oneMonthPrices")}>1M</button>
+                    <button onClick={() => this.fetchDates("3m", "30", "threeMonthPrices")}>3M</button>
+                    <button onClick={() => this.fetchDates("5y", "360", "fiveYrPrices")}>5Y</button>
+                </div>
 
             </div>
         )}

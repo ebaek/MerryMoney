@@ -39,7 +39,13 @@ class UserSplash extends React.Component {
                     </div>
                 </div>
 
-                <TransactionsChart />
+                <div className="chart-show">
+                    <div className="body-info">
+                        <TransactionsChart />
+
+                    </div>
+                </div>
+
             </div>
         )
     }

@@ -141,7 +141,7 @@ class Chart extends React.Component {
                     <Tooltip className='tooltip' 
                             contentStyle={{ border: '0', backgroundColor: 'transparent' }} 
                             formatter={(value, name, props) => {return [""] } } 
-                            position={{x: this.state.hoverXPosition - 50, y: -25}}
+                            position={{x: this.state.hoverXPosition - 50, y: -30}}
                             isAnimationActive={false} cursor={{ stroke: "Gainsboro", strokeWidth: 1.5}}
                             />
                             </LineChart>

@@ -20,7 +20,7 @@ class TransactionsChart extends React.Component {
             oneMonthPrices: "",
             threeMonthPrices: "",
             fiveYrPrices: "",
-            currentChart: "oneWeekPrices",
+            currentChart: "fiveYrPrices",
         };
 
         this.portfolioData = this.portfolioData.bind(this);
@@ -32,7 +32,7 @@ class TransactionsChart extends React.Component {
 
     componentDidMount() {
         this.props.fetchTransactions().then((res) => this.setState(res, () => {
-            this.portfolioData("5d", "1", "oneWeekPrices")}));
+            this.portfolioData("5y", "100", "fiveYrPrices")}));
     }
 
     portfolioData(timeframe, interval, label) {
@@ -91,9 +91,9 @@ class TransactionsChart extends React.Component {
         let newPortValues = {};
         let rangeFunc = this.priceWithinDayRange;
 
-        if(label === "oneDayPrices") {
-            rangeFunc = this.priceWithinHourRange;
-        } else if (label === "fiveYrPrices") {
+        // if(label === "oneDayPrices") {
+        //     rangeFunc = this.priceWithinHourRange;
+        if (label === "fiveYrPrices") {
             rangeFunc = this.priceWithinMonthRange;
         }
 
@@ -104,22 +104,26 @@ class TransactionsChart extends React.Component {
 
                         const companyPrices = Object.assign([], res.prices);
                         companyPrices.forEach((price) => {
-
+                            
                             const priceTime = new Date(price.date);
                             const transactionTime = new Date(transaction.created_at);
-
+                            
                             if (rangeFunc(priceTime, transactionTime)) {
 
-                                const date = this.formatDayDate(price.date);
+                                let time = this.formatDayDate(price.time);
 
-                                if (newPortValues[date] === undefined) {
-                                    newPortValues[date] = 0;
+                                if(label === "oneDayPrices") {
+                                    time = price.label;
+                                }
+
+                                if (newPortValues[time] === undefined) {
+                                    newPortValues[time] = 0;
                                 }
 
                                 if (transaction.buy) {
-                                    newPortValues[date] += (transaction.quantity * price.close);
+                                    newPortValues[time] += (transaction.quantity * price.close);
                                 } else {
-                                    newPortValues[date] -= (transaction.quantity * price.close);
+                                    newPortValues[time] -= (transaction.quantity * price.close);
                                 }
                             }
                         });
@@ -162,22 +166,6 @@ class TransactionsChart extends React.Component {
         const year = transactionTime.getYear();
 
         if (priceTime >= transactionTime || priceYear === year && priceMonth === month && priceDate === date) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    priceWithinHourRange(priceTime, transactionTime){
-        const priceDate = priceTime.getDate() + 1;
-
-        const priceHour = priceTime.getHours();
-
-        const date = transactionTime.getDate();
-        const hour = transactionTime.getHours();
-
-
-        if (priceTime >= transactionTime || priceDate === date && priceHour == hour) {
             return true;
         } else {
             return false;
@@ -282,7 +270,7 @@ class TransactionsChart extends React.Component {
                     <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
                     <button onClick={() => this.fetchDates("1m", "2", "oneMonthPrices")}>1M</button>
                     <button onClick={() => this.fetchDates("3m", "15", "threeMonthPrices")}>3M</button>
-                    <button onClick={() => this.fetchDates("5y", "50", "fiveYrPrices")}>5Y</button>
+                    <button onClick={() => this.fetchDates("5y", "100", "fiveYrPrices")}>5Y</button>
                 </div>
 
             </div>

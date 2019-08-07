@@ -7,7 +7,7 @@ import Root from './components/root';
 import configureStore from './store/store'
 
 // TEST
-import { createTransaction, fetchTransactions } from './actions/transactions_actions'
+// import { createTransaction, fetchTransactions } from './actions/transactions_actions'
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;

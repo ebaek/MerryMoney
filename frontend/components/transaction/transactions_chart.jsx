@@ -108,7 +108,6 @@ class TransactionsChart extends React.Component {
                             const priceTime = new Date(price.date);
                             const transactionTime = new Date(transaction.created_at);
 
-                            debugger
                             if (rangeFunc(priceTime, transactionTime)) {
 
                                 const date = this.formatDayDate(price.date);
@@ -137,7 +136,7 @@ class TransactionsChart extends React.Component {
             })
         }
 
-        debugger
+
     }
 
     priceWithinMonthRange(priceTime, transactionTime){
@@ -147,7 +146,7 @@ class TransactionsChart extends React.Component {
         const month = transactionTime.getMonth();
         const year = transactionTime.getYear();
 
-        debugger
+
         if(priceTime >= transactionTime || priceYear === year && priceMonth === month) {
             return true;
         } else {
@@ -173,7 +172,7 @@ class TransactionsChart extends React.Component {
 
     priceWithinHourRange(priceTime, transactionTime){
         const priceDate = priceTime.getDate() + 1;
-        debugger
+
         const priceHour = priceTime.getHours();
 
         const date = transactionTime.getDate();
@@ -207,20 +206,22 @@ class TransactionsChart extends React.Component {
 
         if (e.isTooltipActive !== false) {
             hoverClose = e.activePayload[0].payload.value;
-            this.setState({ hoverPrice: hoverClose });
-            this.setState({ hoverXPosition: e.activeCoordinate.x });
-
             const change = this.portChange(e.activePayload[0].payload.time);
-            this.setState({
+
+            this.setState({ 
+                hoverPrice: hoverClose,
+                hoverXPosition: e.activeCoordinate.x,
                 change: change["dollarChange"],
-                changeOverTime: change["percentChange"]
+                changeOverTime: change["percentChange"],
             });
         }
     }
 
     portChange(time) {
-        const { portValues } = this.state;
+        const portValues = this.state[this.state.currentChart];
+
         for (let idx = 0; idx < portValues.length; idx++) {
+            debugger
             if (portValues[idx].time === time) {
                 if (portValues[idx - 1] !== undefined) {
                     return this.calculateChange(portValues[idx - 1].value, portValues[idx].value);
@@ -239,7 +240,7 @@ class TransactionsChart extends React.Component {
 
     render(){
         let portValues = this.state[this.state.currentChart] || [];
-        debugger
+
         return(
             <div className="chart-container">
                 <div className="name-price">

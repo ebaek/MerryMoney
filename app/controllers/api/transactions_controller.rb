@@ -8,7 +8,10 @@ class Api::TransactionsController < ApplicationController
     def create
         @transaction = Transaction.new(transaction_params);
         @transaction.user_id = current_user.id;
+        
         if @transaction.save
+            newPortVal = current_user.portfolio_value + (@transaction.purchase_price * @transaction.quantity);
+            current_user.update(portfolio_value: newPortVal)
             render :show
         else
             render json: @transaction.errors.full_messages, status: 401

@@ -7,6 +7,7 @@ const usersReducer = (state = {}, action) => {
         case RECEIVE_CURRENT_USER:
             return Object.assign({}, state, {[action.currentUser.id]: action.currentUser});
         case RECEIVE_TRANSACTION:
+            debugger
             const user_id = action.transaction.user_id;
             const oldPortValue = state[user_id].portfolio_value;
             const totalCost = action.transaction.quantity * action.transaction.purchase_price;

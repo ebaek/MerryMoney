@@ -24,16 +24,12 @@ class BuySell extends React.Component {
 
         const transaction = {
             buy: this.state.buy,
-            // user_id: this.props.user_id,
             purchase_price: this.props.mostRecentPrice.average,
             quantity: this.state.quantity,
             ticker: this.props.match.params.ticker,
         }
 
-        debugger
-        this.props.createTransaction(transaction).then( () => {
-            debugger
-        });
+        this.props.createTransaction(transaction);
     }
 
     // renderErrors() {
@@ -54,9 +50,8 @@ class BuySell extends React.Component {
     // }
 
     render() {
-        debugger
 
-        const formType = this.state.buy ? "Buy" : "Sell";
+        // const formType = this.state.buy ? "Buy" : "Sell";
 
         const mostRecentPrice = this.props.mostRecentPrice.average || '';
         const mostRecentCost = this.props.mostRecentPrice.average * this.state.quantity || '';
@@ -66,7 +61,9 @@ class BuySell extends React.Component {
             <div className="buysell-container">
                 <div className="bs-form">
 
-                    <button>{formType + " " + this.props.match.params.ticker}</button>
+                    <button>{"Buy " + this.props.match.params.ticker}</button>
+                    <button>{"Sell " + this.props.match.params.ticker}</button>
+
 
                     <form onSubmit={this.handleSubmit}>
                         <div className="shares">
@@ -81,12 +78,12 @@ class BuySell extends React.Component {
 
                         <div className="market-price">
                             <label>Market Price</label>
-                            <label>${mostRecentPrice}</label>
+                            <label>${Math.round(mostRecentPrice * 100) / 100}</label>
                         </div>
 
                         <div className="estimated-cost">
                             <label>Estimated Cost</label>
-                            <label>{mostRecentCost}</label>
+                            <label>{Math.round(mostRecentCost * 100) / 100}</label>
                         </div>
 
                         <input type="submit" value="Review Order" />

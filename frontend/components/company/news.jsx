@@ -11,6 +11,14 @@ class News extends React.Component {
 
     componentDidMount() {
         const ticker = this.props.ticker;
+
+        // check if transactions is [] and if it is, then fetchNews by the name of each transaction
+        // this.props.fetchTransactions().then(res => this.setState(res), () => {
+        //     if(res === []) {
+
+        //     }
+        // });
+
         this.props.fetchNews(ticker).then(res => this.setState(res));
     }
 
@@ -75,6 +83,7 @@ class News extends React.Component {
     }
 
     render() {
+        debugger
         return(
             <div className="news-container">
                 <h1>Recent News</h1>

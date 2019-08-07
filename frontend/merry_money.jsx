@@ -28,8 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.getState = store.getState;
         window.dispatch = store.dispatch;
 
-        window.createTransaction = createTransaction;
-        window.fetchTransactions = fetchTransactions;
     // TEST END
 
     const root = document.getElementById('root');

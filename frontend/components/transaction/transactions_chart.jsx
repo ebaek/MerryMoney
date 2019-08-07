@@ -89,17 +89,28 @@ class TransactionsChart extends React.Component {
     fetchDates(timeframe, interval, label) {
         const { transactions } = this.state;
         let newPortValues = {};
+        let rangeFunc = this.priceWithinDayRange;
+
+        if(label === "oneDayPrices") {
+            rangeFunc = this.priceWithinHourRange;
+        } else if (label === "fiveYrPrices") {
+            rangeFunc = this.priceWithinMonthRange;
+        }
 
         if (this.state[label] === "") {
             Promise.all(transactions.map((transaction) => {
                 return this.props.fetchCompanyHistoricPrices(transaction.ticker, timeframe, interval)
                     .then((res) => {
+
                         const companyPrices = Object.assign([], res.prices);
                         companyPrices.forEach((price) => {
+
                             const priceTime = new Date(price.date);
                             const transactionTime = new Date(transaction.created_at);
 
-                            if (this.priceWithinDayRange(priceTime, transactionTime)) {
+                            debugger
+                            if (rangeFunc(priceTime, transactionTime)) {
+
                                 const date = this.formatDayDate(price.date);
 
                                 if (newPortValues[date] === undefined) {
@@ -125,35 +136,51 @@ class TransactionsChart extends React.Component {
                 currentChart: label,
             })
         }
+
+        debugger
     }
 
-    // priceWithinMonthRange(priceTime, transactionTime, monthRange){
-    //     const priceMonth = priceTime.getMonth();
-    //     const priceYear = priceTime.getYear();
+    priceWithinMonthRange(priceTime, transactionTime){
+        const priceYear = priceTime.getYear();
+        const priceMonth = priceTime.getMonth();
 
-    //     const month = transactionTime.getMonth();
-    //     const year = transactionTime.getYear();
+        const month = transactionTime.getMonth();
+        const year = transactionTime.getYear();
 
-    //     if(priceYear === year) {
-    //         return priceMonth - month <= monthRange ? true : false;
-    //     } else if (year - priceYear === 1) {
-    //         const newPriceMonth = priceMonth + 12;
-    //         return newPriceMonth - month <= monthRange ? true : false; 
-    //     }
-
-    //     return false;
-    // }
+        debugger
+        if(priceTime >= transactionTime || priceYear === year && priceMonth === month) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     priceWithinDayRange(priceTime, transactionTime){
-        let priceMonth = priceTime.getMonth();
-        let priceDate = priceTime.getDate() + 1;
-        let priceYear = priceTime.getYear();
+        const priceMonth = priceTime.getMonth();
+        const priceDate = priceTime.getDate() + 1;
+        const priceYear = priceTime.getYear();
 
         const month = transactionTime.getMonth();
         const date = transactionTime.getDate();
         const year = transactionTime.getYear();
 
         if (priceTime >= transactionTime || priceYear === year && priceMonth === month && priceDate === date) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    priceWithinHourRange(priceTime, transactionTime){
+        const priceDate = priceTime.getDate() + 1;
+        debugger
+        const priceHour = priceTime.getHours();
+
+        const date = transactionTime.getDate();
+        const hour = transactionTime.getHours();
+
+
+        if (priceTime >= transactionTime || priceDate === date && priceHour == hour) {
             return true;
         } else {
             return false;
@@ -211,8 +238,6 @@ class TransactionsChart extends React.Component {
     }
 
     render(){
-        // const { portValues } = this.state;
-
         let portValues = this.state[this.state.currentChart] || [];
         debugger
         return(
@@ -257,9 +282,9 @@ class TransactionsChart extends React.Component {
                 <div className="timeframe-buttons">
                     <button onClick={() => this.fetchDates("1d", "60", "oneDayPrices")}>1D</button>
                     <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
-                    <button onClick={() => this.fetchDates("1m", "1", "oneMonthPrices")}>1M</button>
-                    <button onClick={() => this.fetchDates("3m", "30", "threeMonthPrices")}>3M</button>
-                    <button onClick={() => this.fetchDates("5y", "360", "fiveYrPrices")}>5Y</button>
+                    <button onClick={() => this.fetchDates("1m", "2", "oneMonthPrices")}>1M</button>
+                    <button onClick={() => this.fetchDates("3m", "15", "threeMonthPrices")}>3M</button>
+                    <button onClick={() => this.fetchDates("5y", "50", "fiveYrPrices")}>5Y</button>
                 </div>
 
             </div>

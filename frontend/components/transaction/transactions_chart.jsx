@@ -2,7 +2,7 @@ import React from 'react';
 import NumberFormat from 'react-number-format';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import Odometer from 'react-odometerjs';
-
+import { withRouter } from 'react-router-dom';
 
 class TransactionsChart extends React.Component {
     constructor(props) {
@@ -135,8 +135,6 @@ class TransactionsChart extends React.Component {
                 currentChart: label,
             })
         }
-
-
     }
 
     priceWithinMonthRange(priceTime, transactionTime){
@@ -221,7 +219,6 @@ class TransactionsChart extends React.Component {
         const portValues = this.state[this.state.currentChart];
 
         for (let idx = 0; idx < portValues.length; idx++) {
-            debugger
             if (portValues[idx].time === time) {
                 if (portValues[idx - 1] !== undefined) {
                     return this.calculateChange(portValues[idx - 1].value, portValues[idx].value);
@@ -292,4 +289,4 @@ class TransactionsChart extends React.Component {
         )}
     }
         
-export default TransactionsChart;
+export default withRouter(TransactionsChart);

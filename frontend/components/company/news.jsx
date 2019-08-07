@@ -11,15 +11,32 @@ class News extends React.Component {
 
     componentDidMount() {
         const ticker = this.props.ticker;
+        const page = this.props.match.url;
 
-        // check if transactions is [] and if it is, then fetchNews by the name of each transaction
-        // this.props.fetchTransactions().then(res => this.setState(res), () => {
-        //     if(res === []) {
+        this.props.fetchTransactions().then(res => {
+            debugger
+            if(page === "/") {
+                const companies = this.parsePortCompanies(res.transactions);
+                this.props.fetchNews(companies).then(news => this.setState(news));
+            } else {
+                this.props.fetchNews(ticker).then(news => this.setState(news));
+            }
+        });
+    }
 
-        //     }
-        // });
+    parsePortCompanies(transactions) {
+        let allTransactions = "";
+        
+        transactions.forEach( (transaction, idx) => {
+            if (idx === 0) {
+                allTransactions += transaction["ticker"];
+            } else {
+                allTransactions += "%20OR%20" + transaction["ticker"];
+            }
+        })
 
-        this.props.fetchNews(ticker).then(res => this.setState(res));
+        debugger
+        return allTransactions;
     }
 
     publicationDate(date) {
@@ -83,7 +100,6 @@ class News extends React.Component {
     }
 
     render() {
-        debugger
         return(
             <div className="news-container">
                 <h1>Recent News</h1>

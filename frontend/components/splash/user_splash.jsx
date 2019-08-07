@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import TransactionsChart from '../transaction/transactions_chart_container'
+import News from '../company/news_container';
 
 class UserSplash extends React.Component {
     constructor(props) {
@@ -42,7 +43,7 @@ class UserSplash extends React.Component {
                 <div className="chart-show">
                     <div className="body-info">
                         <TransactionsChart />
-
+                        <News />
                     </div>
                 </div>
 

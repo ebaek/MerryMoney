@@ -24,13 +24,16 @@ class BuySell extends React.Component {
 
         const transaction = {
             buy: this.state.buy,
-            user_id: this.props.user_id,
+            // user_id: this.props.user_id,
             purchase_price: this.props.mostRecentPrice.average,
             quantity: this.state.quantity,
             ticker: this.props.match.params.ticker,
         }
 
-        this.props.createTransaction(transaction);
+        debugger
+        this.props.createTransaction(transaction).then( () => {
+            debugger
+        });
     }
 
     // renderErrors() {

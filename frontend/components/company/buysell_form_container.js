@@ -11,8 +11,9 @@ const msp = (state) => {
 
 const mdp = (dispatch) => {
     return({
-        createTransaction: (transaction) => dispatch(createTransaction(transaction)),
-    })
+        createTransaction: (transaction) => {
+            return dispatch(createTransaction(transaction));
+    }})
 }
 
-export default connect(msp, mdp)(BuySellForm)
+export default connect(msp, mdp)(BuySellForm);

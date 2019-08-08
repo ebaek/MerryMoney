@@ -49,7 +49,6 @@ class BuySell extends React.Component {
         const formattedDeposit = <NumberFormat value={cost - this.props.balance} displayType={'text'} thousandSeparator={true} prefix={'$'} />
 
         const formattedQuantity = <NumberFormat value={this.state.quantity} displayType={'text'} thousandSeparator={true} />
-        debugger
         if(this.state.errors) {
             return (
                 <div className="invalid-buy-credentials">
@@ -115,7 +114,6 @@ class BuySell extends React.Component {
     deposit() {
         const cost = this.props.mostRecentPrice.average * this.state.quantity;
         const deposit = cost - this.props.balance;
-        debugger
         const currentUser = this.props.current_user;
         this.props.updateBalance(currentUser, deposit);
         this.setState({

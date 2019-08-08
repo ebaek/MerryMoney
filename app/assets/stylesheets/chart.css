@@ -15,8 +15,9 @@
 .buy-sell-info{
     display: block;
     position: fixed;
-    right: 15%;
-    width: 17%;
+    right: 10%;
+    width: 18%;
+    min-width: 175px;
     min-height: 40%;
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.089);
 }

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import CompanyBlurb from './company_blurb_container';
 import Chart from './chart_container';
 import News from './news_container';
-// import BuySell from './buysell_form_container'
+import BuySell from './buysell_form_container';
 
 class Company extends React.Component {
     constructor(props) {
@@ -50,14 +50,11 @@ class Company extends React.Component {
                     </div>
                 </div>
 
-                    
-            </div>
-        );
+
+                </div>
+                );
+            }
     }
-}
-
+        
 export default withRouter(Company);
-
-// <div className="buy-sell-info">
-//     <BuySell />
-// </div>
+        

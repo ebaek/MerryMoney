@@ -1,5 +1,6 @@
 .news-container{
     margin-top: 5%;
+    width: 65%;
 }
 
 .news-container a {
@@ -51,8 +52,8 @@
 
 
 .news-img-container{
-    width: 190px;
-    height: 130px;
+    width: 180px;
+    height: 120px;
     overflow: hidden;
     border-radius: 8px;
 }

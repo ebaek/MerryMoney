@@ -201,15 +201,17 @@ class Chart extends React.Component {
                     </div>
                 </div>
 
-                <div className="buy-sell-info">
-                    <BuySell mostRecentPrice={this.state.mostRecentPrice}/>
-                </div>
-            </div>
-            
-        );
-    }
-}
-                    
+                <BuySell mostRecentPrice={this.state.mostRecentPrice} />
 
-export default withRouter(Chart);
+                </div>
+                
+                );
+            }
+        }
+        
+        
+        export default withRouter(Chart);
+
+
+        
                     

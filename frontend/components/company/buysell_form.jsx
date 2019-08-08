@@ -97,41 +97,41 @@ class BuySell extends React.Component {
         const balance = this.props.balance;
 
         return(
-            <div className="buysell-container">
-                <div className="bs-form">
+            <div className="buy-sell-info">
 
+                <div className="buy-sell-but">
                     <button onClick={() => this.buySellSwitch("buy")}>{"Buy " + this.props.match.params.ticker}</button>
                     <button onClick={() => this.buySellSwitch("sell")}>{"Sell " + this.props.match.params.ticker}</button>
-
-                    <form onSubmit={this.handleSubmit}>
-                        <div className="shares">
-                            <label>Shares</label>
-                            <input type="number" 
-                                min="0" 
-                                step="1"
-                                onChange={this.update('quantity')}
-                                required
-                                />
-                        </div>
-
-                        <div className="market-price">
-                            <label>Market Price</label>
-                            <label>${Math.round(mostRecentPrice * 100) / 100}</label>
-                        </div>
-
-                        <div className="estimated-cost">
-                            <label>Estimated Cost</label>
-                            <label>{Math.round(mostRecentCost * 100) / 100}</label>
-                        </div>
-
-                        <input type="submit" value="Review Order" />
-
-                        <div className="buying-paper">
-                            <label>${Math.round(balance * 100) / 100} Buying Power Available</label>
-                        </div>
-
-                    </form>
                 </div>
+
+                <form className="bs-form" onSubmit={this.handleSubmit}>
+                    <div className="shares">
+                        <label>Shares</label>
+                        <input type="number" 
+                            min="0" 
+                            step="1"
+                            onChange={this.update('quantity')}
+                            required
+                            />
+                    </div>
+
+                    <div className="market-price">
+                        <label>Market Price</label>
+                        <label>${Math.round(mostRecentPrice * 100) / 100}</label>
+                    </div>
+
+                    <div className="estimated-cost">
+                        <label>Estimated Cost</label>
+                        <label>${Math.round(mostRecentCost * 100) / 100}</label>
+                    </div>
+                    
+                    <input className="review-order" type="submit" value="Review Order" />
+
+                    <div className="buying-power">
+                        <label>${Math.round(balance * 100) / 100} Buying Power Available</label>
+                    </div>
+
+                </form>
             </div>
         );
     }

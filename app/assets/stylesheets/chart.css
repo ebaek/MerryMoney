@@ -7,18 +7,122 @@
 .chart-container {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 65%;
     padding-bottom: 2%;
     border-bottom: 2px solid #EEF1F7;
-
-    border: 2px solid red;
 }
 
 .buy-sell-info{
-    width: 30%;
-    border: 1px solid black;
+    position: fixed;
+    right: 15%;
+    width: 18%;
+    height: 45%;
 }
 
+.buy-sell-but {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 12%;
+    border-bottom: 1px solid pink;
+}
+
+.bs-form {
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+}
+
+.bs-form label {
+    font-size: 12px;
+}
+
+.buy-sell-but button {
+    width: 50%;
+    background: transparent;
+    font-size: 15px;
+    font-weight: 500;
+    color: #040D14;
+}
+
+.shares {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 15%;
+    align-items: center;
+}
+
+.shares input {
+    height: 60%;
+    width: 30%;
+    border: none; 
+    border: solid 1px Gainsboro;
+    background: #fafafa;
+    border-radius: 5px;
+    text-align: right; 
+    padding-right: 5%;
+}
+
+.shares input:hover {
+    border: 1px solid #21ce99;
+}
+
+.shares input:focus {
+    outline: none;
+    border: 1px solid #21ce99;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.market-price {
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    border-bottom: 1.5px solid #f0f0f0;
+}
+
+.estimated-cost {
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    margin-bottom: 5%;
+}
+
+.review-order {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    background: #21ce99;
+    color: white;
+    font-size: 12px;
+    border-radius: 5px;
+    border: none;
+}
+
+.buying-power {
+    margin-top: 10%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    font-weight: 600;
+    border-top: 1.5px solid #f0f0f0;
+}
+
+.buying-power label {
+    margin-top: 5%;
+}
 
 .linechart {
     max-width: 100%;
@@ -120,6 +224,5 @@
     line-height: 1;
     color: #040D14;
 }
-
 
 

@@ -21,7 +21,7 @@ csv_nasdaq = File.read(Rails.root.join('lib', 'seeds', 'nasdaq.csv'))
 csv_nasdaq = CSV.parse(csv_nasdaq, :headers => true, :encoding => 'ISO-8859-1')
 
 csv_nasdaq.each do |row|
-  company = Company.create!(ticker: row['Symbol'])
+  company = Company.create!(ticker: row['Symbol'], name: row['Name'])
 end
 
 # add nyse companies
@@ -30,7 +30,7 @@ csv_nyse = CSV.parse(csv_nyse, :headers => true, :encoding => 'ISO-8859-1')
 
 csv_nyse.each do |row|
   unless Company.find_by(ticker: row['Symbol'])
-    company = Company.create!(ticker: row['Symbol'])
+    company = Company.create!(ticker: row['Symbol'], name: row['Name'])
   end
 end
 
@@ -40,7 +40,7 @@ csv_amex = CSV.parse(csv_amex, :headers => true, :encoding => 'ISO-8859-1')
 
 csv_amex.each do |row|
   unless Company.find_by(ticker: row['Symbol'])
-    company = Company.create!(ticker: row['Symbol'])
+    company = Company.create!(ticker: row['Symbol'], name: row['Name'])
   end
 end
 
@@ -52,7 +52,6 @@ end
 # purchase_price: 187.93,
 # quantity: 1,
 # ticker: "LMT"})
-
 
 # amazon = Transaction.create!({
 # buy: true,

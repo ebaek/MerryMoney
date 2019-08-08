@@ -28,6 +28,6 @@ class Api::CompaniesController < ApplicationController
 
     private
     def company_params
-        params.require(:company).permit(:ticker)
+        params.require(:company).permit(:ticker, :name)
     end 
 end

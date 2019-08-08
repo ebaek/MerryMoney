@@ -48,6 +48,12 @@
     box-shadow: 2.5px 2px 10px 4px rgb(219, 219, 219);
 }
 
+.nav-search-results {
+    width: 50px;
+    border: 1px solid pink;
+    z-index: 12;
+}
+
 .nav-searchbar-links {
     display: flex;
     flex-direction: row;
@@ -85,7 +91,6 @@
     background: none;
     white-space: nowrap;
     margin-right: 5%;
-
 }
 
 .signout-button:hover{
@@ -102,4 +107,6 @@
     justify-content: center;
     align-items: center;
     width: 30%;
+    height: 40%;
+    position: absolute;
 }

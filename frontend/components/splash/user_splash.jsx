@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import TransactionsChart from '../transaction/transactions_chart_container'
 import News from '../company/news_container';
+import Search from './search';
 
 class UserSplash extends React.Component {
     constructor(props) {
@@ -30,7 +31,6 @@ class UserSplash extends React.Component {
                     </button>
 
                     <div className="nav-searchbar-links">
-                        <input className="nav-search" type="text" placeholder="Search"/>
 
                         <div className="personal-links-user">
                             <a href="https://www.linkedin.com/in/ebaek5/">LinkedIn</a>
@@ -38,6 +38,8 @@ class UserSplash extends React.Component {
                             <button onClick={this.handleLogout} className="signout-button">Sign Out</button>                            
                         </div>
                     </div>
+
+                    <Search />
                 </div>
 
                 <div className="chart-show">

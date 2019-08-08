@@ -13,6 +13,7 @@ class Search extends React.Component {
         }
 
         this.handleInput = this.handleInput.bind(this);
+        this.redirectCompanyPage = this.redirectCompanyPage.bind(this);
     }
 
     handleInput(e) {
@@ -25,6 +26,11 @@ class Search extends React.Component {
         fetchCompanies().then( companies => this.setState({
             companies: companies,
         }))
+    }
+
+    redirectCompanyPage(ticker) {
+        debugger
+        this.props.history.push(`/${ticker}`);
     }
 
     match() {
@@ -58,7 +64,7 @@ class Search extends React.Component {
 
         if (searchResults) {
             searchLi = searchResults.map( (result) => {
-                return(<li key={result[0]}>
+                return(<li key={result[0]} onClick={() => this.redirectCompanyPage(result[0])}>
                     {result[0]}
                     {result[1]}
                 </li>);

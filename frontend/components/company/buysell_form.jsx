@@ -14,6 +14,7 @@ class BuySell extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.buySellSwitch = this.buySellSwitch.bind(this);
         this.clearErrors = this.clearErrors.bind(this);
+        this.deposit = this.deposit.bind(this);
     }
 
     update(field) {
@@ -38,27 +39,27 @@ class BuySell extends React.Component {
             this.setState({
                 errors: true,
             })
-            // console.log("invalid transaction");
         }
     }
 
     renderErrors() {
         const icon = <i className="fas fa-exclamation-circle"></i>;
         const cost = Math.round(this.props.mostRecentPrice.average * this.state.quantity * 100) / 100;
-        const formattedCost = <NumberFormat value={cost} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+        
+        const formattedDeposit = <NumberFormat value={cost - this.props.balance} displayType={'text'} thousandSeparator={true} prefix={'$'} />
 
         const formattedQuantity = <NumberFormat value={this.state.quantity} displayType={'text'} thousandSeparator={true} />
-
+        debugger
         if(this.state.errors) {
             return (
                 <div className="invalid-buy-credentials">
                     <div className="error-text">
                         <div>{icon} Not Enough Buying Power</div>
-                        <p>Please deposit {formattedCost} to purchase {formattedQuantity} shares at market price.</p>
+                        <p>Please deposit {formattedDeposit} to purchase {formattedQuantity} shares at market price.</p>
                     </div>
 
                     <div className="error-buttons">
-                        <button className="deposit">Deposit {formattedCost}</button>
+                        <button className="deposit" onClick={this.deposit}>Deposit {formattedDeposit}</button>
                         <button className="back" onClick={this.clearErrors}>Back</button>
                     </div>
                 </div>
@@ -109,6 +110,17 @@ class BuySell extends React.Component {
         }
 
         return numShares;
+    }
+
+    deposit() {
+        const cost = this.props.mostRecentPrice.average * this.state.quantity;
+        const deposit = cost - this.props.balance;
+        debugger
+        const currentUser = this.props.current_user;
+        this.props.updateBalance(currentUser, deposit);
+        this.setState({
+            errors: false,
+        })
     }
 
     validTransaction(transaction) {

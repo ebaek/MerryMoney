@@ -1,5 +1,4 @@
 import * as APIUtil from '../util/news_api_util';
-
 export const RECEIVE_NEWS = "RECEIVE_NEWS";
 
 const receiveNews = (news) => {

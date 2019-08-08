@@ -15,16 +15,45 @@
 .buy-sell-info{
     position: fixed;
     right: 15%;
-    width: 18%;
-    height: 45%;
+    width: 17%;
+    min-height: 40%;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.089);
+}
+
+.invalid-buy-credentials {
+    display: flex;
+    flex-direction: column;
+}
+
+.invalid-buy-credentials div {
+    margin-top: 7%;
+}
+
+.invalid-buy-credentials p {
+    margin-top: 4%;
+    font-size: 11px;
+}
+
+.buy-sell-info button:focus{
+    outline:0;
 }
 
 .buy-sell-but {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 12%;
-    border-bottom: 1px solid pink;
+    height: 100%;
+    border-bottom: 1px solid Gainsboro;
+}
+
+.buy-sell-but button {
+    width: 50%;
+    height: 40px;
+    background: transparent;
+    font-size: 15px;
+    font-weight: 500;
+    color: #040D14;
+    border: none;
 }
 
 .bs-form {
@@ -37,13 +66,14 @@
     font-size: 12px;
 }
 
-.buy-sell-but button {
-    width: 50%;
-    background: transparent;
-    font-size: 15px;
-    font-weight: 500;
-    color: #040D14;
+
+.buy-sell-but button:active {
+    background-color: #21ce99;
 }
+
+.buy-sell-but button:focus {
+    background-color: #21ce99;
+} 
 
 .shares {
     margin-top: 5%;
@@ -55,7 +85,8 @@
 }
 
 .shares input {
-    height: 60%;
+    margin-top: 5%;
+    height: 30px;
     width: 30%;
     border: none; 
     border: solid 1px Gainsboro;
@@ -81,7 +112,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .market-price {
-    height: 15%;
+    margin-top: 5%;
+    height: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -90,7 +122,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .estimated-cost {
-    height: 15%;
+    margin-top: 6%;
+    height: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -99,6 +132,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .review-order {
+    margin-top: 10%;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -110,12 +144,21 @@ input[type=number]::-webkit-outer-spin-button {
     border: none;
 }
 
+.review-order:hover {
+    border: 1px solid #199972;
+    background-color: #1aa278;
+}
+
+.review-order:focus{
+    outline: 0;
+}
+
 .buying-power {
     margin-top: 10%;
+    margin-bottom: 3%;
     height: 10%;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
     font-weight: 600;
     border-top: 1.5px solid #f0f0f0;
 }

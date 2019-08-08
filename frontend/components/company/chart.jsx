@@ -197,7 +197,7 @@ class Chart extends React.Component {
                         <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
                         <button onClick={() => this.fetchDates("1m", "2", "oneMonthPrices")}>1M</button>
                         <button onClick={() => this.fetchDates("3m", "15", "threeMonthPrices")}>3M</button>
-                        <button onClick={() => this.fetchDates("5y", "100", "fiveYrPrices")}>5Y</button>
+                        <button onClick={() => this.fetchDates("5y", "60", "fiveYrPrices")}>5Y</button>
                     </div>
                 </div>
 

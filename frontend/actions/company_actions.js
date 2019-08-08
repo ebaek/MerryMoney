@@ -79,7 +79,8 @@ export const fetchCompanyQuote = (ticker) => (dispatch) => {
 export const fetchCompanyHistoricPrices = (ticker, range, interval) => (dispatch) => {
     return APICompUtil.fetchCompanyHistoricPrices(ticker, range, interval)
         .then( (prices) => dispatch(receiveCompanyHistoricPrices(prices)));
-} 
+}
+
 
 
 

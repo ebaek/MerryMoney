@@ -33,32 +33,41 @@ class BuySell extends React.Component {
         if (this.validTransaction(transaction)) {
             this.props.createTransaction(transaction);
         } else {
-            console.log("invalid transaction");
+            this.setState({
+                errors: true,
+            })
+            // console.log("invalid transaction");
         }
     }
 
-    // renderErrors() {
-    //     const icon = (this.props.errors.length === 0) ? null : (<i className="fas fa-exclamation-circle"></i>);
+    renderErrors() {
+        const icon = <i className="fas fa-exclamation-circle"></i>;
+        const formattedCost = Math.round(this.props.mostRecentPrice.average * this.state.quantity * 100) / 100;
 
-    //     return (
-    //         <div className="invalid-credentials">
-    //             {icon}
-    //             {this.props.errors.map((error) => (
-    //                 <p key={`error-${error.index}`}>{error}</p>
-    //             ))}
-    //         </div>
-    //     );
-    // }
+        if(this.state.errors) {
+            return (
+                <div className="invalid-buy-credentials">
+                    <div>{icon} Not Enough Buying Power</div>
+    
+                    <p>Please deposit ${formattedCost} to purchase {this.state.quantity} shares at market price.</p>
+                </div>
+            );
+        }
+    }
 
-    // componentWillUnmount() {
-    //     this.props.clearErrors();
-    // }
+    componentWillUnmount() {
+        this.props.clearErrors();
+    }
 
     buySellSwitch(purchase) {
         if(purchase === "buy") {
-            this.setState({"buy": true});
+            this.setState({
+                "buy": true,
+            });
         } else {
-            this.setState({ "buy": false });
+            this.setState({ 
+                "buy": false,
+            });
         }
     }
 
@@ -69,7 +78,6 @@ class BuySell extends React.Component {
         let transactionsArr = Object.values(this.props.transactions)
         for (let i = 0; i < transactionsArr.length; i++) {
             let transaction = transactionsArr[i];
-            debugger
             if(transaction["user_id"] === this.props.user_id && transaction["ticker"] === ticker) {
                 if (transaction["buy"] === true) {
                     numShares = numShares + 1;
@@ -125,6 +133,8 @@ class BuySell extends React.Component {
                         <label>${Math.round(mostRecentCost * 100) / 100}</label>
                     </div>
                     
+                    {this.renderErrors()}
+
                     <input className="review-order" type="submit" value="Review Order" />
 
                     <div className="buying-power">

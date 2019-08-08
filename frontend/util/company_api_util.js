@@ -44,3 +44,4 @@ export const fetchCompanyHistoricPrices = (ticker, range, interval) => {
 
 
 
+

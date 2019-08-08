@@ -9,6 +9,7 @@ const msp = (state, ownProps) => {
     })
 }
 
+
 const mdp = dispatch => {
     return ({
         fetchCompanyHistoricPrices: (ticker, range, interval) => dispatch(fetchCompanyHistoricPrices(ticker, range, interval)),

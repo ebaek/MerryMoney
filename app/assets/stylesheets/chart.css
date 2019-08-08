@@ -95,7 +95,6 @@
     font-size: 12px;
 }
 
-
 .buy-sell-but button:active {
     background-color: #21ce99;
 }
@@ -221,6 +220,7 @@ input[type=number]::-webkit-outer-spin-button {
     font-weight: 500;
     letter-spacing: -0.29px;
     margin-bottom: 2%;
+    line-height: normal;
     color: #040D14;
 }
 

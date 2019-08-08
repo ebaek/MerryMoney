@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import CompanyBlurb from './company_blurb_container';
 import Chart from './chart_container';
 import News from './news_container';
-import BuySell from './buysell_form_container';
+import Search from '../splash/search';
 
 class Company extends React.Component {
     constructor(props) {
@@ -31,8 +31,9 @@ class Company extends React.Component {
                         <i className="fas fa-money-bill"></i>
                     </button>
 
+                    <Search />
+
                     <div className="nav-searchbar-links">
-                        <input className="nav-search" type="text" placeholder="Search" />
 
                         <div className="personal-links-user">
                             <a href="https://www.linkedin.com/in/ebaek5/">LinkedIn</a>
@@ -40,6 +41,7 @@ class Company extends React.Component {
                             <button onClick={this.handleLogout} className="signout-button">Sign Out</button>
                         </div>
                     </div>
+
                 </div>
 
                 <div className="chart-show">
@@ -50,10 +52,9 @@ class Company extends React.Component {
                     </div>
                 </div>
 
-
                 </div>
-                );
-            }
+            );
+        }
     }
         
 export default withRouter(Company);

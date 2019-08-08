@@ -1,14 +1,3 @@
-.nav-bar {
-    padding-top: 1%;
-    overflow: hidden;
-    position: fixed; 
-    top: 0; 
-    width: 100%; 
-    background-color: white;
-    z-index: 10;
-    position: sticky;
-}
-
 .splash-header {
     margin-left: 10%;
     margin-right: 3%;

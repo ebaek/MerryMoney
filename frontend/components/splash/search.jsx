@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import { fetchCompanies } from '../../util/company_api_util';
 
 class Search extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -29,7 +28,6 @@ class Search extends React.Component {
     }
 
     redirectCompanyPage(ticker) {
-        debugger
         this.props.history.push(`/${ticker}`);
     }
 
@@ -65,28 +63,28 @@ class Search extends React.Component {
         if (searchResults) {
             searchLi = searchResults.map( (result) => {
                 return(<li key={result[0]} onClick={() => this.redirectCompanyPage(result[0])}>
-                    {result[0]}
-                    {result[1]}
+                    <div className="search-result">
+                        <div className="ticker-search">{result[0]}</div>
+                        <div className="company-name-search">{result[1]}</div>
+                    </div>
                 </li>);
             });
         }
 
         return (
-            <ul className="nav-search-results">
+            <ul>
                 { searchLi }
             </ul>
         );
     }
 
     render() {
-
         return(
-            <div>
+            <div className="search-container">
                 <input className="nav-search" 
                     type="text" placeholder="Search" 
                     onChange={this.handleInput} 
                     value={this.state.inputVal} />
-
                 {this.matchListItems()}
             </div>
         );

@@ -29,7 +29,9 @@ class UserSplash extends React.Component {
                     <button className="nav-logo" onClick={this.homepageRedirect}>
                         <i className="fas fa-money-bill"></i>
                     </button>
-
+                    
+                    <Search />
+                    
                     <div className="nav-searchbar-links">
 
                         <div className="personal-links-user">
@@ -39,7 +41,6 @@ class UserSplash extends React.Component {
                         </div>
                     </div>
 
-                    <Search />
                 </div>
 
                 <div className="chart-show">

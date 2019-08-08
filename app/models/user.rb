@@ -11,11 +11,12 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  portfolio_value :float            default(0.0), not null
+#  balance         :float            default(0.0), not null
 #
 
 class User < ApplicationRecord
     validates :email, :session_token, presence: true, uniqueness: true
-    validates :first_name, :last_name, :portfolio_value, :password_digest, presence: true
+    validates :first_name, :last_name, :balance, :portfolio_value, :password_digest, presence: true
 
     validates :password, length: {minimum: 6}, allow_nil: true
 

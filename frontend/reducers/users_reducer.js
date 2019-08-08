@@ -7,14 +7,26 @@ const usersReducer = (state = {}, action) => {
         case RECEIVE_CURRENT_USER:
             return Object.assign({}, state, {[action.currentUser.id]: action.currentUser});
         case RECEIVE_TRANSACTION:
-            debugger
             const user_id = action.transaction.user_id;
-            const oldPortValue = state[user_id].portfolio_value;
-            const totalCost = action.transaction.quantity * action.transaction.purchase_price;
-            const newPortValue = action.transaction.buy ? oldPortValue - totalCost : oldPortValue + totalCost;
+            const oldPortVal = state[user_id].portfolio_value;
+            const oldBalance = state[user_id].balance;
+
+            let newBalance = "";
+            let newPortVal = "";
+
+            const totalPrice = action.transaction.quantity * action.transaction.purchase_price;
+
+            if (action.transaction.buy) {
+                newBalance = oldBalance - totalPrice;
+                newPortVal = oldPortVal + totalPrice;
+            } else {
+                newBalance = oldBalance + totalPrice;
+                newPortVal = oldPortVal - totalPrice;
+            }
 
             const newUser = Object.assign({}, state[user_id]);
-            newUser.portfolio_value = newPortValue;
+            newUser.portfolio_value = newPortVal;
+            newUser.balance = newBalance;
 
             return Object.assign({}, state, {[user_id]: newUser});
         default:

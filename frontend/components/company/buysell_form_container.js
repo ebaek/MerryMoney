@@ -5,6 +5,8 @@ import BuySellForm from './buysell_form'
 const msp = (state) => {
     return({
         user_port_val: state.entities.users[state.session.id].portfolio_value,
+        balance: state.entities.users[state.session.id].balance,
+        transactions: state.entities.transactions,
         user_id: state.session.id,
     })
 }

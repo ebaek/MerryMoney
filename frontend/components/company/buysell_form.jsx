@@ -11,6 +11,7 @@ class BuySell extends React.Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.buySellSwitch = this.buySellSwitch.bind(this);
     }
 
     update(field) {
@@ -29,7 +30,11 @@ class BuySell extends React.Component {
             ticker: this.props.match.params.ticker,
         }
 
-        this.props.createTransaction(transaction);
+        if (this.validTransaction(transaction)) {
+            this.props.createTransaction(transaction);
+        } else {
+            console.log("invalid transaction");
+        }
     }
 
     // renderErrors() {
@@ -49,21 +54,54 @@ class BuySell extends React.Component {
     //     this.props.clearErrors();
     // }
 
+    buySellSwitch(purchase) {
+        if(purchase === "buy") {
+            this.setState({"buy": true});
+        } else {
+            this.setState({ "buy": false });
+        }
+    }
+
+    numShares() {
+        const ticker = this.props.match.params.ticker;
+        let numShares = 0;
+        
+        let transactionsArr = Object.values(this.props.transactions)
+        for (let i = 0; i < transactionsArr.length; i++) {
+            let transaction = transactionsArr[i];
+            debugger
+            if(transaction["user_id"] === this.props.user_id && transaction["ticker"] === ticker) {
+                if (transaction["buy"] === true) {
+                    numShares = numShares + 1;
+                } else { 
+                    numShares = numShares - 1;
+                }
+            }
+        }
+
+        return numShares;
+    }
+
+    validTransaction(transaction) {
+        if(transaction["buy"]) {
+            return this.props.balance >= transaction["purchase_price"] * transaction["quantity"] ? true : false;
+        } else {
+            return this.numShares() >= transaction["quantity"] ? true : false;
+        }
+    }
+
     render() {
-
-        // const formType = this.state.buy ? "Buy" : "Sell";
-
         const mostRecentPrice = this.props.mostRecentPrice.average || '';
         const mostRecentCost = this.props.mostRecentPrice.average * this.state.quantity || '';
         const portValue = this.props.user_port_val;
+        const balance = this.props.balance;
 
         return(
             <div className="buysell-container">
                 <div className="bs-form">
 
-                    <button>{"Buy " + this.props.match.params.ticker}</button>
-                    <button>{"Sell " + this.props.match.params.ticker}</button>
-
+                    <button onClick={() => this.buySellSwitch("buy")}>{"Buy " + this.props.match.params.ticker}</button>
+                    <button onClick={() => this.buySellSwitch("sell")}>{"Sell " + this.props.match.params.ticker}</button>
 
                     <form onSubmit={this.handleSubmit}>
                         <div className="shares">
@@ -89,12 +127,10 @@ class BuySell extends React.Component {
                         <input type="submit" value="Review Order" />
 
                         <div className="buying-paper">
-                            <label>${portValue} Buying Power Available</label>
+                            <label>${Math.round(balance * 100) / 100} Buying Power Available</label>
                         </div>
 
                     </form>
-
-                    
                 </div>
             </div>
         );

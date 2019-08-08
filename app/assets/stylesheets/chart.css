@@ -21,8 +21,13 @@
 }
 
 .invalid-buy-credentials {
+    border-top: 2px solid #EEF1F7;
     display: flex;
     flex-direction: column;
+}
+
+.error-text {
+    margin-top: 2%;
 }
 
 .invalid-buy-credentials div {
@@ -44,6 +49,28 @@
     width: 100%;
     height: 100%;
     border-bottom: 1px solid Gainsboro;
+}
+
+.error-buttons button {
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.deposit {
+    background: #21ce99;
+    color: white;
+    border: none;
+}
+
+.back {
+    background: white;
+    color: #21ce99;
+    border: 1px solid #21ce99;
 }
 
 .buy-sell-but button {
@@ -89,7 +116,6 @@
     height: 30px;
     width: 30%;
     border: none; 
-    border: solid 1px Gainsboro;
     background: #fafafa;
     border-radius: 5px;
     text-align: right; 
@@ -112,13 +138,13 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .market-price {
-    margin-top: 5%;
+    margin-top: 7%;
     height: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-weight: 600;
-    border-bottom: 1.5px solid #f0f0f0;
+    border-bottom: 1.5px solid #EEF1F7;
 }
 
 .estimated-cost {
@@ -132,7 +158,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .review-order {
-    margin-top: 10%;
+    margin-top: 7%;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -160,7 +186,7 @@ input[type=number]::-webkit-outer-spin-button {
     display: flex;
     justify-content: center;
     font-weight: 600;
-    border-top: 1.5px solid #f0f0f0;
+    border-top: 1.5px solid #EEF1F7;
 }
 
 .buying-power label {
@@ -217,8 +243,13 @@ input[type=number]::-webkit-outer-spin-button {
     color: #21ce99;
 }
 
+.timeframe-buttons button:active {
+    color: #21ce99;
+}
+
 .timeframe-buttons button:focus {
-    outline:0;
+    outline: 0;
+    color: #21ce99;
 }
 
 .name-price{

@@ -248,7 +248,7 @@ class TransactionsChart extends React.Component {
                     <LineChart className="linechart" data={portValues}
                         onMouseMove={this.hoverPrice}>
 
-                        <Line type="monotone" dataKey="value" stroke="#21CE99"
+                        <Line type="linear" dataKey="value" stroke="#21CE99"
                             strokeWidth={2} dot={false} />
 
                         <XAxis dataKey="time" hide={true} />

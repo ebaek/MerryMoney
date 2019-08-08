@@ -177,7 +177,7 @@ class Chart extends React.Component {
                         <LineChart className="linechart" data={chart}
                             onMouseMove={this.hoverPrice}>
 
-                            <Line type="monotone" dataKey={lineDataKey} stroke="#21CE99"
+                            <Line type="linear" dataKey={lineDataKey} stroke="#21CE99"
                                 strokeWidth={2} dot={false} />
 
                             <XAxis dataKey={xAxisLabel} hide={true} />

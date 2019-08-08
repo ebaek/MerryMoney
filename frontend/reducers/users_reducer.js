@@ -23,7 +23,7 @@ const usersReducer = (state = {}, action) => {
                 newBalance = oldBalance + totalPrice;
                 newPortVal = oldPortVal - totalPrice;
             }
-
+            
             const newUser = Object.assign({}, state[user_id]);
             newUser.portfolio_value = newPortVal;
             newUser.balance = newBalance;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import NumberFormat from 'react-number-format';
 
 class BuySell extends React.Component {
     constructor(props) {
@@ -12,6 +13,7 @@ class BuySell extends React.Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.buySellSwitch = this.buySellSwitch.bind(this);
+        this.clearErrors = this.clearErrors.bind(this);
     }
 
     update(field) {
@@ -42,21 +44,40 @@ class BuySell extends React.Component {
 
     renderErrors() {
         const icon = <i className="fas fa-exclamation-circle"></i>;
-        const formattedCost = Math.round(this.props.mostRecentPrice.average * this.state.quantity * 100) / 100;
+        const cost = Math.round(this.props.mostRecentPrice.average * this.state.quantity * 100) / 100;
+        const formattedCost = <NumberFormat value={cost} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+
+        const formattedQuantity = <NumberFormat value={this.state.quantity} displayType={'text'} thousandSeparator={true} />
 
         if(this.state.errors) {
             return (
                 <div className="invalid-buy-credentials">
-                    <div>{icon} Not Enough Buying Power</div>
-    
-                    <p>Please deposit ${formattedCost} to purchase {this.state.quantity} shares at market price.</p>
+                    <div className="error-text">
+                        <div>{icon} Not Enough Buying Power</div>
+                        <p>Please deposit {formattedCost} to purchase {formattedQuantity} shares at market price.</p>
+                    </div>
+
+                    <div className="error-buttons">
+                        <button className="deposit">Deposit {formattedCost}</button>
+                        <button className="back" onClick={this.clearErrors}>Back</button>
+                    </div>
                 </div>
+            );
+        } else {
+            return(
+                <input className="review-order" type="submit" value="Review Order" />
             );
         }
     }
 
+    clearErrors() {
+        this.setState({
+            errors: false,
+        })
+    }
+
     componentWillUnmount() {
-        this.props.clearErrors();
+        this.clearErrors();
     }
 
     buySellSwitch(purchase) {
@@ -101,7 +122,9 @@ class BuySell extends React.Component {
     render() {
         const mostRecentPrice = this.props.mostRecentPrice.average || '';
         const mostRecentCost = this.props.mostRecentPrice.average * this.state.quantity || '';
-        const portValue = this.props.user_port_val;
+        const formattedCost = <NumberFormat value={Math.round(mostRecentCost * 100) / 100} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+
+        // const portValue = this.props.user_port_val;
         const balance = this.props.balance;
 
         return(
@@ -119,6 +142,7 @@ class BuySell extends React.Component {
                             min="0" 
                             step="1"
                             onChange={this.update('quantity')}
+                            placeholder="0"
                             required
                             />
                     </div>
@@ -130,12 +154,11 @@ class BuySell extends React.Component {
 
                     <div className="estimated-cost">
                         <label>Estimated Cost</label>
-                        <label>${Math.round(mostRecentCost * 100) / 100}</label>
+                        <label>{formattedCost}</label>
                     </div>
                     
                     {this.renderErrors()}
 
-                    <input className="review-order" type="submit" value="Review Order" />
 
                     <div className="buying-power">
                         <label>${Math.round(balance * 100) / 100} Buying Power Available</label>

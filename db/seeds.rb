@@ -45,43 +45,43 @@ csv_amex.each do |row|
 end
 
 # # add robert's (demo user) transactions
-# lockheed = Transaction.create!({
-# buy: true,
-# user_id: robert.id,
-# created_at: "2014-11-28T04:21:41.217Z",
-# purchase_price: 187.93,
-# quantity: 1,
-# ticker: "LMT"})
+lockheed = Transaction.create!({
+buy: true,
+user_id: robert.id,
+created_at: "2014-11-28T04:21:41.217Z",
+purchase_price: 187.93,
+quantity: 1,
+ticker: "LMT"})
 
-# amazon = Transaction.create!({
-# buy: true,
-# user_id: robert.id,
-# created_at: "2016-07-30T04:21:41.217Z",
-# purchase_price: 1784.00,
-# quantity: 1,
-# ticker: "AMZN"})
+amazon = Transaction.create!({
+buy: true,
+user_id: robert.id,
+created_at: "2016-07-30T04:21:41.217Z",
+purchase_price: 1784.00,
+quantity: 1,
+ticker: "AMZN"})
 
-# microsoft_buy = Transaction.create!({
-# buy: true,
-# user_id: robert.id,
-# created_at: "2017-04-01T01:21:41.217Z",
-# purchase_price: 134.60,
-# quantity: 2,
-# ticker: "MSFT"})
+microsoft_buy = Transaction.create!({
+buy: true,
+user_id: robert.id,
+created_at: "2017-04-01T01:21:41.217Z",
+purchase_price: 134.60,
+quantity: 2,
+ticker: "MSFT"})
 
-# microsoft_sell = Transaction.create!({
-# buy: false,
-# user_id: robert.id,
-# created_at: "2019-08-02T03:43:45.217Z",
-# purchase_price: 142.34,
-# quantity: 1,
-# ticker: "MSFT"})
+microsoft_sell = Transaction.create!({
+buy: false,
+user_id: robert.id,
+created_at: "2019-08-02T03:43:45.217Z",
+purchase_price: 142.34,
+quantity: 1,
+ticker: "MSFT"})
 
-# etsy = Transaction.create!({
-# buy: true,
-# user_id: robert.id,
-# created_at: "2019-08-05T02:43:45.217Z",
-# purchase_price: 55.55,
-# quantity: 3,
-# ticker: "ETSY"})
+etsy = Transaction.create!({
+buy: true,
+user_id: robert.id,
+created_at: "2019-08-05T02:43:45.217Z",
+purchase_price: 55.55,
+quantity: 3,
+ticker: "ETSY"})
 

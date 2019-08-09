@@ -5,7 +5,7 @@ export const fetchCompanyNews = (company) => {
         method: "GET",
         url: `https://newsapi.org/v2/everything?q=${company}&pageSize=7&apiKey=${window.newsAPIKey}`
     })
-}
+};
 
 
 

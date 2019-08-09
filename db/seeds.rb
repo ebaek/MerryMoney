@@ -85,3 +85,25 @@ purchase_price: 55.55,
 quantity: 3,
 ticker: "ETSY"})
 
+
+# watchlist items!
+
+lockheed = Watchlist.create!({
+user_id: robert.id, 
+company_id: lockheed.id,
+})
+
+amazon = Watchlist.create!({
+user_id: robert.id, 
+company_id: amazon.id,
+})
+
+etsy = Watchlist.create!({
+user_id: robert.id, 
+company_id: etsy.id,
+})
+
+microsoft = Watchlist.create!({
+user_id: robert.id, 
+company_id: microsoft.id,
+})

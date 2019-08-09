@@ -30,7 +30,7 @@ class TransactionsChart extends React.Component {
     }
 
     componentDidMount() {
-        this.portfolioData("1d", "60", "oneDayPrices");
+        this.portfolioData("1d", "5", "oneDayPrices");
     }
 
     portfolioData(timeframe, interval, label) {
@@ -191,11 +191,11 @@ class TransactionsChart extends React.Component {
                 </ResponsiveContainer>
 
                 <div className="timeframe-buttons">
-                    <button onClick={() => this.fetchDates("1d", "60", "oneDayPrices")}>1D</button>
+                    <button onClick={() => this.fetchDates("1d", "5", "oneDayPrices")}>1D</button>
                     <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
-                    <button onClick={() => this.fetchDates("1m", "2", "oneMonthPrices")}>1M</button>
-                    <button onClick={() => this.fetchDates("3m", "15", "threeMonthPrices")}>3M</button>
-                    <button onClick={() => this.fetchDates("5y", "100", "fiveYrPrices")}>5Y</button>
+                    <button onClick={() => this.fetchDates("1m", "1", "oneMonthPrices")}>1M</button>
+                    <button onClick={() => this.fetchDates("3m", "1", "threeMonthPrices")}>3M</button>
+                    <button onClick={() => this.fetchDates("5y", "10", "fiveYrPrices")}>5Y</button>
                 </div>
 
             </div>

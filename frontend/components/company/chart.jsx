@@ -32,7 +32,7 @@ class Chart extends React.Component {
 
     componentDidMount() {
         this.ticker = this.props.ticker;
-        this.props.fetchCompanyHistoricPrices(this.ticker, "1d", "60")
+        this.props.fetchCompanyHistoricPrices(this.ticker, "1d", "15")
             .then( (res) => {
                 this.setState({
                     data: res,
@@ -51,7 +51,7 @@ class Chart extends React.Component {
     componentDidUpdate(prevProps) {
         if (this.props.match.params.ticker !== prevProps.match.params.ticker) {
             this.ticker = this.props.ticker;
-            this.props.fetchCompanyHistoricPrices(this.ticker, "1d", "60")
+            this.props.fetchCompanyHistoricPrices(this.ticker, "1d", "15")
                 .then((res) => {
                     this.setState({
                         data: res,
@@ -208,11 +208,11 @@ class Chart extends React.Component {
                     </ResponsiveContainer>
 
                     <div className="timeframe-buttons">
-                        <button onClick={() => this.fetchDates("1d", "60", "oneDayPrices")}>1D</button>
+                        <button onClick={() => this.fetchDates("1d", "1", "oneDayPrices")}>1D</button>
                         <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
-                        <button onClick={() => this.fetchDates("1m", "2", "oneMonthPrices")}>1M</button>
-                        <button onClick={() => this.fetchDates("3m", "15", "threeMonthPrices")}>3M</button>
-                        <button onClick={() => this.fetchDates("5y", "60", "fiveYrPrices")}>5Y</button>
+                        <button onClick={() => this.fetchDates("1m", "1", "oneMonthPrices")}>1M</button>
+                        <button onClick={() => this.fetchDates("3m", "1", "threeMonthPrices")}>3M</button>
+                        <button onClick={() => this.fetchDates("5y", "10", "fiveYrPrices")}>5Y</button>
                     </div>
                 </div>
 

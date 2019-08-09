@@ -18,6 +18,10 @@ class Watchlist extends React.Component {
     }
 
     render() {
+        return (
+            <div className="watchlist">
+            </div>
+        )
     };
 }
 

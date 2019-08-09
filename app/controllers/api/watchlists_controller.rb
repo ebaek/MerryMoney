@@ -3,6 +3,7 @@ class Api::WatchlistsController < ApplicationController
 
     def index
         @watchlist_items = Watchlist.includes(:user).where(user_id: current_user.id)
+        render :index
     end
 
     def create
@@ -23,8 +24,8 @@ class Api::WatchlistsController < ApplicationController
             render json: ['Unable to remove item from watchlist.'], status: 404
         end
     end
-C
+
     def watchlist_params
-        params.require(:item).permit(:user_id, :company_id)
+        params.require(:item).permit(:user_id, :ticker)
     end
 end

@@ -6,9 +6,6 @@ import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './store/store'
 
-// TEST
-// import { createTransaction, fetchTransactions } from './actions/transactions_actions'
-
 document.addEventListener('DOMContentLoaded', () => {
     let store;
     if (window.currentUser) {
@@ -27,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // TEST START
         window.getState = store.getState;
         window.dispatch = store.dispatch;
-
     // TEST END
 
     const root = document.getElementById('root');

@@ -47,12 +47,17 @@ class BuySell extends React.Component {
 
         if (!validTransaction[0] && !validTransaction[1]) {
             this.props.createTransaction(transaction);
+            this.redirectPortfolioPage();
         } else {
             this.setState({
                 fundError: validTransaction[0],
                 ownError: validTransaction[1],
             })
         }
+    }
+
+    redirectPortfolioPage() {
+        this.props.history.push('/');
     }
 
     checkError() {
@@ -95,20 +100,12 @@ class BuySell extends React.Component {
     }
 
     renderErrors() {
-        let cost = Math.round(this.props.mostRecentPrice.average * this.state.quantity * 100) / 100;
-        let deposit = Math.round((cost - this.props.balance)* 100 ) / 100
-        let formattedDeposit = <NumberFormat value={deposit} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-        let formattedQuantity = <NumberFormat value={this.state.quantity} displayType={'text'} thousandSeparator={true} />
-
         if(this.state.fundError || this.state.ownError) {
-
             return (
                 <div className="invalid-buy-credentials">
                     <div className="error-text">
                         {this.checkError()}
                     </div>
-
-
                 </div>
             );
         } else {
@@ -201,8 +198,8 @@ class BuySell extends React.Component {
                             step="1"
                             onChange={this.update('quantity')}
                             placeholder="0"
-                            required
                             value={this.state.quantity}
+                            required
                             />
                     </div>
 

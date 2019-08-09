@@ -6,6 +6,7 @@ import { fetchCompanyHistoricPrices } from '../../actions/company_actions'
 const msp = (state) => {
     return({
         user: state.entities.users[state.session.id],
+        transactions: state.entities.users[state.session.id].transactions,
     });
 }
 

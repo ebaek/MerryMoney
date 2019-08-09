@@ -9,7 +9,7 @@ class TransactionsChart extends React.Component {
         super(props);
 
         this.state = {
-            transactions: [], 
+            // transactions: [], 
             portValues: [],
             hoverPrice: 0,
             hoverXPosition: "",
@@ -20,7 +20,7 @@ class TransactionsChart extends React.Component {
             oneMonthPrices: "",
             threeMonthPrices: "",
             fiveYrPrices: "",
-            currentChart: "fiveYrPrices",
+            currentChart: "oneDayPrices",
         };
 
         this.portfolioData = this.portfolioData.bind(this);
@@ -31,14 +31,15 @@ class TransactionsChart extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchTransactions().then((res) => this.setState(res, () => {
-            this.portfolioData("5y", "100", "fiveYrPrices")}));
+        this.portfolioData("1d", "60", "oneDayPrices");
     }
 
+
     portfolioData(timeframe, interval, label) {
-        const {transactions} = this.state;
+        const transactions = this.props.transactions;
         let newPortValues = {};
 
+        debugger
         Promise.all(transactions.map( (transaction) => {
             return this.props.fetchCompanyHistoricPrices(transaction.ticker, timeframe, interval)
                 .then( (res) => {
@@ -71,7 +72,6 @@ class TransactionsChart extends React.Component {
     formatDayDate(date) {
         let dateObj = new Date(date);
         let newDate = dateObj.toDateString().split(" ");
-
         
         newDate = newDate[1] + " " + newDate[2] + ", " + newDate[3];
         return newDate;
@@ -87,7 +87,8 @@ class TransactionsChart extends React.Component {
     }
 
     fetchDates(timeframe, interval, label) {
-        const { transactions } = this.state;
+        const transactions = this.props.transactions;
+        debugger
         let newPortValues = {};
         let rangeFunc = this.priceWithinDayRange;
 
@@ -100,7 +101,7 @@ class TransactionsChart extends React.Component {
             Promise.all(transactions.map((transaction) => {
                 return this.props.fetchCompanyHistoricPrices(transaction.ticker, timeframe, interval)
                     .then((res) => {
-
+                        debugger
                         const companyPrices = Object.assign([], res.prices);
                         companyPrices.forEach((price) => {
                             
@@ -138,37 +139,36 @@ class TransactionsChart extends React.Component {
         }
     }
 
-    priceWithinMonthRange(priceTime, transactionTime){
-        const priceYear = priceTime.getYear();
-        const priceMonth = priceTime.getMonth();
+    // priceWithinMonthRange(priceTime, transactionTime){
+    //     const priceYear = priceTime.getYear();
+    //     const priceMonth = priceTime.getMonth();
 
-        const month = transactionTime.getMonth();
-        const year = transactionTime.getYear();
+    //     const month = transactionTime.getMonth();
+    //     const year = transactionTime.getYear();
 
 
-        if(priceTime >= transactionTime || priceYear === year && priceMonth === month) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    //     if(priceTime >= transactionTime || priceYear === year && priceMonth === month) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
-    priceWithinDayRange(priceTime, transactionTime){
-        const priceMonth = priceTime.getMonth();
-        const priceDate = priceTime.getDate() + 1;
-        const priceYear = priceTime.getYear();
+    // priceWithinDayRange(priceTime, transactionTime){
+    //     const priceMonth = priceTime.getMonth();
+    //     const priceDate = priceTime.getDate() + 1;
+    //     const priceYear = priceTime.getYear();
 
-        const month = transactionTime.getMonth();
-        const date = transactionTime.getDate();
-        const year = transactionTime.getYear();
+    //     const month = transactionTime.getMonth();
+    //     const date = transactionTime.getDate();
+    //     const year = transactionTime.getYear();
 
-        
-        if (priceTime >= transactionTime || priceYear === year && priceMonth === month && priceDate === date) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    //     if (priceTime >= transactionTime || priceYear === year && priceMonth === month && priceDate === date) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     formatPriceChange(price) {
         if (price === 0) return "";
@@ -223,7 +223,7 @@ class TransactionsChart extends React.Component {
 
     render(){
         let portValues = this.state[this.state.currentChart] || [];
-
+        debugger
         return(
             <div className="chart-container">
                 <div className="name-price">

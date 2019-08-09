@@ -18,13 +18,6 @@ class Watchlist extends React.Component {
     }
 
     render() {
-        // let companies = Object.values(watchlistItems)
-
-        return(
-            <div className="watchlist">
-
-            </div>
-        )
     };
 }
 

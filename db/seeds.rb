@@ -12,6 +12,7 @@ require 'csv'
 User.destroy_all
 Company.destroy_all
 Transaction.destroy_all
+Watchlist.destroy_all
 
 # demo user 
 robert = User.create!(email: 'batman34@gmail.com', password: 'watermelon', first_name: 'Robert', last_name: 'Smith', balance: 935.54)
@@ -90,20 +91,20 @@ ticker: "ETSY"})
 
 lockheed = Watchlist.create!({
 user_id: robert.id, 
-company_id: lockheed.id,
+ticker: lockheed.ticker,
 })
 
 amazon = Watchlist.create!({
 user_id: robert.id, 
-company_id: amazon.id,
+ticker: amazon.ticker,
 })
 
 etsy = Watchlist.create!({
 user_id: robert.id, 
-company_id: etsy.id,
+ticker: etsy.ticker,
 })
 
 microsoft = Watchlist.create!({
 user_id: robert.id, 
-company_id: microsoft.id,
+ticker: microsoft_buy.ticker,
 })

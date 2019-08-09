@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import TransactionsChart from '../transaction/transactions_chart_container'
 import News from '../company/news_container';
 import Search from './search';
+import Watchlist from '../watchlist/watchlist_container';
 
 class UserSplash extends React.Component {
     constructor(props) {
@@ -54,6 +55,7 @@ class UserSplash extends React.Component {
                     </div>
                 </div>
 
+                <Watchlist />
             </div>
         )
     }

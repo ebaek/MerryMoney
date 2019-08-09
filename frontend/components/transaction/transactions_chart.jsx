@@ -92,7 +92,11 @@ class TransactionsChart extends React.Component {
     }
 
     fetchDates(timeframe, interval, label) {
-        if(this.state[label] === "") this.portfolioData(timeframe, interval, label);
+        if(this.state[label] === "") {
+            this.portfolioData(timeframe, interval, label);
+        } else {
+            this.setState({currentChart: label});
+        }
     }
 
     formatPriceChange(price) {

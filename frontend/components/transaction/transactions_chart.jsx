@@ -35,11 +35,6 @@ class TransactionsChart extends React.Component {
             this.portfolioData("5y", "100", "fiveYrPrices")}));
     }
 
-    componentDidUpdate(prevProps) {
-        // debugger;
-        
-    }
-
     portfolioData(timeframe, interval, label) {
         const {transactions} = this.state;
         let newPortValues = {};

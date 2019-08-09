@@ -43,12 +43,14 @@ class BuySell extends React.Component {
             ticker: this.props.match.params.ticker,
         }
 
-        if (!this.validTransaction(transaction)[0] && !this.validTransaction[1]) {
+        const validTransaction = this.validTransaction(transaction);
+
+        if (!validTransaction[0] && !validTransaction[1]) {
             this.props.createTransaction(transaction);
         } else {
             this.setState({
-                fundError: this.validTransaction(transaction)[0],
-                ownError: this.validTransaction(transaction)[1],
+                fundError: validTransaction[0],
+                ownError: validTransaction[1],
             })
         }
     }
@@ -70,11 +72,22 @@ class BuySell extends React.Component {
                 <div>
                     <div>{icon} Not Enough Buying Power</div>
                     <p>Please deposit {formattedDeposit} to purchase {formattedQuantity} shares at market price.</p>
+
+                    <div className="error-buttons">
+                        <button className="deposit" onClick={this.deposit}>Deposit {formattedDeposit}</button>
+                        <button className="back" onClick={this.clearErrors}>Back</button>
+                    </div>
                 </div>
             )
         } else if (this.state.ownError) {
             errorObj = (
-                <div>{icon} Invalid transaction. </div>
+                <div>
+                    {icon} Insufficient number of shares. 
+                    <div className="error-buttons">
+                        <button className="back" onClick={this.clearErrors}>Back</button>
+                    </div>
+
+                </div>
             )
         }
 
@@ -83,10 +96,8 @@ class BuySell extends React.Component {
 
     renderErrors() {
         let cost = Math.round(this.props.mostRecentPrice.average * this.state.quantity * 100) / 100;
-
         let deposit = Math.round((cost - this.props.balance)* 100 ) / 100
         let formattedDeposit = <NumberFormat value={deposit} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-
         let formattedQuantity = <NumberFormat value={this.state.quantity} displayType={'text'} thousandSeparator={true} />
 
         if(this.state.fundError || this.state.ownError) {
@@ -97,10 +108,7 @@ class BuySell extends React.Component {
                         {this.checkError()}
                     </div>
 
-                    <div className="error-buttons">
-                        <button className="deposit" onClick={this.deposit}>Deposit {formattedDeposit}</button>
-                        <button className="back" onClick={this.clearErrors}>Back</button>
-                    </div>
+
                 </div>
             );
         } else {
@@ -112,7 +120,8 @@ class BuySell extends React.Component {
 
     clearErrors() {
         this.setState({
-            errors: false,
+            fundError: false,
+            ownError: false,
         })
     }
 
@@ -133,21 +142,16 @@ class BuySell extends React.Component {
     }
 
     numShares() {
+        const transactions = this.props.transactions;
         const ticker = this.props.match.params.ticker;
         let numShares = 0;
-        
-        let transactionsArr = Object.values(this.props.transactions)
-        for (let i = 0; i < transactionsArr.length; i++) {
-            let transaction = transactionsArr[i];
-            if(transaction["user_id"] === this.props.user_id && transaction["ticker"] === ticker) {
-                if (transaction["buy"] === true) {
-                    numShares = numShares + 1;
-                } else { 
-                    numShares = numShares - 1;
-                }
+
+        for (let i = 0; i < transactions.length; i++) {
+            let transaction = transactions[i];
+            if(transaction["ticker"] === ticker) {
+                numShares = transaction["buy"] === true ? numShares + 1 : numShares - 1;
             }
         }
-
         return numShares;
     }
 

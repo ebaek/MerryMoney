@@ -146,7 +146,6 @@ class Chart extends React.Component {
         return { dollarChange: dollarChange, percentChange: percentChange }
     }
 
-
     formatPercent(decimal) {
         if(decimal === 0) return "";
         return <NumberFormat value={decimal * 100} displayType={'text'} format="(#####%)" />

@@ -1,5 +1,7 @@
 # README
 
+[View Live Site Here](https://merrymoney.herokuapp.com/#/)
+---
 ![Company show page with stock performance on line graph](screenshots/company.png)
 
 ## About

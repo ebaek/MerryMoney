@@ -9,7 +9,6 @@ class TransactionsChart extends React.Component {
         super(props);
 
         this.state = {
-            // transactions: [], 
             portValues: [],
             hoverPrice: 0,
             hoverXPosition: "",
@@ -25,7 +24,7 @@ class TransactionsChart extends React.Component {
 
         this.portfolioData = this.portfolioData.bind(this);
         this.reformatPortData = this.reformatPortData.bind(this);
-
+        this.fetchDates = this.fetchDates.bind(this);
         this.hoverPrice = this.hoverPrice.bind(this);
         this.formatDayDate = this.formatDayDate.bind(this);
     }
@@ -39,20 +38,18 @@ class TransactionsChart extends React.Component {
         const transactions = this.props.transactions;
         let newPortValues = {};
 
-        debugger
         Promise.all(transactions.map( (transaction) => {
             return this.props.fetchCompanyHistoricPrices(transaction.ticker, timeframe, interval)
                 .then( (res) => {
                     const companyPrices = Object.assign([], res.prices);
                     companyPrices.forEach((price) => {
-                        const priceTime = new Date(price.date);
+                        const priceTime = new Date(this.convertDateObjParams(price));
                         const transactionTime = new Date(transaction.created_at);
 
-                        if (this.priceWithinDayRange(priceTime, transactionTime)) {  
-                            const date = this.formatDayDate(price.date);
-                            if(newPortValues[date] === undefined) {
-                                newPortValues[date] = 0;
-                            }
+                        if(transactionTime <= priceTime) {  
+                            const date = timeframe === "1d" ? price.label : this.formatDayDate(price.date) 
+
+                            if(newPortValues[date] === undefined) newPortValues[date] = 0;
 
                             if (transaction.buy) {
                                 newPortValues[date] += (transaction.quantity * price.close);
@@ -62,9 +59,10 @@ class TransactionsChart extends React.Component {
                         }
                     });
                 });
-            })).then( () => {        
+            })).then( () => {
                 this.setState({ 
                     [label]: this.reformatPortData(newPortValues),
+                    currentChart: label,
                 });
             });
     }
@@ -77,9 +75,16 @@ class TransactionsChart extends React.Component {
         return newDate;
     }
 
+    convertDateObjParams(price) {
+        if(price.minute){
+            return price.date + " " + price.label;
+        } else {
+            return price.date;
+        }
+    }
+
     reformatPortData(newPortValues){
         const chartData = [];
-
         for(let i = 0; i < Object.keys(newPortValues).length; i++) {
             chartData.push( {time: Object.keys(newPortValues)[i], value: Object.values(newPortValues)[i]} );
         }
@@ -87,88 +92,8 @@ class TransactionsChart extends React.Component {
     }
 
     fetchDates(timeframe, interval, label) {
-        const transactions = this.props.transactions;
-        debugger
-        let newPortValues = {};
-        let rangeFunc = this.priceWithinDayRange;
-
-        
-        if (label === "fiveYrPrices") {
-            rangeFunc = this.priceWithinMonthRange;
-        }
-
-        if (this.state[label] === "") {
-            Promise.all(transactions.map((transaction) => {
-                return this.props.fetchCompanyHistoricPrices(transaction.ticker, timeframe, interval)
-                    .then((res) => {
-                        debugger
-                        const companyPrices = Object.assign([], res.prices);
-                        companyPrices.forEach((price) => {
-                            
-                            const priceTime = new Date(price.date);
-                            const transactionTime = new Date(transaction.created_at);
-                            if (rangeFunc(priceTime, transactionTime)) {
-                                let time = this.formatDayDate(price.date);
-
-                                if(label === "oneDayPrices") {
-                                    time = price.label;
-                                }
-
-                                if (newPortValues[time] === undefined) {
-                                    newPortValues[time] = 0;
-                                }
-
-                                if (transaction.buy) {
-                                    newPortValues[time] += (transaction.quantity * price.close);
-                                } else {
-                                    newPortValues[time] -= (transaction.quantity * price.close);
-                                }
-                            }
-                        });
-                    });
-            })).then(() => {
-                this.setState({ 
-                    [label]: this.reformatPortData(newPortValues),
-                    currentChart: label,
-                });
-            });
-        } else {
-            this.setState({
-                currentChart: label,
-            })
-        }
+        if(this.state[label] === "") this.portfolioData(timeframe, interval, label);
     }
-
-    // priceWithinMonthRange(priceTime, transactionTime){
-    //     const priceYear = priceTime.getYear();
-    //     const priceMonth = priceTime.getMonth();
-
-    //     const month = transactionTime.getMonth();
-    //     const year = transactionTime.getYear();
-
-
-    //     if(priceTime >= transactionTime || priceYear === year && priceMonth === month) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
-    // priceWithinDayRange(priceTime, transactionTime){
-    //     const priceMonth = priceTime.getMonth();
-    //     const priceDate = priceTime.getDate() + 1;
-    //     const priceYear = priceTime.getYear();
-
-    //     const month = transactionTime.getMonth();
-    //     const date = transactionTime.getDate();
-    //     const year = transactionTime.getYear();
-
-    //     if (priceTime >= transactionTime || priceYear === year && priceMonth === month && priceDate === date) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 
     formatPriceChange(price) {
         if (price === 0) return "";

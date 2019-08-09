@@ -15,6 +15,18 @@ class Search extends React.Component {
         this.redirectCompanyPage = this.redirectCompanyPage.bind(this);
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.ticker !== prevProps.match.params.ticker) {
+            fetchCompanies().then(companies => this.setState({
+                companies: companies,
+            }))
+
+            this.setState({
+                input_val: "",
+            })
+        }
+    }
+
     handleInput(e) {
         this.setState({
             input_val: e.target.value
@@ -84,7 +96,7 @@ class Search extends React.Component {
                 <input className="nav-search" 
                     type="text" placeholder="Search" 
                     onChange={this.handleInput} 
-                    value={this.state.inputVal} />
+                    value={this.state.input_val} />
                 {this.matchListItems()}
             </div>
         );

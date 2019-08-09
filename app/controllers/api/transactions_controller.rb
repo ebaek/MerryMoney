@@ -20,7 +20,7 @@ class Api::TransactionsController < ApplicationController
             current_user.update(balance: newBalance, portfolio_value: newPortVal)
             render :show
         else
-            render json: @transaction.errors.full_messages, status: 401
+            render json: @transaction.errors.full_messages, status: 422
         end
     end
 

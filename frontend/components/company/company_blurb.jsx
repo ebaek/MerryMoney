@@ -14,6 +14,14 @@ class CompanyBlurb extends React.Component {
         this.props.fetchCompanyQuote(ticker).then(res => this.setState(res));
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.ticker !== prevProps.match.params.ticker) {
+            const ticker = this.props.ticker;
+            this.props.fetchCompanyBasics(ticker).then(res => this.setState(res));
+            this.props.fetchCompanyQuote(ticker).then(res => this.setState(res));
+        }
+    }
+
     formatNumber(num) {
         if(num >= 1000000 && num < 10000000) {
             return <NumberFormat value={num} displayType={'text'} format="#.##M" />

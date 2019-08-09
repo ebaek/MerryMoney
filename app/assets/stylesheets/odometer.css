@@ -8,6 +8,7 @@
   font-size: 33px;
   font-family: "DIN Pro", -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1;
+  z-index: -1;
 }
 
 .odometer.odometer-auto-theme .odometer-digit, .odometer.odometer-theme-minimal .odometer-digit {

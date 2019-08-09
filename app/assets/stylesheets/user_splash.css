@@ -47,11 +47,12 @@
     height: 36px;
     border: 2px solid pink;
     background-color: white;
-
 }
 
 .nav-search {
     border: 1px solid Gainsboro;
+    box-sizing: border-box;
+    background: white;
     font-size: 13px;
     font-weight: 250;
     color: #040d14;
@@ -61,8 +62,7 @@
     padding: 0 13px;
     margin-top: 1%;
     margin-bottom: 1%;
-    box-sizing: border-box;
-    background: white;
+    min-width: 100px;
 }
 
 .nav-search:hover {
@@ -76,16 +76,18 @@
     box-sizing: border-box;
     width: 100%;
     position: absolute;
-    top: 23px;
+    top: 22px;
     background: #FFFFFF;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
-    box-shadow: 2.5px 10px 20px 4px rgb(219, 219, 219);
+    box-shadow: 0px 10px 8px rgb(219, 219, 219);
+    padding-left: 2.5%;
 }
 
 .search-container ul li {
-    padding-top: 1%;
-    padding-bottom: 1%;
+    display: block;
+    padding-top: 1.5%;
+    padding-bottom: 1.75%;
     list-style-type: none;
     font-weight: 500;
     display: block;
@@ -95,8 +97,8 @@
     background: #EEF1F7;
 }
 
-.search-result {
-    display: flex;
+.search-result div{
+    display: inline-block;
 }
 
 .ticker-search {

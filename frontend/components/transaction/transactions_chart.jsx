@@ -10,7 +10,7 @@ class TransactionsChart extends React.Component {
 
         this.state = {
             portValues: [],
-            hoverPrice: 0,
+            hoverPrice: "",
             hoverXPosition: "",
             change: 0,
             changeOverTime: 0,
@@ -32,7 +32,6 @@ class TransactionsChart extends React.Component {
     componentDidMount() {
         this.portfolioData("1d", "60", "oneDayPrices");
     }
-
 
     portfolioData(timeframe, interval, label) {
         const transactions = this.props.transactions;
@@ -152,7 +151,7 @@ class TransactionsChart extends React.Component {
 
     render(){
         let portValues = this.state[this.state.currentChart] || [];
-        debugger
+
         return(
             <div className="chart-container">
                 <div className="name-price">
@@ -162,7 +161,6 @@ class TransactionsChart extends React.Component {
                         <div className="price">
                             <p className="dollar-sign">$</p>
                             <Odometer duration={500} value={this.state.hoverPrice} />
-
                         </div>
 
                         <div className="price-change">

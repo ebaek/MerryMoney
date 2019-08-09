@@ -165,11 +165,7 @@ class Chart extends React.Component {
         let chart = this.state[this.state.currentChart] || [];
 
         let lineDataKey = "close";
-        let xAxisLabel = "date";
-
-        if (this.state.currentChart === "oneDayPrices") {
-            xAxisLabel = "label";
-        }
+        let xAxisLabel = this.state.currentChart === "oneDayPrices" ? "label" : "date";
 
         return (
             <div className="chart-form">

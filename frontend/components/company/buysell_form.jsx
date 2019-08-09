@@ -23,6 +23,16 @@ class BuySell extends React.Component {
         });
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.ticker !== prevProps.match.params.ticker) {
+            this.setState({
+                buy: true,
+                quantity: "",
+                errors: false,
+            })
+        }
+    }
+
     handleSubmit(e) {
         e.preventDefault();
 
@@ -33,28 +43,58 @@ class BuySell extends React.Component {
             ticker: this.props.match.params.ticker,
         }
 
-        if (this.validTransaction(transaction)) {
+        if (!this.validTransaction(transaction)[0] && !this.validTransaction[1]) {
             this.props.createTransaction(transaction);
         } else {
             this.setState({
-                errors: true,
+                fundError: this.validTransaction(transaction)[0],
+                ownError: this.validTransaction(transaction)[1],
             })
         }
     }
 
-    renderErrors() {
+    checkError() {
+        let errorObj = null;
         const icon = <i className="fas fa-exclamation-circle"></i>;
-        const cost = Math.round(this.props.mostRecentPrice.average * this.state.quantity * 100) / 100;
-        
-        const formattedDeposit = <NumberFormat value={cost - this.props.balance} displayType={'text'} thousandSeparator={true} prefix={'$'} />
 
-        const formattedQuantity = <NumberFormat value={this.state.quantity} displayType={'text'} thousandSeparator={true} />
-        if(this.state.errors) {
+        let cost = Math.round(this.props.mostRecentPrice.average * this.state.quantity * 100) / 100;
+
+        let deposit = Math.round((cost - this.props.balance) * 100) / 100
+        let formattedDeposit = <NumberFormat value={deposit} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+
+        let formattedQuantity = <NumberFormat value={this.state.quantity} displayType={'text'} thousandSeparator={true} />
+
+
+        if (this.state.fundError) {
+            errorObj = (
+                <div>
+                    <div>{icon} Not Enough Buying Power</div>
+                    <p>Please deposit {formattedDeposit} to purchase {formattedQuantity} shares at market price.</p>
+                </div>
+            )
+        } else if (this.state.ownError) {
+            errorObj = (
+                <div>{icon} Invalid transaction. </div>
+            )
+        }
+
+        return errorObj
+    }
+
+    renderErrors() {
+        let cost = Math.round(this.props.mostRecentPrice.average * this.state.quantity * 100) / 100;
+
+        let deposit = Math.round((cost - this.props.balance)* 100 ) / 100
+        let formattedDeposit = <NumberFormat value={deposit} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+
+        let formattedQuantity = <NumberFormat value={this.state.quantity} displayType={'text'} thousandSeparator={true} />
+
+        if(this.state.fundError || this.state.ownError) {
+
             return (
                 <div className="invalid-buy-credentials">
                     <div className="error-text">
-                        <div>{icon} Not Enough Buying Power</div>
-                        <p>Please deposit {formattedDeposit} to purchase {formattedQuantity} shares at market price.</p>
+                        {this.checkError()}
                     </div>
 
                     <div className="error-buttons">
@@ -65,7 +105,7 @@ class BuySell extends React.Component {
             );
         } else {
             return(
-                <input className="review-order" type="submit" value="Review Order" />
+                <input className="review-order" type="submit" value="Order" />
             );
         }
     }
@@ -122,11 +162,16 @@ class BuySell extends React.Component {
     }
 
     validTransaction(transaction) {
+        let fundError = false;
+        let ownError = false;
+
         if(transaction["buy"]) {
-            return this.props.balance >= transaction["purchase_price"] * transaction["quantity"] ? true : false;
+            fundError = this.props.balance >= transaction["purchase_price"] * transaction["quantity"] ? false : true;
         } else {
-            return this.numShares() >= transaction["quantity"] ? true : false;
+            ownError = this.numShares() >= transaction["quantity"] ? false : true;
         }
+
+        return [fundError, ownError];
     }
 
     render() {
@@ -134,7 +179,6 @@ class BuySell extends React.Component {
         const mostRecentCost = this.props.mostRecentPrice.average * this.state.quantity || '';
         const formattedCost = <NumberFormat value={Math.round(mostRecentCost * 100) / 100} displayType={'text'} thousandSeparator={true} prefix={'$'} />
 
-        // const portValue = this.props.user_port_val;
         const balance = this.props.balance;
 
         return(
@@ -154,6 +198,7 @@ class BuySell extends React.Component {
                             onChange={this.update('quantity')}
                             placeholder="0"
                             required
+                            value={this.state.quantity}
                             />
                     </div>
 

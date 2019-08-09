@@ -86,8 +86,11 @@
 }
 
 .search-container ul li {
+    padding-top: 1%;
+    padding-bottom: 1%;
     list-style-type: none;
     font-weight: 500;
+    display: block;
 }
 
 .search-container ul li:hover {

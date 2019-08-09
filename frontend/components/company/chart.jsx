@@ -48,6 +48,26 @@ class Chart extends React.Component {
         })
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.ticker !== prevProps.match.params.ticker) {
+            this.ticker = this.props.ticker;
+            this.props.fetchCompanyHistoricPrices(this.ticker, "1d", "60")
+                .then((res) => {
+                    this.setState({
+                        data: res,
+                        oneDayPrices: res.prices,
+                        mostRecentPrice: res.prices[res.prices.length - 1],
+                    });
+                });
+
+            this.props.fetchCompanyKeyStats(this.ticker).then((res) => {
+                this.setState({
+                    name: res.stats.companyName,
+                })
+            })
+        }
+    }
+
     fetchDates(interval, numPoints, label){
         this.ticker = this.props.ticker;
 
@@ -210,7 +230,7 @@ class Chart extends React.Component {
         }
         
         
-        export default withRouter(Chart);
+export default withRouter(Chart);
 
 
         

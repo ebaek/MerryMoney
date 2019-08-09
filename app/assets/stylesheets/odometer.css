@@ -25,10 +25,8 @@
     *vertical-align: auto;
     *zoom: 1;
     *display: inline;
-    
-  height: 38px;  
-
-  visibility: hidden;
+    height: 38px;  
+    visibility: hidden;
 }
 .odometer.odometer-auto-theme .odometer-digit .odometer-digit-inner, .odometer.odometer-theme-minimal .odometer-digit .odometer-digit-inner {
   text-align: left;

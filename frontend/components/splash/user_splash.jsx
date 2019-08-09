@@ -22,6 +22,10 @@ class UserSplash extends React.Component {
         this.props.history.push('/');
     }
 
+    componentDidUpdate(prevProps){
+        
+    }
+
     render() {
         return (
             <div className="user-container">

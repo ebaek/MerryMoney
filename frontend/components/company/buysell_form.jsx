@@ -164,7 +164,8 @@ class BuySell extends React.Component {
         const currentUser = this.props.current_user;
         this.props.updateBalance(currentUser, deposit);
         this.setState({
-            errors: false,
+            fundError: false,
+            ownError: false,
         })
     }
 

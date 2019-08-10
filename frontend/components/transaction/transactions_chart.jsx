@@ -30,7 +30,7 @@ class TransactionsChart extends React.Component {
     }
 
     componentDidMount() {
-        this.portfolioData("1d", "5", "oneDayPrices");
+        this.portfolioData("1d", "500", "oneDayPrices");
     }
 
     portfolioData(timeframe, interval, label) {

@@ -7,17 +7,20 @@ class Api::TransactionsController < ApplicationController
 
     def create
         @transaction = Transaction.new(transaction_params);
-        @transaction.user_id = current_user.id;
+        @transaction.user_id = current_user.id
         
-        if @transaction.save
+        transactions = current_user.transactions
+        
+        if @transaction.save!
             if @transaction.buy 
-                newBalance = current_user.balance - (@transaction.purchase_price * @transaction.quantity);
-                newPortVal = current_user.portfolio_value + (@transaction.purchase_price * @transaction.quantity);
+                newBalance = current_user.balance - (@transaction.purchase_price * @transaction.quantity)
+                newPortVal = current_user.portfolio_value + (@transaction.purchase_price * @transaction.quantity)
             else
-                newBalance = current_user.balance + (@transaction.purchase_price * @transaction.quantity);
+                newBalance = current_user.balance + (@transaction.purchase_price * @transaction.quantity)
+                newPortVal = current_user.portfolio_value - (@transaction.purchase_price * @transaction.quantity)
             end
-
-            current_user.update(balance: newBalance, portfolio_value: newPortVal)
+            
+            current_user.update!(balance: newBalance, portfolio_value: newPortVal, transactions: transactions.push(@transaction))
             render :show
         else
             render json: @transaction.errors.full_messages, status: 422

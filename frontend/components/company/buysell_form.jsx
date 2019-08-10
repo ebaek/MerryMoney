@@ -15,6 +15,7 @@ class BuySell extends React.Component {
         this.buySellSwitch = this.buySellSwitch.bind(this);
         this.clearErrors = this.clearErrors.bind(this);
         this.deposit = this.deposit.bind(this);
+        this.redirectPortfolioPage = this.redirectPortfolioPage.bind(this);
     }
 
     update(field) {
@@ -45,9 +46,12 @@ class BuySell extends React.Component {
 
         const validTransaction = this.validTransaction(transaction);
 
+    
         if (!validTransaction[0] && !validTransaction[1]) {
-            this.props.createTransaction(transaction);
-            this.redirectPortfolioPage();
+            this.props.createTransaction(transaction).then( () => {
+                this.redirectPortfolioPage();
+            });
+            
         } else {
             this.setState({
                 fundError: validTransaction[0],
@@ -145,10 +149,12 @@ class BuySell extends React.Component {
 
         for (let i = 0; i < transactions.length; i++) {
             let transaction = transactions[i];
+
             if(transaction["ticker"] === ticker) {
-                numShares = transaction["buy"] === true ? numShares + 1 : numShares - 1;
+                numShares = transaction["buy"] === true ? numShares + transaction["quantity"] : numShares - transaction["quantity"];
             }
         }
+        
         return numShares;
     }
 
@@ -172,6 +178,7 @@ class BuySell extends React.Component {
             ownError = this.numShares() >= transaction["quantity"] ? false : true;
         }
 
+        
         return [fundError, ownError];
     }
 
@@ -214,7 +221,6 @@ class BuySell extends React.Component {
                     </div>
                     
                     {this.renderErrors()}
-
 
                     <div className="buying-power">
                         <label>${Math.round(balance * 100) / 100} Buying Power Available</label>

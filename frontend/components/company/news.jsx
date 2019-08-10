@@ -10,17 +10,17 @@ class News extends React.Component {
     }
 
     componentDidMount() {
-        const ticker = this.props.ticker;
-        const page = this.props.match.url;
+        // const ticker = this.props.ticker;
+        // const page = this.props.match.url;
 
-        this.props.fetchTransactions().then(res => {
-            if(page === "/") {
-                const companies = this.parsePortCompanies(res.transactions);
-                this.props.fetchNews(companies).then(news => this.setState(news));
-            } else {
-                this.props.fetchNews(ticker).then(news => this.setState(news));
-            }
-        });
+        // this.props.fetchTransactions().then(res => {
+        //     if(page === "/") {
+        //         const companies = this.parsePortCompanies(res.transactions);
+        //         this.props.fetchNews(companies).then(news => this.setState(news));
+        //     } else {
+        //         this.props.fetchNews(ticker).then(news => this.setState(news));
+        //     }
+        // });
     }
 
     componentDidUpdate(prevProps) {

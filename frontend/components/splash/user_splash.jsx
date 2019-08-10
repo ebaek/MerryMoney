@@ -54,8 +54,9 @@ class UserSplash extends React.Component {
                         <News />
                     </div>
                 </div>
-
+                
                 <Watchlist />
+
             </div>
         )
     }

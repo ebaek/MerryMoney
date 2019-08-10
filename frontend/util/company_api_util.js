@@ -43,7 +43,7 @@ export const fetchCompanyHistoricPrices = (ticker, range, interval) => {
 export const fetchRecentPrice = (ticker) => {
     return $.ajax({
         method: "GET",
-        url: `https://cloud.iexapis.com/stable/stock/${ticker}/chart/5d/?filter=close,changeOverTime&chartLast=2&token=${window.iexAPIKey}`
+        url: `https://cloud.iexapis.com/stable/stock/${ticker}/chart/5d/?filter=close,changeOverTime&chartLast=1&token=${window.iexAPIKey}`
     });
 };
 

@@ -32,7 +32,9 @@ const usersReducer = (state = {}, action) => {
             const newUser = Object.assign({}, state[user_id]);
             newUser.portfolio_value = newPortVal;
             newUser.balance = newBalance;
-
+            newUser.transactions.push(action.transaction);
+            
+             
             return Object.assign({}, state, {[user_id]: newUser});
         default:
             return state;

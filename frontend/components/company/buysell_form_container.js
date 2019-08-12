@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { createTransaction } from '../../actions/transactions_actions';
 import { updateBalance } from '../../actions/user_actions';
 import { createWatchlistItem, deleteWatchlistItem } from '../../actions/watchlist_actions';
+import { fetchWatchlist } from '../../actions/watchlist_actions';
 import BuySellForm from './buysell_form'
 
 const msp = (state) => {
@@ -17,8 +18,9 @@ const mdp = (dispatch) => {
     return({
         createTransaction: (transaction) => dispatch(createTransaction(transaction)),
         updateBalance: (current_user, deposit) => dispatch(updateBalance(current_user, deposit)),
-        createWatchListItem: (item) => dispatch(createWatchlistItem(item)),   
-        deleteWatchListItem: (id) => dispatch(deleteWatchlistItem(id)),
+        fetchWatchlist: () => dispatch(fetchWatchlist()),
+        createWatchlistItem: (ticker) => dispatch(createWatchlistItem(ticker)),   
+        deleteWatchlistItem: (id) => dispatch(deleteWatchlistItem(id)),
     })
 }
 

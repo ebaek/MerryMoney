@@ -23,10 +23,10 @@ export const fetchWatchlist = () => (dispatch) => {
     return APIUtil.fetchWatchList().then( (watchlist) => dispatch(receiveWatchlist(watchlist)));
 };
 
-export const createWatchlistItem = (item) => (dispatch) => {
-    return APIUtil.createWatchListItem(item).then( (item) => dispatch(receiveWatchlistItem(item)));
+export const createWatchlistItem = (ticker) => (dispatch) => {
+    return APIUtil.createWatchListItem(ticker).then( (item) => dispatch(receiveWatchlistItem(item)));
 };
 
-export const deleteWatchlistItem = (id) => (dispatch) => {
-    return APIUtil.deleteWatchListItem(id).then( (id) => dispatch(deleteWatchListItem(id)))
+export const deleteWatchlistItem = (ticker) => (dispatch) => {
+    return APIUtil.deleteWatchListItem(ticker).then( (ticker) => dispatch(deleteWatchListItem(ticker)))
 };

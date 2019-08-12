@@ -18,7 +18,7 @@ class Api::WatchlistsController < ApplicationController
     def destroy
         @watchlist_item = Watchlist.find(params[:id])
         if @watchlist_item
-            @watchlist_item.delete
+            @watchlist_item.destroy
             render :show
         else
             render json: ['Unable to remove item from watchlist.'], status: 404

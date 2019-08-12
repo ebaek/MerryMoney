@@ -1,4 +1,4 @@
-export const createWatchListItem = (item) => {
+export const createWatchlistItem = (item) => {
     return $.ajax({
         method: 'POST',
         url: '/api/watchlists',
@@ -6,14 +6,14 @@ export const createWatchListItem = (item) => {
     })
 };
 
-export const fetchWatchList = () => {
+export const fetchWatchlist = () => {
     return $.ajax({
         method: 'GET',
         url: '/api/watchlists'
     })
 };
 
-export const deleteWatchListItem = (id) => {
+export const deleteWatchlistItem = (id) => {
     return $.ajax({
         method: 'DELETE',
         url: `api/watchlists/${id}`,

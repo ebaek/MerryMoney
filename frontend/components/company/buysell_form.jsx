@@ -10,6 +10,7 @@ class BuySell extends React.Component {
             buy: true,
             quantity: "",
             watchlistTickers: [],
+            watchlistIdTicker: {},
             watchStatus: false,
         };
 
@@ -24,16 +25,20 @@ class BuySell extends React.Component {
 
     componentDidMount() {
         const watchlistTickers = [];
+        const watchlistIdTicker = {}
         const ticker = this.props.match.params.ticker;
 
         this.props.fetchWatchlist().then( (watchlistObj) => {
-            Promise.all(watchlistObj.watchlist.map((item) => {
+            Promise.all(Object.values(watchlistObj.watchlist).map((item) => {
                 watchlistTickers.push(item.company_id);
+                watchlistIdTicker[item.company_id] = item.id
             })).then( () => {
                 const watchStatus = watchlistTickers.includes(ticker) ? true : false;
+
                 this.setState({
                     watchlistTickers: watchlistTickers,
                     watchStatus: watchStatus,
+                    watchlistIdTicker: watchlistIdTicker,
                 });
             })
         });
@@ -47,20 +52,22 @@ class BuySell extends React.Component {
 
     componentDidUpdate(prevProps) {
         const watchlistTickers = [];
+        const watchlistIdTicker = {}
         const ticker = this.props.match.params.ticker;
 
         if (this.props.match.params.ticker !== prevProps.match.params.ticker) {
             this.props.fetchWatchlist().then((watchlistObj) => {
                 Promise.all(watchlistObj.watchlist.map((item) => {
                     watchlistTickers.push(item.company_id);
+                    watchlistIdTicker[item.company_id] = item.id
                 })).then(() => {
                     const watchStatus = watchlistTickers.includes(ticker) ? true : false;
-
                     this.setState({
                         buy: true,
                         quantity: "",
                         errors: false,
                         watchlistTickers: watchlistTickers,
+                        watchlistIdTicker: watchlistIdTicker,
                         watchStatus: watchStatus,
                     });
                 })
@@ -213,32 +220,40 @@ class BuySell extends React.Component {
 
     addWatchlist() {
         const ticker = this.props.match.params.ticker;
-        
-        this.props.createWatchlistItem(ticker);
+        const companyWatchlistId = this.state.watchlistIdTicker[ticker];
+
+        this.props.createWatchlistItem({user_id: this.props.current_user.id, ticker: ticker});
 
         this.setState({
-            watchlistStatus: true,
+            watchStatus: true,
         })
     }
 
     deleteWatchlist() {
         const ticker = this.props.match.params.ticker;
+        const companyWatchlistId = this.state.watchlistIdTicker[ticker];
 
-        this.props.deleteWatchlistItem(ticker);
+        debugger
+        this.props.deleteWatchlistItem(companyWatchlistId);
+        console.log(this.state.watchStatus);
 
         this.setState({
-            watchlistStatus: false,
-        })
+            watchStatus: false,
+        }, () => console.log(this.state.watchStatus));
+
     }
 
     render() {
+        const { watchStatus } = this.state;
+
         const mostRecentPrice = this.props.mostRecentPrice.average || '';
         const mostRecentCost = this.props.mostRecentPrice.average * this.state.quantity || '';
         const formattedCost = <NumberFormat value={Math.round(mostRecentCost * 100) / 100} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         const balance = this.props.balance;
-        const watchButton = this.state.watchStatus ? 
-            <button className="watching" onClick={() => this.deleteWatchlist()}>Remove from Watchlist</button> :
-            <button className="notwatching" onClick={() => this.addWatchlist()}>Add to Watchlist</button> 
+        
+        const watchButton = watchStatus ? 
+            <button className="watching" onClick={this.deleteWatchlist}>Remove from Watchlist</button> :
+            <button className="notwatching" onClick={this.addWatchlist}>Add to Watchlist</button> 
 
         return(
             <div className="form-watchlist">

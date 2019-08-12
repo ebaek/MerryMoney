@@ -208,7 +208,7 @@ class Chart extends React.Component {
                     </ResponsiveContainer>
 
                     <div className="timeframe-buttons">
-                        <button onClick={() => this.fetchDates("1d", "1", "oneDayPrices")}>1D</button>
+                        <button onClick={() => this.fetchDates("1d", "15", "oneDayPrices")}>1D</button>
                         <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
                         <button onClick={() => this.fetchDates("1m", "1", "oneMonthPrices")}>1M</button>
                         <button onClick={() => this.fetchDates("3m", "1", "threeMonthPrices")}>3M</button>

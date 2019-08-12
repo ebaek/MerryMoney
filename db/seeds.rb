@@ -108,3 +108,13 @@ microsoft = Watchlist.create!({
 user_id: robert.id, 
 ticker: microsoft_buy.ticker,
 })
+
+google = Watchlist.create!({
+user_id: robert.id, 
+ticker: "GOOGL",
+})
+
+ford = Watchlist.create!({
+user_id: robert.id, 
+ticker: "F",
+})

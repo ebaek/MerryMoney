@@ -14,19 +14,19 @@ export const receiveWatchlistItem = (watchlist_item) => ({
     watchlist_item,
 });
 
-export const removeWatchListItem = (id) => ({
+export const removeWatchlistItem = (watchlistItem) => ({
     type: DELETE_WATCHLIST_ITEM,
-    id,
+    watchlistItem,
 })
 
 export const fetchWatchlist = () => (dispatch) => {
-    return APIUtil.fetchWatchList().then( (watchlist) => dispatch(receiveWatchlist(watchlist)));
+    return APIUtil.fetchWatchlist().then( (watchlist) => dispatch(receiveWatchlist(watchlist)));
 };
 
 export const createWatchlistItem = (ticker) => (dispatch) => {
-    return APIUtil.createWatchListItem(ticker).then( (item) => dispatch(receiveWatchlistItem(item)));
+    return APIUtil.createWatchlistItem(ticker).then( (item) => dispatch(receiveWatchlistItem(item)));
 };
 
-export const deleteWatchlistItem = (ticker) => (dispatch) => {
-    return APIUtil.deleteWatchListItem(ticker).then( (ticker) => dispatch(deleteWatchListItem(ticker)))
+export const deleteWatchlistItem = (id) => (dispatch) => {
+    return APIUtil.deleteWatchlistItem(id).then( (res) => dispatch(removeWatchlistItem(res)))
 };

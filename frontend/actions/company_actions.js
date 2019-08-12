@@ -80,10 +80,3 @@ export const fetchCompanyHistoricPrices = (ticker, range, interval) => (dispatch
     return APICompUtil.fetchCompanyHistoricPrices(ticker, range, interval)
         .then( (prices) => dispatch(receiveCompanyHistoricPrices(prices)));
 }
-
-// export const fetchMostRecentPrice = (ticker) => (dispatch) => {
-//     return APICompUtil.fetchMostRecentPrice(ticker).then( (price) => dispatch(receiveCompanyHistoricPrices(price)));
-// }
-
-
-

@@ -28,9 +28,17 @@
     align-items: center;
     justify-content: space-between;
     border: 1px solid pink;
+    height: 40px;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
-.watchlist-item-priceinfo {
-    display: flex;
-    flex-direction: column;
+.watchlist-item:hover {
+    background-color: #fafafa;
 }
+
+.watchlist-item-ticker {
+    font-weight: 600;
+}
+
+

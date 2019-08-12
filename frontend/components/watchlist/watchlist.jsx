@@ -1,6 +1,6 @@
 import React from 'react';
 import { fetchRecentPrice } from '../../util/company_api_util'
-import NumberFormat from 'react-number-format';
+import { withRouter } from 'react-router-dom';
 
 class Watchlist extends React.Component {
     constructor(props) {
@@ -9,6 +9,8 @@ class Watchlist extends React.Component {
         this.state = {
             watchlistItems: [],
         }
+
+        this.redirectCompanyPage = this.redirectCompanyPage.bind(this);
     }
 
     componentDidMount() {
@@ -32,19 +34,25 @@ class Watchlist extends React.Component {
         })
     }
 
+    formatPercentChange(change) {
+        const percentForm = change * 100;
+        return percentForm.toFixed(2);
+    }
+
+    redirectCompanyPage(ticker) {
+        this.props.history.push(`/${ticker}`);
+    }
+
     itemsLi() {
         const items = this.state.watchlistItems.map( (item, idx) => {
             return(
-                <li className="watchlist-item" key={idx}>
-                    <p>{item[0]}</p>
-                    <div className="watchlist-item-priceinfo">
-                    <p>${item[1]}</p>
-                    <p>{item[2]}</p>
-                    </div>
+                <li className="watchlist-item" key={idx} onClick={() => this.redirectCompanyPage(item[0])}>
+                    <p className="watchlist-item-ticker">{item[0]}</p>
+                    <p>${item[1].toLocaleString('en')}</p>
+                    <p>{this.formatPercentChange(item[2])}%</p>
                 </li>
             );
         })
-
         return items
     }
 
@@ -61,4 +69,4 @@ class Watchlist extends React.Component {
     };
 }
 
-export default Watchlist;
+export default withRouter(Watchlist);

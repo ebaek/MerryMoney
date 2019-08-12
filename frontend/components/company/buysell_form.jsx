@@ -16,6 +16,7 @@ class BuySell extends React.Component {
         this.clearErrors = this.clearErrors.bind(this);
         this.deposit = this.deposit.bind(this);
         this.redirectPortfolioPage = this.redirectPortfolioPage.bind(this);
+        this.watchlistAction = this.watchlistAction.bind(this);
     }
 
     update(field) {
@@ -153,7 +154,6 @@ class BuySell extends React.Component {
                 numShares = transaction["buy"] === true ? numShares + transaction["quantity"] : numShares - transaction["quantity"];
             }
         }
-        
         return numShares;
     }
 
@@ -178,8 +178,11 @@ class BuySell extends React.Component {
             ownError = this.numShares() >= transaction["quantity"] ? false : true;
         }
 
-        
         return [fundError, ownError];
+    }
+
+    watchlistAction() {
+
     }
 
     render() {
@@ -190,44 +193,50 @@ class BuySell extends React.Component {
         const balance = this.props.balance;
 
         return(
-            <div className="buy-sell-info">
+            <div className="form-watchlist">
+                <div className="buy-sell-info">
 
-                <div className="buy-sell-but">
-                    <button onClick={() => this.buySellSwitch("buy")}>{"Buy " + this.props.match.params.ticker}</button>
-                    <button onClick={() => this.buySellSwitch("sell")}>{"Sell " + this.props.match.params.ticker}</button>
+                    <div className="buy-sell-but">
+                        <button onClick={() => this.buySellSwitch("buy")}>{"Buy " + this.props.match.params.ticker}</button>
+                        <button onClick={() => this.buySellSwitch("sell")}>{"Sell " + this.props.match.params.ticker}</button>
+                    </div>
+
+                    <form className="bs-form" onSubmit={this.handleSubmit}>
+                        <div className="shares">
+                            <label>Shares</label>
+                            <input type="number"
+                                min="0"
+                                step="1"
+                                onChange={this.update('quantity')}
+                                placeholder="0"
+                                value={this.state.quantity}
+                                required
+                            />
+                        </div>
+
+                        <div className="market-price">
+                            <label>Market Price</label>
+                            <label>${Math.round(mostRecentPrice * 100) / 100}</label>
+                        </div>
+
+                        <div className="estimated-cost">
+                            <label>Estimated Cost</label>
+                            <label>{formattedCost}</label>
+                        </div>
+
+                        {this.renderErrors()}
+
+                        <div className="buying-power">
+                            <label>${Math.round(balance * 100) / 100} Buying Power Available</label>
+                        </div>
+                    </form>
                 </div>
 
-                <form className="bs-form" onSubmit={this.handleSubmit}>
-                    <div className="shares">
-                        <label>Shares</label>
-                        <input type="number" 
-                            min="0" 
-                            step="1"
-                            onChange={this.update('quantity')}
-                            placeholder="0"
-                            value={this.state.quantity}
-                            required
-                            />
-                    </div>
-
-                    <div className="market-price">
-                        <label>Market Price</label>
-                        <label>${Math.round(mostRecentPrice * 100) / 100}</label>
-                    </div>
-
-                    <div className="estimated-cost">
-                        <label>Estimated Cost</label>
-                        <label>{formattedCost}</label>
-                    </div>
-                    
-                    {this.renderErrors()}
-
-                    <div className="buying-power">
-                        <label>${Math.round(balance * 100) / 100} Buying Power Available</label>
-                    </div>
-
-                </form>
+                <div className="watchlist-toggle-div">
+                    <button className="watchlist-toggle" onClick={this.watchlistAction()}>Add to Watchlist</button>
+                </div>
             </div>
+            
         );
     }
 }

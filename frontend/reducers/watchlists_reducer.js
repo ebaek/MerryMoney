@@ -1,4 +1,4 @@
-import { RECEIVE_WATCHLIST, REMOVE_WATCHLIST_ITEM, RECEIVE_WATCHLIST_ITEM} from '../actions/watchlist_actions';
+import { RECEIVE_WATCHLIST, DELETE_WATCHLIST_ITEM, RECEIVE_WATCHLIST_ITEM} from '../actions/watchlist_actions';
 
 const watchlistsReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -8,7 +8,7 @@ const watchlistsReducer = (state = {}, action) => {
             return Object.assign({}, action.watchlist);
         case RECEIVE_WATCHLIST_ITEM:
             return Object.assign({}, state, { [action.watchlist_item.id]: action.watchlist_item });
-        case REMOVE_WATCHLIST_ITEM:
+        case DELETE_WATCHLIST_ITEM:
             let newState = merge({}, state);
             delete newState[action.watchlist_item.id];
             return newState;

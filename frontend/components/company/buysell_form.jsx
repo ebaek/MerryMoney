@@ -75,7 +75,6 @@ class BuySell extends React.Component {
 
         let formattedQuantity = <NumberFormat value={this.state.quantity} displayType={'text'} thousandSeparator={true} />
 
-
         if (this.state.fundError) {
             errorObj = (
                 <div>

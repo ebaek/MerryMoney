@@ -9,6 +9,8 @@ class BuySell extends React.Component {
         this.state = {
             buy: true,
             quantity: "",
+            watchlistTickers: [],
+            watchStatus: false,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,7 +18,25 @@ class BuySell extends React.Component {
         this.clearErrors = this.clearErrors.bind(this);
         this.deposit = this.deposit.bind(this);
         this.redirectPortfolioPage = this.redirectPortfolioPage.bind(this);
-        this.watchlistAction = this.watchlistAction.bind(this);
+        this.addWatchlist = this.addWatchlist.bind(this);
+        this.deleteWatchlist = this.deleteWatchlist.bind(this);
+    }
+
+    componentDidMount() {
+        const watchlistTickers = [];
+        const ticker = this.props.match.params.ticker;
+
+        this.props.fetchWatchlist().then( (watchlistObj) => {
+            Promise.all(watchlistObj.watchlist.map((item) => {
+                watchlistTickers.push(item.company_id);
+            })).then( () => {
+                const watchStatus = watchlistTickers.includes(ticker) ? true : false;
+                this.setState({
+                    watchlistTickers: watchlistTickers,
+                    watchStatus: watchStatus,
+                });
+            })
+        });
     }
 
     update(field) {
@@ -26,12 +46,25 @@ class BuySell extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+        const watchlistTickers = [];
+        const ticker = this.props.match.params.ticker;
+
         if (this.props.match.params.ticker !== prevProps.match.params.ticker) {
-            this.setState({
-                buy: true,
-                quantity: "",
-                errors: false,
-            })
+            this.props.fetchWatchlist().then((watchlistObj) => {
+                Promise.all(watchlistObj.watchlist.map((item) => {
+                    watchlistTickers.push(item.company_id);
+                })).then(() => {
+                    const watchStatus = watchlistTickers.includes(ticker) ? true : false;
+
+                    this.setState({
+                        buy: true,
+                        quantity: "",
+                        errors: false,
+                        watchlistTickers: watchlistTickers,
+                        watchStatus: watchStatus,
+                    });
+                })
+            });
         }
     }
 
@@ -46,7 +79,6 @@ class BuySell extends React.Component {
         }
 
         const validTransaction = this.validTransaction(transaction);
-
     
         if (!validTransaction[0] && !validTransaction[1]) {
             this.props.createTransaction(transaction).then( () => {
@@ -95,11 +127,9 @@ class BuySell extends React.Component {
                     <div className="error-buttons">
                         <button className="back" onClick={this.clearErrors}>Back</button>
                     </div>
-
                 </div>
             )
         }
-
         return errorObj
     }
 
@@ -181,16 +211,34 @@ class BuySell extends React.Component {
         return [fundError, ownError];
     }
 
-    watchlistAction() {
+    addWatchlist() {
+        const ticker = this.props.match.params.ticker;
+        
+        this.props.createWatchlistItem(ticker);
 
+        this.setState({
+            watchlistStatus: true,
+        })
+    }
+
+    deleteWatchlist() {
+        const ticker = this.props.match.params.ticker;
+
+        this.props.deleteWatchlistItem(ticker);
+
+        this.setState({
+            watchlistStatus: false,
+        })
     }
 
     render() {
         const mostRecentPrice = this.props.mostRecentPrice.average || '';
         const mostRecentCost = this.props.mostRecentPrice.average * this.state.quantity || '';
         const formattedCost = <NumberFormat value={Math.round(mostRecentCost * 100) / 100} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-
         const balance = this.props.balance;
+        const watchButton = this.state.watchStatus ? 
+            <button className="watching" onClick={() => this.deleteWatchlist()}>Remove from Watchlist</button> :
+            <button className="notwatching" onClick={() => this.addWatchlist()}>Add to Watchlist</button> 
 
         return(
             <div className="form-watchlist">
@@ -233,7 +281,7 @@ class BuySell extends React.Component {
                 </div>
 
                 <div className="watchlist-toggle-div">
-                    <button className="watchlist-toggle" onClick={this.watchlistAction()}>Add to Watchlist</button>
+                    { watchButton }
                 </div>
             </div>
             

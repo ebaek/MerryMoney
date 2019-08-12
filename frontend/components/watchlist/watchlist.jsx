@@ -121,7 +121,6 @@ class Watchlist extends React.Component {
     }
 
     render() {
-        debugger
         return (
             <div className="sidebar">
                 <h3 className="sidebar-header">Portfolio</h3>

@@ -86,17 +86,38 @@ class Watchlist extends React.Component {
         this.props.history.push(`/${ticker}`);
     }
 
-    itemsLi() {
+    watchlistItemsLi() {
         const items = this.state.watchlistItems.map( (item, idx) => {
+            let percentColor = (item[2] > 0) ? "price-positive" : "price-negative";
+
             return(
                 <li className="watchlist-item" key={idx} onClick={() => this.redirectCompanyPage(item[0])}>
                     <p className="watchlist-item-ticker">{item[0]}</p>
                     <p>${item[1].toLocaleString('en')}</p>
-                    <p>{this.formatPercentChange(item[2])}%</p>
+                    <p className={percentColor}>{this.formatPercentChange(item[2])}%</p>
                 </li>
             );
         })
-        return items
+        return items;
+    }
+
+    portfolioItemsLi() {
+        const portItems = this.state.portfolioItems.map((item, idx) => {
+            let shareLabel = (item[1] === 1) ? " share" : " shares";
+            let percentColor = (item[2][0].changeOverTime > 0) ? "price-positive" : "price-negative";
+
+            return (
+                <li className="watchlist-item" key={idx} onClick={() => this.redirectCompanyPage(item[0])}>
+                    <div className="portfolio-ticker-shares">
+                        <p className="watchlist-item-ticker">{item[0]}</p>
+                        <p className="share-quantity">{item[1]}{shareLabel}</p>
+                    </div>
+                    <p>${item[2][0].close.toLocaleString('en')}</p>
+                    <p className={percentColor}>{this.formatPercentChange(item[2][0].changeOverTime)}%</p>
+                </li>
+            );
+        })
+        return portItems;
     }
 
     render() {
@@ -104,10 +125,13 @@ class Watchlist extends React.Component {
         return (
             <div className="sidebar">
                 <h3 className="sidebar-header">Portfolio</h3>
+                <ul className="watchlist-items">
+                    {this.portfolioItemsLi()}
+                </ul>
 
                 <h3 className="sidebar-header">Watchlist</h3>
                 <ul className="watchlist-items">
-                    {this.itemsLi()}
+                    {this.watchlistItemsLi()}
                 </ul>
             </div>
         )

@@ -2,11 +2,13 @@
     display: inline-block;
     align-items: center;
     position: absolute;
-    border: 1px solid black;
     width: 225px;
-    height: 400px;
+    height: 80%;
     top: 18%;
     right: 10%;
+    padding: 1%;
+    box-sizing: border-box;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(48, 51, 51, 0.09);
 }
 
 .sidebar-header {
@@ -31,6 +33,18 @@
     height: 40px;
     padding-left: 10%;
     padding-right: 10%;
+}
+
+.price-positive {
+    color: #21ce99;
+}
+
+.price-negative {
+    color: #F45531;
+}
+
+.share-quantity {
+    color: #b1bfc4;
 }
 
 .watchlist-item:hover {

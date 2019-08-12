@@ -21,7 +21,6 @@ class Watchlist extends React.Component {
         const portItems = []
 
         this.props.fetchWatchlist().then( (items) => {
-            debugger
             Object.values(items.watchlist).forEach( (item) => {
                 watchlistTickers.push(item["company_id"]);
             })

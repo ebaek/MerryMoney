@@ -233,7 +233,6 @@ class BuySell extends React.Component {
         const ticker = this.props.match.params.ticker;
         const companyWatchlistId = this.state.watchlistIdTicker[ticker];
 
-        debugger
         this.props.deleteWatchlistItem(companyWatchlistId);
         console.log(this.state.watchStatus);
 

@@ -40,12 +40,13 @@ export const fetchCompanyHistoricPrices = (ticker, range, interval) => {
     });
 };
 
-export const fetchRecentPrice = (ticker) => {
+export const fetchMostRecentPrice = (ticker) => {
     return $.ajax({
         method: "GET",
         url: `https://cloud.iexapis.com/stable/stock/${ticker}/chart/5d/?filter=close,changeOverTime&chartLast=1&token=${window.iexAPIKey}`
     });
 };
+
 
 
 

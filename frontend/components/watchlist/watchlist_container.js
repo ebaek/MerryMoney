@@ -5,6 +5,7 @@ import { fetchWatchlist } from '../../actions/watchlist_actions';
 const msp = (state) => {
     return ({
         watchlist_items: state.entities.watchlists,
+        transactions: state.entities.users[state.session.id].transactions,
     });
 }
 

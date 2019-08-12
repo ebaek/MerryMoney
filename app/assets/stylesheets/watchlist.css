@@ -1,4 +1,4 @@
-.watchlist {
+.sidebar {
     display: inline-block;
     align-items: center;
     position: absolute;
@@ -9,7 +9,7 @@
     right: 10%;
 }
 
-.watchlist-header {
+.sidebar-header {
     margin: 0;
     padding: 0;
 }

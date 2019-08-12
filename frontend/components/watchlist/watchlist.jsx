@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchRecentPrice } from '../../util/company_api_util'
+import { fetchMostRecentPrice } from '../../util/company_api_util'
 import { withRouter } from 'react-router-dom';
 
 class Watchlist extends React.Component {
@@ -7,23 +7,26 @@ class Watchlist extends React.Component {
         super(props);
 
         this.state = {
+            portfolioItems: [],
             watchlistItems: [],
         }
-
         this.redirectCompanyPage = this.redirectCompanyPage.bind(this);
     }
 
     componentDidMount() {
         const prices = [];
-        const tickers = [];
+        const watchlistTickers = [];
+
+        const portfolio = this.transactions();
+        const portItems = []
 
         this.props.fetchWatchlist().then( (items) => {
             Object.values(items)[1].forEach( (item) => {
-                tickers.push(item["company_id"]);
+                watchlistTickers.push(item["company_id"]);
             })
 
-            Promise.all( tickers.map( (company) => {
-                return fetchRecentPrice(company).then( (price) => {
+            Promise.all( watchlistTickers.map( (company) => {
+                return fetchMostRecentPrice(company).then( (price) => {
                     prices.push([company, price[0].close, price[0].changeOverTime]);
                 })
             })).then( () => {
@@ -31,7 +34,47 @@ class Watchlist extends React.Component {
                     watchlistItems: prices,
                 })
             })
+
+            Promise.all( portfolio.map( (position) => {
+                return fetchMostRecentPrice(position[0]).then((price) => {
+                    portItems.push([position[0], position[1], price]);
+                })
+            })).then(() => {
+                this.setState({
+                    portfolioItems: portItems,
+                })
+            })
+
         })
+    }
+
+    transactions() {
+        const transactionCount = this.transactionsHelper();
+        const transactions = [];
+
+        Object.keys(transactionCount).forEach( (ticker) => {
+            if( transactionCount[ticker] > 0 ) {
+                transactions.push([ticker, transactionCount[ticker]]);
+            }
+        })
+
+        return transactions;
+    }
+
+    transactionsHelper() {
+        const positions = {};
+
+        this.props.transactions.forEach((transaction) => {
+            if (positions[transaction.ticker] === undefined) positions[transaction.ticker] = 0;
+
+            if (transaction.buy) {
+                positions[transaction.ticker] += transaction.quantity;
+            } else {
+                positions[transaction.ticker] -= transaction.quantity;
+            }
+        });
+
+        return positions;
     }
 
     formatPercentChange(change) {
@@ -56,11 +99,13 @@ class Watchlist extends React.Component {
         return items
     }
 
-
     render() {
+        debugger
         return (
-            <div className="watchlist">
-                <h3 className="watchlist-header">Watchlist</h3>
+            <div className="sidebar">
+                <h3 className="sidebar-header">Portfolio</h3>
+
+                <h3 className="sidebar-header">Watchlist</h3>
                 <ul className="watchlist-items">
                     {this.itemsLi()}
                 </ul>

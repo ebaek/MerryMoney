@@ -70,3 +70,9 @@ Users can search for companies by either ticker or company name. The search bar 
 
 ![Search bar](screenshots/search.png)
 
+### Future Features
+* Compare companies with corresponding line charts 
+* Add dark mode toggle when the market closes 
+* Analyst ratings and reviews on the company page 
+
+

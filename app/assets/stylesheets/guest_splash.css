@@ -203,6 +203,10 @@
     color: #040D14;
 }
 
+.fourth {
+    background-color: #040D14;
+}
+
 .fourth, .fifth {
     margin-top: 2%;
     display: flex;
@@ -259,7 +263,7 @@
 .keep-tabs-pic {
     top: 2px;
     margin-top: -5%;
-    margin-left: -25%;
+    margin-left: -20%;
     height: 110%;
     width: auto;
     z-index: -2;

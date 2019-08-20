@@ -1,22 +1,26 @@
 .chart-form {
-    width: 100%;
     display: flex;
-    flex-direction: horizontal;
+    flex-direction: row;
 }
 
 .chart-container {
     display: flex;
     flex-direction: column;
-    width: 65%;
+    width: 95%;
     padding-bottom: 2%;
     border-bottom: 2px solid #EEF1F7;
 }
 
+.comp-body {
+    width: 70%;
+}
+
 .form-watchlist {
+    margin-left: 5%;
+    margin-top: 2.5%;
     min-width: 175px;
-    position: fixed;
     right: 10%;
-    width: 18%;
+    width: 225px;
 }
 
 .buy-sell-info{

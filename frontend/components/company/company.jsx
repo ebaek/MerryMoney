@@ -48,7 +48,9 @@ class Company extends React.Component {
                     <div className="body-info">
                         <Chart />
                         <CompanyBlurb />
-                        <News />
+                        <div className="comp-news">
+                            <News />
+                        </div>
                     </div>
                 </div>
 

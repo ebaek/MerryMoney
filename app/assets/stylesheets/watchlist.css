@@ -1,11 +1,12 @@
 .sidebar {
     display: inline-block;
     align-items: center;
-    position: absolute;
     width: 225px;
-    height: 80%;
-    top: 20%;
-    right: 10%;
+    max-height: 600px;
+    overflow-y: scroll !important;
+    margin-top: 3%;
+    margin-right: 5%;
+    margin-left: 5%;
     background: white;
     box-sizing: border-box;
     overflow-y: scroll;

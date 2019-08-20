@@ -1,6 +1,10 @@
 .news-container{
     margin-top: 5%;
-    width: 65%;
+    width: 95%;
+}
+
+.user-news {
+    width: 95%;
 }
 
 .news-container a {

@@ -205,53 +205,55 @@ class Chart extends React.Component {
 
         return (
             <div className="chart-form">
-                <div className="chart-container">
-                    <div className="name-price">
-                        <h1>{this.state.name}</h1>
+                <div className="comp-body">
+                    <div className="chart-container">
+                        <div className="name-price">
+                            <h1>{this.state.name}</h1>
 
-                        <div className="price-info">
-                            <div className="price">
-                                <p className="dollar-sign">$</p>
-                                <Odometer duration={500} value={this.state.hoverPrice} />
+                            <div className="price-info">
+                                <div className="price">
+                                    <p className="dollar-sign">$</p>
+                                    <Odometer duration={500} value={this.state.hoverPrice} />
+                                </div>
+
+                                <div className="price-change">
+                                    <h3>{this.formatPriceChange(this.state.change)}</h3>
+                                    <h3>{this.formatPercent(this.state.changeOverTime)}</h3>
+                                </div>
                             </div>
 
-                            <div className="price-change">
-                                <h3>{this.formatPriceChange(this.state.change)}</h3>
-                                <h3>{this.formatPercent(this.state.changeOverTime)}</h3>
-                            </div>
                         </div>
 
-                    </div>
+                        <ResponsiveContainer width='100%' aspect={7 / 2.0}>
+                            <LineChart className="linechart" data={chart}
+                                onMouseMove={this.hoverPrice}>
 
-                    <ResponsiveContainer width='100%' aspect={7 / 2.0}>
-                        <LineChart className="linechart" data={chart}
-                            onMouseMove={this.hoverPrice}>
+                                <Line type="linear" dataKey={lineDataKey} stroke="#21CE99"
+                                    strokeWidth={2} dot={false} />
 
-                            <Line type="linear" dataKey={lineDataKey} stroke="#21CE99"
-                                strokeWidth={2} dot={false} />
+                                <XAxis dataKey={xAxisLabel} hide={true} />
+                                <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true} />
 
-                            <XAxis dataKey={xAxisLabel} hide={true} />
-                            <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true} />
+                                <Tooltip className='tooltip'
+                                    contentStyle={{ border: '0', backgroundColor: 'transparent' }}
+                                    formatter={(value, name, props) => { return [""] }}
+                                    position={{ x: this.state.hoverXPosition - 50, y: -30 }}
+                                    isAnimationActive={false} cursor={{ stroke: "Gainsboro", strokeWidth: 1.5 }}
+                                />
+                            </LineChart>
+                        </ResponsiveContainer>
 
-                            <Tooltip className='tooltip'
-                                contentStyle={{ border: '0', backgroundColor: 'transparent' }}
-                                formatter={(value, name, props) => { return [""] }}
-                                position={{ x: this.state.hoverXPosition - 50, y: -30 }}
-                                isAnimationActive={false} cursor={{ stroke: "Gainsboro", strokeWidth: 1.5 }}
-                            />
-                        </LineChart>
-                    </ResponsiveContainer>
-
-                    <div className="timeframe-buttons">
-                        <button onClick={() => this.fetchDates("1d", "30", "oneDayPrices")}>1D</button>
-                        <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
-                        <button onClick={() => this.fetchDates("1m", "1", "oneMonthPrices")}>1M</button>
-                        <button onClick={() => this.fetchDates("3m", "1", "threeMonthPrices")}>3M</button>
-                        <button onClick={() => this.fetchDates("5y", "10", "fiveYrPrices")}>5Y</button>
+                        <div className="timeframe-buttons">
+                            <button onClick={() => this.fetchDates("1d", "30", "oneDayPrices")}>1D</button>
+                            <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
+                            <button onClick={() => this.fetchDates("1m", "1", "oneMonthPrices")}>1M</button>
+                            <button onClick={() => this.fetchDates("3m", "1", "threeMonthPrices")}>3M</button>
+                            <button onClick={() => this.fetchDates("5y", "10", "fiveYrPrices")}>5Y</button>
+                        </div>
                     </div>
                 </div>
-
-                <BuySell mostRecentPrice={this.state.mostRecentPrice} />
+                
+                    <BuySell mostRecentPrice={this.state.mostRecentPrice} />
 
                 </div>
                 

@@ -45,7 +45,6 @@
 .nav-search {
     width: 100%;
     height: 36px;
-    border: 2px solid pink;
     background-color: white;
 }
 
@@ -152,7 +151,6 @@
 
 .user-financials {
     display: flex;
-    border: 2px solid pink;
     justify-content: center;
     align-items: center;
     width: 30%;

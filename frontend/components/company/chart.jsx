@@ -34,10 +34,13 @@ class Chart extends React.Component {
         this.ticker = this.props.ticker;
         this.props.fetchCompanyHistoricPrices(this.ticker, "1d", "15")
             .then( (res) => {
+                const validPrices = res.prices.filter(function (price) {
+                    return price.high !== null;
+                });
+
                 this.setState({
-                    data: res,
-                    oneDayPrices: res.prices,
-                    mostRecentPrice: res.prices[res.prices.length - 1],
+                    oneDayPrices: validPrices,
+                    mostRecentPrice: validPrices[validPrices.length - 1],
                 });
             });
         
@@ -74,9 +77,14 @@ class Chart extends React.Component {
         if (this.state[label] === "") {
             this.props.fetchCompanyHistoricPrices(this.ticker, interval, numPoints)
                 .then((res) => {
+
+                    const validPrices = res.prices.filter(function (price) {
+                        return price.high !== null;
+                    });
+
                     this.setState({
-                        data: res,
-                        [label]: this.convertDateYrs(res.prices),
+                        data: validPrices,
+                        [label]: this.convertDateYrs(validPrices),
                         currentChart: label,
                     });
                 });
@@ -103,6 +111,7 @@ class Chart extends React.Component {
     }
 
     hoverPrice(e) {
+        // set the hoverClose to the most recent price if this.state.price === ""
         let hoverClose = "";
 
         if (e.isTooltipActive !== false) {  
@@ -208,7 +217,7 @@ class Chart extends React.Component {
                     </ResponsiveContainer>
 
                     <div className="timeframe-buttons">
-                        <button onClick={() => this.fetchDates("1d", "15", "oneDayPrices")}>1D</button>
+                        <button onClick={() => this.fetchDates("1d", "30", "oneDayPrices")}>1D</button>
                         <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
                         <button onClick={() => this.fetchDates("1m", "1", "oneMonthPrices")}>1M</button>
                         <button onClick={() => this.fetchDates("3m", "1", "threeMonthPrices")}>3M</button>

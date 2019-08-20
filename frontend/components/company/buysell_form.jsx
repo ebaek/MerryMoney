@@ -254,13 +254,23 @@ class BuySell extends React.Component {
             <button className="watching" onClick={this.deleteWatchlist}>Remove from Watchlist</button> :
             <button className="notwatching" onClick={this.addWatchlist}>Add to Watchlist</button> 
 
+        let idBuy = "";
+        let idSell = "";
+        if (this.state.buy) {
+            idBuy = "toggled";
+            idSell = "";
+        } else {
+            idBuy = "";
+            idSell = "toggled";
+        }
+
         return(
             <div className="form-watchlist">
                 <div className="buy-sell-info">
 
                     <div className="buy-sell-but">
-                        <button onClick={() => this.buySellSwitch("buy")}>{"Buy " + this.props.match.params.ticker}</button>
-                        <button onClick={() => this.buySellSwitch("sell")}>{"Sell " + this.props.match.params.ticker}</button>
+                        <button id={idBuy} onClick={() => this.buySellSwitch("buy")}>{"Buy " + this.props.match.params.ticker}</button>
+                        <button id={idSell} onClick={() => this.buySellSwitch("sell")}>{"Sell " + this.props.match.params.ticker}</button>
                     </div>
 
                     <form className="bs-form" onSubmit={this.handleSubmit}>

@@ -9,6 +9,7 @@ const watchlistsReducer = (state = {}, action) => {
         case RECEIVE_WATCHLIST_ITEM:
             return Object.assign({}, state, { [action.watchlist_item.id]: action.watchlist_item });
         case DELETE_WATCHLIST_ITEM:
+            debugger
             let newState = Object.assign({}, state);
             delete newState[action.watchlistItem.id];
             return newState;

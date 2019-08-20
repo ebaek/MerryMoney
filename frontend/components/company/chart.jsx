@@ -38,9 +38,12 @@ class Chart extends React.Component {
                     return price.high !== null;
                 });
 
+                debugger
+
                 this.setState({
                     oneDayPrices: validPrices,
                     mostRecentPrice: validPrices[validPrices.length - 1],
+                    hoverPrice: validPrices[validPrices.length - 1].average,
                 });
             });
         
@@ -56,10 +59,15 @@ class Chart extends React.Component {
             this.ticker = this.props.ticker;
             this.props.fetchCompanyHistoricPrices(this.ticker, "1d", "15")
                 .then((res) => {
+
+                    const validPrices = res.prices.filter(function (price) {
+                        return price.high !== null;
+                    });
+
                     this.setState({
-                        data: res,
-                        oneDayPrices: res.prices,
-                        mostRecentPrice: res.prices[res.prices.length - 1],
+                        oneDayPrices: validPrices,
+                        mostRecentPrice: validPrices[validPrices.length - 1],
+                        hoverPrice: validPrices[validPrices.length - 1].average,
                     });
                 });
 
@@ -77,20 +85,36 @@ class Chart extends React.Component {
         if (this.state[label] === "") {
             this.props.fetchCompanyHistoricPrices(this.ticker, interval, numPoints)
                 .then((res) => {
+                    let validPrices = 0;
+                    let hover = "";
 
-                    const validPrices = res.prices.filter(function (price) {
-                        return price.high !== null;
-                    });
+                    if (interval !== "3m" || interval !== "5y") {
+                        validPrices = res.prices.filter(function (price) {
+                            return price.close !== null;
+                        });
+
+                        hover = validPrices[validPrices.length - 1].close;
+                    } else {
+                        validPrices = res.prices.filter(function (price) {
+                            return price.average !== null;
+                        });
+                        hover = validPrices[validPrices.length - 1].average;
+                    }
 
                     this.setState({
                         data: validPrices,
                         [label]: this.convertDateYrs(validPrices),
                         currentChart: label,
+                        hoverPrice: hover,
                     });
+
                 });
         } else {
+            const lastPriceHover = this.state[label];
+
             this.setState({
                 currentChart: label,
+                hoverPrice: lastPriceHover[lastPriceHover.length - 1].close,
             })
         }
     }
@@ -111,16 +135,15 @@ class Chart extends React.Component {
     }
 
     hoverPrice(e) {
-        // set the hoverClose to the most recent price if this.state.price === ""
-        let hoverClose = "";
+        if (e.isTooltipActive !== false) {
+            let hoverClose = e.activePayload[0].payload.close;
 
-        if (e.isTooltipActive !== false) {  
-            hoverClose = e.activePayload[0].payload.close
-            
             const change = this.compChange(e.activePayload[0].payload.label);
 
-            this.setState({ hoverPrice: hoverClose, 
-                hoverXPosition: e.activeCoordinate.x });
+            this.setState({ 
+                hoverPrice: hoverClose, 
+                hoverXPosition: e.activeCoordinate.x 
+            });
             
             if (this.state.currentChart !== "oneDayPrices") {
                 this.setState({ 
@@ -186,7 +209,6 @@ class Chart extends React.Component {
                             <div className="price">
                                 <p className="dollar-sign">$</p>
                                 <Odometer duration={500} value={this.state.hoverPrice} />
-
                             </div>
 
                             <div className="price-change">

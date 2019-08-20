@@ -9,8 +9,8 @@ class TransactionsChart extends React.Component {
         super(props);
 
         this.state = {
-            portValues: [],
-            hoverPrice: "",
+            // portValues: [],
+            hoverPrice: 0,
             hoverXPosition: "",
             change: 0,
             changeOverTime: 0,
@@ -59,9 +59,11 @@ class TransactionsChart extends React.Component {
                     });
                 });
             })).then( () => {
+                const portData = this.reformatPortData(newPortValues);
                 this.setState({ 
-                    [label]: this.reformatPortData(newPortValues),
+                    [label]: portData,
                     currentChart: label,
+                    hoverPrice: portData[portData.length - 1].value,
                 });
             });
     }
@@ -94,7 +96,11 @@ class TransactionsChart extends React.Component {
         if(this.state[label] === "") {
             this.portfolioData(timeframe, interval, label);
         } else {
-            this.setState({currentChart: label});
+            const lastPrices = this.state[label];
+            this.setState({
+                currentChart: label,
+                hoverPrice: lastPrices[lastPrices.length - 1],
+            });
         }
     }
 

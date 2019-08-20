@@ -34,16 +34,17 @@ class Chart extends React.Component {
         this.ticker = this.props.ticker;
         this.props.fetchCompanyHistoricPrices(this.ticker, "1d", "15")
             .then( (res) => {
+
                 const validPrices = res.prices.filter(function (price) {
-                    return price.high !== null;
+                    return price.average !== null;
                 });
 
-                debugger
+                const hoverLabel = validPrices.length === 0 ? 0 : validPrices[validPrices.length - 1].average;
 
                 this.setState({
                     oneDayPrices: validPrices,
                     mostRecentPrice: validPrices[validPrices.length - 1],
-                    hoverPrice: validPrices[validPrices.length - 1].average,
+                    hoverPrice: hoverLabel,
                 });
             });
         
@@ -61,7 +62,7 @@ class Chart extends React.Component {
                 .then((res) => {
 
                     const validPrices = res.prices.filter(function (price) {
-                        return price.high !== null;
+                        return price.average !== null;
                     });
 
                     this.setState({
@@ -86,18 +87,15 @@ class Chart extends React.Component {
             this.props.fetchCompanyHistoricPrices(this.ticker, interval, numPoints)
                 .then((res) => {
                     let validPrices = 0;
-                    let hover = "";
+                    let hover = 0;
 
                     if (interval !== "3m" || interval !== "5y") {
                         validPrices = res.prices.filter(function (price) {
-                            return price.close !== null;
-                        });
-
+                            return price.close !== null;});
                         hover = validPrices[validPrices.length - 1].close;
                     } else {
                         validPrices = res.prices.filter(function (price) {
-                            return price.average !== null;
-                        });
+                            return price.average !== null;});
                         hover = validPrices[validPrices.length - 1].average;
                     }
 
@@ -111,10 +109,16 @@ class Chart extends React.Component {
                 });
         } else {
             const lastPriceHover = this.state[label];
+            let hover = 0;
+
+            if (lastPriceHover.length !== 0) {
+                hover = (interval !== "3m" || interval !== "5y") ? 
+                    lastPriceHover[lastPriceHover.length - 1].close : lastPriceHover[lastPriceHover.length - 1].average;
+            }
 
             this.setState({
                 currentChart: label,
-                hoverPrice: lastPriceHover[lastPriceHover.length - 1].close,
+                hoverPrice: hover,
             })
         }
     }

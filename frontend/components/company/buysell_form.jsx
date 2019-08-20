@@ -57,7 +57,7 @@ class BuySell extends React.Component {
 
         if (this.props.match.params.ticker !== prevProps.match.params.ticker) {
             this.props.fetchWatchlist().then((watchlistObj) => {
-                Promise.all(watchlistObj.watchlist.map((item) => {
+                Promise.all(Object.values(watchlistObj.watchlist).map((item) => {
                     watchlistTickers.push(item.company_id);
                     watchlistIdTicker[item.company_id] = item.id
                 })).then(() => {
@@ -245,8 +245,12 @@ class BuySell extends React.Component {
     render() {
         const { watchStatus } = this.state;
 
-        const mostRecentPrice = this.props.mostRecentPrice.average || '';
-        const mostRecentCost = this.props.mostRecentPrice.average * this.state.quantity || '';
+        let mostRecentPrice = "";
+        if(this.props.mostRecentPrice !== undefined) {
+            mostRecentPrice = this.props.mostRecentPrice.average ? this.props.mostRecentPrice.average : this.props.mostRecentPrice.close;
+        }
+
+        const mostRecentCost = mostRecentPrice * this.state.quantity || '';
         const formattedCost = <NumberFormat value={Math.round(mostRecentCost * 100) / 100} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         const balance = this.props.balance;
         
@@ -256,6 +260,7 @@ class BuySell extends React.Component {
 
         let idBuy = "";
         let idSell = "";
+
         if (this.state.buy) {
             idBuy = "toggled";
             idSell = "";

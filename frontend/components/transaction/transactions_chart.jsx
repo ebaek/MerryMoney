@@ -9,7 +9,6 @@ class TransactionsChart extends React.Component {
         super(props);
 
         this.state = {
-            // portValues: [],
             hoverPrice: 0,
             hoverXPosition: "",
             change: 0,

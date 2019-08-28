@@ -200,7 +200,7 @@ class TransactionsChart extends React.Component {
                     <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
                     <button onClick={() => this.fetchDates("1m", "1", "oneMonthPrices")}>1M</button>
                     <button onClick={() => this.fetchDates("3m", "1", "threeMonthPrices")}>3M</button>
-                    <button onClick={() => this.fetchDates("5y", "10", "fiveYrPrices")}>5Y</button>
+                    <button onClick={() => this.fetchDates("5y", "30", "fiveYrPrices")}>5Y</button>
                 </div>
 
             </div>

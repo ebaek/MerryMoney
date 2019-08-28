@@ -56,6 +56,7 @@ class Chart extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+        debugger
         if (this.props.match.params.ticker !== prevProps.match.params.ticker) {
             this.ticker = this.props.ticker;
             this.props.fetchCompanyHistoricPrices(this.ticker, "1d", "15")
@@ -69,6 +70,10 @@ class Chart extends React.Component {
                         oneDayPrices: validPrices,
                         mostRecentPrice: validPrices[validPrices.length - 1],
                         hoverPrice: validPrices[validPrices.length - 1].average,
+                        oneWeekPrices: "",
+                        oneMonthPrices: "",
+                        threeMonthPrices: "",
+                        fiveYrPrices: "",
                     });
                 });
 
@@ -248,7 +253,7 @@ class Chart extends React.Component {
                             <button onClick={() => this.fetchDates("5d", "1", "oneWeekPrices")}>1W</button>
                             <button onClick={() => this.fetchDates("1m", "1", "oneMonthPrices")}>1M</button>
                             <button onClick={() => this.fetchDates("3m", "1", "threeMonthPrices")}>3M</button>
-                            <button onClick={() => this.fetchDates("5y", "10", "fiveYrPrices")}>5Y</button>
+                            <button onClick={() => this.fetchDates("5y", "30", "fiveYrPrices")}>5Y</button>
                         </div>
                     </div>
                 </div>

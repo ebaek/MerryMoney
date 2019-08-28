@@ -75,7 +75,7 @@
     color: #21ce99;
 }
 
-#linkedin:hover, #github:hover {
+#linkedin:hover, #github:hover, #personal:hover {
     color: #21ce99;
     cursor: pointer;
 }
@@ -85,6 +85,10 @@
 }
 
 #linkedin {
+    margin-right: 5%;
+}
+
+#personal {
     margin-right: 5%;
 }
 

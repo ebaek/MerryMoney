@@ -38,6 +38,7 @@ class GuestSplash extends React.Component {
 
                         <div className="links-buttons">
                             <div className="personal-links">
+                                <a href="http://www.estherbaek.com/" id="personal">Personal</a>
                                 <a href="https://www.linkedin.com/in/ebaek5/" id="linkedin">LinkedIn</a>
                                 <a href="https://github.com/ebaek" id="github">Github</a>
                             </div>

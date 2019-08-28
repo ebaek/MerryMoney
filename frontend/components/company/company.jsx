@@ -36,6 +36,7 @@ class Company extends React.Component {
                     <div className="nav-searchbar-links">
 
                         <div className="personal-links-user">
+                            <a href="http://www.estherbaek.com/">Personal</a>
                             <a href="https://www.linkedin.com/in/ebaek5/">LinkedIn</a>
                             <a href="https://github.com/ebaek">Github</a>
                             <button onClick={this.handleLogout} className="signout-button">Sign Out</button>

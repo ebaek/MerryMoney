@@ -56,7 +56,6 @@ class Chart extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        debugger
         if (this.props.match.params.ticker !== prevProps.match.params.ticker) {
             this.ticker = this.props.ticker;
             this.props.fetchCompanyHistoricPrices(this.ticker, "1d", "15")

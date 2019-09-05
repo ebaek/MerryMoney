@@ -29,7 +29,7 @@ export const fetchCompanyKeyStats = (ticker) => {
 export const fetchCompanyQuote = (ticker) => {
     return $.ajax({
         method: 'GET',
-        url: `https://cloud.iexapis.com/stable/stock/${ticker}/quote/batch?&types=quote&filter=peRatio,high,low,volume,avgTotalVolume,week52High,week52Low&token=${window.iexAPIKey}`
+        url: `https://cloud.iexapis.com/stable/stock/${ticker}/quote/batch?&types=quote&filter=peRatio,avgTotalVolume,week52High,week52Low&token=${window.iexAPIKey}`
     })
 };
 

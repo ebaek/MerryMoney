@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import CompanyBlurb from './company_blurb';
 import {logout} from '../../actions/session_actions'
-import {fetchCompanyBasics, fetchCompanyKeyStats, fetchCompanyQuote} from '../../actions/company_actions';
+import {fetchCompanyBasics, fetchCompanyKeyStats, 
+        fetchCompanyQuote, fetchCompanyDelayedQuote} from '../../actions/company_actions';
 import { withRouter } from 'react-router-dom';
 
 const msp = (state, ownProps) => {
@@ -17,6 +18,7 @@ const mdp = dispatch => {
         fetchCompanyBasics: (ticker) => dispatch(fetchCompanyBasics(ticker)),
         fetchCompanyKeyStats: (ticker) => dispatch(fetchCompanyKeyStats(ticker)),
         fetchCompanyQuote: (ticker) => dispatch(fetchCompanyQuote(ticker)),
+        fetchCompanyDelayedQuote: (ticker) => dispatch(fetchCompanyDelayedQuote(ticker)),
     })
 }
 

@@ -47,7 +47,7 @@ class UserSplash extends React.Component {
 
                 <div className="chart-show">
                     <div className="transac-news-watch">
-                        <div class="body-div">
+                        <div className="body-div">
                             <TransactionsChart />
 
                             <div className="user-news">

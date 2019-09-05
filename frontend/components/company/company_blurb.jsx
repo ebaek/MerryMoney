@@ -5,7 +5,7 @@ import NumberFormat from 'react-number-format';
 class CompanyBlurb extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {company_data: {}, stats: {}, quote: {}};
+        this.state = {company_data: {}, quote: {}, delayedQuote: {}};
     }
 
     componentDidMount() {
@@ -41,6 +41,7 @@ class CompanyBlurb extends React.Component {
     }
 
     render() {
+        console.log(this.state);
         const { company_data } = this.state; 
         const { quote } = this.state;
 
@@ -74,28 +75,8 @@ class CompanyBlurb extends React.Component {
                     </div>
             
                     <div>
-                        <h4>Market Cap</h4>
-                        <p>{this.formatNumber(quote.marketCap)}</p>
-                    </div>
-
-                    <div>
                         <h4>Price-Earnings Ratio</h4>
                         <p><NumberFormat value={quote.peRatio} displayType={'text'} format="#####" /></p>
-                    </div>
-
-                    <div>
-                        <h4>High Today</h4>
-                        <p>{quote.high}</p>
-                    </div>
-
-                    <div>
-                        <h4>Low Today</h4>
-                        <p>{quote.low}</p>
-                    </div>
-
-                    <div>
-                        <h4>Volume</h4>
-                        <p>{this.formatNumber(quote.volume)}</p>
                     </div>
 
                     <div>

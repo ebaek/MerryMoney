@@ -2,10 +2,12 @@
 
 [View Live Site Here](https://merrymoney.herokuapp.com/#/)
 ---
-![Company show page with stock performance on line graph](screenshots/company.png)
+![Merry Money Homepage](screenshots/homepage.gif)
 
 ## About
 MerryMoney is a clone of popular trading application Robinhood. I chose to work on a Robinhood clone because the application combines the simplicity of a beautiful interface and the complexity of conveying critical investment information to the average investor. I partitioned MerryMoney into 6 main phases during a 10-day sprint in which I used React, Redux, Javascript, and Ruby on Rails. These phases included implementing user authentication, extracting and visualizing real-time company information, displaying user portfolio performance, handling user transactions, and enabling the creation of company watchlists. 
+
+![User show page with portfolio performance](screenshots/user-show.gif)
 
 ## Technologies
 * Frontend: React, Redux
@@ -59,6 +61,8 @@ portfolioData(timeframe, interval, label) {
             });
     }
 ```
+![Company show page with stock performance on line graph](screenshots/company-show.gif)
+
 
 ### News
 In addition to the portfolio analysis feature, I integrated a news feature using the News API. On the dashboard, users can access relevant information specifically tailored towards their portfolios and on the individual stock pages users can access company- specific information.
